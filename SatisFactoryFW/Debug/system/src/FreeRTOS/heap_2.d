@@ -1,31 +1,31 @@
 system/src/FreeRTOS/heap_2.o: ../system/src/FreeRTOS/heap_2.c \
- C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\system\include\FreeRTOS/FreeRTOS.h \
- c:\users\damag\documents\mateo\polito\thesis\gitrepository\satisfactoryfw\user\inc\freertosconfig.h \
- C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\DeviceSupport\inc/mxconstants.h \
- C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\system\include\FreeRTOS/projdefs.h \
- C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\system\include\FreeRTOS/portable.h \
- C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\system\include\FreeRTOS/deprecated_definitions.h \
- C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\system\include\FreeRTOS/portmacro.h \
- C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\system\include\FreeRTOS/mpu_wrappers.h \
- C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\system\include\FreeRTOS/task.h \
- C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\system\include\FreeRTOS/list.h
+ D:\Mateo\Workspace\SatisFactoryFW\system\include\FreeRTOS/FreeRTOS.h \
+ d:\mateo\workspace\satisfactoryfw\user\inc\freertosconfig.h \
+ D:\Mateo\Workspace\SatisFactoryFW\DeviceSupport\inc/mxconstants.h \
+ D:\Mateo\Workspace\SatisFactoryFW\system\include\FreeRTOS/projdefs.h \
+ D:\Mateo\Workspace\SatisFactoryFW\system\include\FreeRTOS/portable.h \
+ D:\Mateo\Workspace\SatisFactoryFW\system\include\FreeRTOS/deprecated_definitions.h \
+ D:\Mateo\Workspace\SatisFactoryFW\system\include\FreeRTOS/portmacro.h \
+ D:\Mateo\Workspace\SatisFactoryFW\system\include\FreeRTOS/mpu_wrappers.h \
+ D:\Mateo\Workspace\SatisFactoryFW\system\include\FreeRTOS/task.h \
+ D:\Mateo\Workspace\SatisFactoryFW\system\include\FreeRTOS/list.h
 
-C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\system\include\FreeRTOS/FreeRTOS.h:
+D:\Mateo\Workspace\SatisFactoryFW\system\include\FreeRTOS/FreeRTOS.h:
 
-c:\users\damag\documents\mateo\polito\thesis\gitrepository\satisfactoryfw\user\inc\freertosconfig.h:
+d:\mateo\workspace\satisfactoryfw\user\inc\freertosconfig.h:
 
-C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\DeviceSupport\inc/mxconstants.h:
+D:\Mateo\Workspace\SatisFactoryFW\DeviceSupport\inc/mxconstants.h:
 
-C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\system\include\FreeRTOS/projdefs.h:
+D:\Mateo\Workspace\SatisFactoryFW\system\include\FreeRTOS/projdefs.h:
 
-C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\system\include\FreeRTOS/portable.h:
+D:\Mateo\Workspace\SatisFactoryFW\system\include\FreeRTOS/portable.h:
 
-C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\system\include\FreeRTOS/deprecated_definitions.h:
+D:\Mateo\Workspace\SatisFactoryFW\system\include\FreeRTOS/deprecated_definitions.h:
 
-C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\system\include\FreeRTOS/portmacro.h:
+D:\Mateo\Workspace\SatisFactoryFW\system\include\FreeRTOS/portmacro.h:
 
-C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\system\include\FreeRTOS/mpu_wrappers.h:
+D:\Mateo\Workspace\SatisFactoryFW\system\include\FreeRTOS/mpu_wrappers.h:
 
-C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\system\include\FreeRTOS/task.h:
+D:\Mateo\Workspace\SatisFactoryFW\system\include\FreeRTOS/task.h:
 
-C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\system\include\FreeRTOS/list.h:
+D:\Mateo\Workspace\SatisFactoryFW\system\include\FreeRTOS/list.h:
