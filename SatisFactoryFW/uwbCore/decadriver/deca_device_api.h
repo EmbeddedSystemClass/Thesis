@@ -75,7 +75,7 @@ typedef signed long int32;
 //! constants for selecting the bit rate for data TX (and RX)
 //! These are defined for write (with just a shift) the TX_FCTRL register
 #define DWT_BR_110K		0	//!< UWB bit rate 110 kbits/s
-#define DWT_BR_850K		1	//!< UWB bit rate 850 kbits/s
+#define DWT_BR_850K		1	//!< UWB bit rate 850 kbits/
 #define DWT_BR_6M8		2	//!< UWB bit rate 6.8 Mbits/s
 
 //! constants for specifying the (Nominal) mean Pulse Repetition Frequency
