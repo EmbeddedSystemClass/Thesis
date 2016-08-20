@@ -631,6 +631,7 @@ int testapprun(instance_data_t *inst, int message)
 								if(fcode == RTLS_DEMO_MSG_TAG_POLL) //got poll from Tag
 								{
 									inst->rangeNumA[srcAddr[0]&0x7] = messageData[POLL_RNUM]; //when anchor receives a poll, we need to remember the new range number
+									//OJOOOOOO ACA SE COMPARA CON EL NUMERO DE TAGS, ACA DEBE HABER UN CAMBIO
 								}
 								else //got poll from Anchor (initiator)
 								{
@@ -805,7 +806,7 @@ int testapprun(instance_data_t *inst, int message)
 
 								if((RTLS_DEMO_MSG_TAG_FINAL == fcode) &&
 										(inst->rangeNumA[srcAddr[0]&0x7] != messageData[POLL_RNUM])) //Final's range number needs to match Poll's or else discard this message
-								{
+								{ ///OJOOOO CAMBIAR NUMERO DE TAGS
                                     inst->testAppState = TA_RXE_WAIT ;              // wait for next frame
                                     break;
 								}
@@ -876,7 +877,7 @@ int testapprun(instance_data_t *inst, int message)
 								{
 									inst->newRangeTagAddress = srcAddr[0] + ((uint16) srcAddr[1] << 8);
 									//time-of-flight
-									inst->tof[inst->newRangeTagAddress & 0x7] = tof;
+									inst->tof[inst->newRangeTagAddress & 0x7] = tof;  ///OJOOO CAMBIAR NUMERO DE TAGS
 									//calculate all tag - anchor ranges... and report
 									inst->newRange = instance_calcranges(&inst->tofArray[0], MAX_ANCHOR_LIST_SIZE, TOF_REPORT_T2A, &inst->rxResponseMask);
 									inst->rxResponseMaskReport = inst->rxResponseMask; //copy the valid mask to report
