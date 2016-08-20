@@ -1018,7 +1018,7 @@ void instancesetreplydelay(int delayus) //delay in us
 
 	x = (int) ceil(msgdatalen*8/330.0f);
 
-	msgdatalen = msgdatalen*8 + x*48;
+	msgdatalen = msgdatalen*8 + x*48; // 48 ES PARA INCLUIR REED-SOLOMON PARITY BITS (ESTE ES EL TAMAÑO TOTAL DE LA TRAMA MAC)
 
 	//add some margin so we don't timeout too soon
 	margin = 0; //(TAG_FINAL_MSG_LEN - TAG_POLL_MSG_LEN);
@@ -1030,8 +1030,8 @@ void instancesetreplydelay(int delayus) //delay in us
 	//assume PHR length is 172308ns for 110k and 21539ns for 850k/6.81M
 	if(instance_data[instance].configData.dataRate == DWT_BR_110K)
     {
-		msgdatalen *= 8205.13f;
-		msgdatalen += 172308; // PHR length in nanoseconds
+		msgdatalen *= 8205.13f;    //TIMING DURATION IEEE802.15.4 8025.13 * DATA BITS
+		msgdatalen += 172308; // PHR length in nanoseconds   TIMING DURATION IEEE802.15.4  8025.13* 21 BITS
 
 		margin *= 8205.13f;
 
@@ -1070,7 +1070,7 @@ void instancesetreplydelay(int delayus) //delay in us
 	//preamble  = plen * (994 or 1018) depending on 16 or 64 PRF
 	if(instance_data[instance].configData.prf == DWT_PRF_16M)
 	{
-		preamblelen = (sfdlen + preamblelen) * 0.99359f;
+		preamblelen = (sfdlen + preamblelen) * 0.99359f;  //  TIMING DURATION IEEE802.15.4
 	}
 	else
 	{
