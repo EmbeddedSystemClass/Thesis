@@ -72,7 +72,7 @@ all: SatisFactoryFW.elf secondary-outputs
 SatisFactoryFW.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross ARM C++ Linker'
-	arm-none-eabi-g++ -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -Og -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -ffreestanding -fno-move-loop-invariants -Wall -Wextra  -g3 -T "D:\Mateo\Workspace\SatisFactoryFW\ldscripts\mem.ld" -T "D:\Mateo\Workspace\SatisFactoryFW\ldscripts\libs.ld" -T "D:\Mateo\Workspace\SatisFactoryFW\ldscripts\sections.ld" -nostartfiles -Xlinker --gc-sections -L"D:\Mateo\Workspace\SatisFactoryFW\mpuCore\mpl" -Wl,-Map,"SatisFactoryFW.map" -o "SatisFactoryFW.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-g++ -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -Og -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -ffreestanding -fno-move-loop-invariants -Wall -Wextra  -g3 -T "C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\ldscripts\mem.ld" -T "C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\ldscripts\libs.ld" -T "C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\ldscripts\sections.ld" -nostartfiles -Xlinker --gc-sections -L"C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\mpuCore\mpl" -Wl,-Map,"SatisFactoryFW.map" -o "SatisFactoryFW.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
