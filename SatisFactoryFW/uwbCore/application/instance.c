@@ -17,7 +17,7 @@
 #include "deca_regs.h"
 
 #include "instance.h"
-
+#define MATEO_IMPL
 // -------------------------------------------------------------------------------------------------------------------
 
 
@@ -630,8 +630,13 @@ int testapprun(instance_data_t *inst, int message)
             					inst->tagPollRxTime = dw_event->timeStamp ; //save Poll's Rx time
 								if(fcode == RTLS_DEMO_MSG_TAG_POLL) //got poll from Tag
 								{
+
+									#ifdef MATEO_IMPL
+									inst->rangeNumA[srcAddr[0]&0x7f] = messageData[POLL_RNUM]; //when anchor receives a poll, we need to remember the new range number
+
+									#else		//OJOOOOOO ACA SE COMPARA CON EL NUMERO DE TAGS, ACA DEBE HABER UN CAMBIO
 									inst->rangeNumA[srcAddr[0]&0x7] = messageData[POLL_RNUM]; //when anchor receives a poll, we need to remember the new range number
-									//OJOOOOOO ACA SE COMPARA CON EL NUMERO DE TAGS, ACA DEBE HABER UN CAMBIO
+									#endif
 								}
 								else //got poll from Anchor (initiator)
 								{
@@ -804,8 +809,15 @@ int testapprun(instance_data_t *inst, int message)
 								uint8 validResp = messageData[VRESP];
 								uint8 index = RRXT0 + 5*(inst->shortAdd_idx);
 
+
+#ifdef MATEO_IMPL
 								if((RTLS_DEMO_MSG_TAG_FINAL == fcode) &&
-										(inst->rangeNumA[srcAddr[0]&0x7] != messageData[POLL_RNUM])) //Final's range number needs to match Poll's or else discard this message
+										(inst->rangeNumA[srcAddr[0]&0x7f] != messageData[POLL_RNUM])) //Final's range number needs to match Poll's or else discard this message
+#else
+									if((RTLS_DEMO_MSG_TAG_FINAL == fcode) &&
+											(inst->rangeNumA[srcAddr[0]&0x7] != messageData[POLL_RNUM])) //Final's range number needs to match Poll's or else discard this message
+
+#endif
 								{ ///OJOOOO CAMBIAR NUMERO DE TAGS
                                     inst->testAppState = TA_RXE_WAIT ;              // wait for next frame
                                     break;
@@ -877,7 +889,13 @@ int testapprun(instance_data_t *inst, int message)
 								{
 									inst->newRangeTagAddress = srcAddr[0] + ((uint16) srcAddr[1] << 8);
 									//time-of-flight
+#ifdef MATEO_IMPL
+
+									inst->tof[inst->newRangeTagAddress & 0x7f] = tof;  ///OJOOO CAMBIAR NUMERO DE TAGS
+#else
 									inst->tof[inst->newRangeTagAddress & 0x7] = tof;  ///OJOOO CAMBIAR NUMERO DE TAGS
+
+#endif
 									//calculate all tag - anchor ranges... and report
 									inst->newRange = instance_calcranges(&inst->tofArray[0], MAX_ANCHOR_LIST_SIZE, TOF_REPORT_T2A, &inst->rxResponseMask);
 									inst->rxResponseMaskReport = inst->rxResponseMask; //copy the valid mask to report

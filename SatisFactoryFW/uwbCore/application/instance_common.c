@@ -16,7 +16,7 @@
 #include "deca_spi.h"
 
 #include "instance.h"
-
+#define MATEO_IMPL
 
 // -------------------------------------------------------------------------------------------------------------------
 //      Data Definitions
@@ -922,7 +922,11 @@ void ancprepareresponse2(uint16 sourceAddress, uint8 srcAddr_index, uint8 fcode_
 void ancprepareresponse(uint16 sourceAddress, uint8 srcAddr_index, uint8 fcode_index, uint8 *frame, uint32 uTimeStamp)
 {
 	uint16 frameLength = 0;
+#ifdef MATEO_IMPL
+	uint8 tof_idx = (sourceAddress) & 0x7f ;
+#else
 	uint8 tof_idx = (sourceAddress) & 0x7 ;
+#endif
 	int instance = 0;
 
 	instance_data[instance].psduLength = frameLength = ANCH_RESPONSE_MSG_LEN + FRAME_CRTL_AND_ADDRESS_S + FRAME_CRC;
@@ -1118,8 +1122,15 @@ void instance_rxcallback(const dwt_callback_data_t *rxd)
 							instance_data[instance].rxMsgCount++;
 							return;
 						}
+#ifdef MATEO_IMPL
+						instance_data[instance].rxRespsIdx = (int8) ((dw_event.msgu.frame[POLL_RNUM+fcode_index] & 0xf)
+																+ ((sourceAddress&0x7f) << 4));
+#else
 						instance_data[instance].rxRespsIdx = (int8) ((dw_event.msgu.frame[POLL_RNUM+fcode_index] & 0xf)
 																+ ((sourceAddress&0x7) << 4));
+#endif
+
+
 						instance_data[instance].rxResps[instance_data[instance].rxRespsIdx] = 0;
 						//debug LED on
 						//led_on(LED_PC9);
@@ -1132,8 +1143,12 @@ void instance_rxcallback(const dwt_callback_data_t *rxd)
 						instance_data[instance].responseTO = NUM_EXPECTED_RESPONSES; //set number of expected responses to 3 (from other anchors)
 
 						dw_event.type_pend = anctxorrxreenable(instance_data[instance].instanceAddress16, 2+0);
-
+#ifdef MATEO_IMPL
+						instance_data[instance].tof[sourceAddress & 0x7f] = INVALID_TOF; //clear ToF ..
+#else
 						instance_data[instance].tof[sourceAddress & 0x7] = INVALID_TOF; //clear ToF ..
+#endif
+
 						//debug LED off
 						//led_off(LED_PC9);
 					}

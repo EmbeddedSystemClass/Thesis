@@ -20,7 +20,7 @@ extern "C" {
 
 #include "deca_types.h"
 #include "deca_device_api.h"
-
+#define MATEO_IMPL
 /******************************************************************************************************************
 ********************* NOTES on DW (MP) features/options ***********************************************************
 *******************************************************************************************************************/
@@ -85,7 +85,12 @@ extern "C" {
 //NOTE: the user payload assumes that there are only 88 "free" bytes to be used for the user message (it does not scale according to the addressing modes)
 #define MAX_USER_PAYLOAD_STRING	MAX_USER_PAYLOAD_STRING_LL
 
+#ifdef MATEO_IMPL
+#define MAX_TAG_LIST_SIZE				(128)
+#else
 #define MAX_TAG_LIST_SIZE				(8)
+#endif
+
 #define MAX_ANCHOR_LIST_SIZE			(4) //this is limited to 4 in this application
 #define NUM_EXPECTED_RESPONSES			(3) //e.g. MAX_ANCHOR_LIST_SIZE - 1
 #define NUM_EXPECTED_RESPONSES_ANC		(1) //anchors A0, A1 and A2 are involved in anchor to anchor ranging
