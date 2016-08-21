@@ -30,14 +30,27 @@
 
 #include "uart.h"
 
-//#define MATEO_IMPL
+#define MATEO_IMPL
 
 #define SWS1_SHF_MODE 0x02	//short frame mode (6.81M)
 #define SWS1_CH5_MODE 0x04	//channel 5 mode
 #define SWS1_ANC_MODE 0x08  //anchor mode
+
+#ifdef MATEO_IMPL
 #define SWS1_A1A_MODE 0x10  //anchor/tag address A1
 #define SWS1_A2A_MODE 0x20  //anchor/tag address A2
 #define SWS1_A3A_MODE 0x40  //anchor/tag address A3
+#define SWS1_A4A_MODE 0x80  //anchor/tag address A4
+#define SWS1_A5A_MODE 0x100  //anchor/tag address A5
+#define SWS1_A6A_MODE 0x200  //anchor/tag address A6
+#define SWS1_A7A_MODE 0x400  //anchor/tag address A7
+
+#else
+#define SWS1_A1A_MODE 0x10  //anchor/tag address A1
+#define SWS1_A2A_MODE 0x20  //anchor/tag address A2
+#define SWS1_A3A_MODE 0x40  //anchor/tag address A3
+#endif
+
 #define SWS1_USB2SPI_MODE 0x78  //USB to SPI mode
 #define SWS1_TXSPECT_MODE 0x38  //Continuous TX spectrum mode
 //"1234567812345678"
@@ -46,17 +59,24 @@
 
 /* Defines used to substitute buttons and pins for porting to SatisFactory*/
 #ifdef MATEO_IMPL
+#define SWS1_ADD_MODE 0x7f0  //GET THE TAG/ANCHOR ADDRESS
+
 #define SWITCH_ON 			TRUE
 #define SWITCH_OFF 			FALSE
 
-#define BUTTON_0			FALSE
+#define BUTTON_0			TRUE
 
 #define TA_SW1_3			FALSE
 #define TA_SW1_4			FALSE		/* FALSE: Tag - TRUE: Anchor */
 #define TA_SW1_5			FALSE
 #define TA_SW1_6			FALSE
-#define TA_SW1_7			TRUE
+#define TA_SW1_7			FALSE
 #define TA_SW1_8			FALSE
+#define TA_SW1_9			FALSE
+#define TA_SW1_10			FALSE
+#define TA_SW1_11			TRUE
+
+#define TA_SW1_12			FALSE
 
 #define FASTRANGING 		SWITCH_OFF
 
@@ -65,7 +85,7 @@
 #define SWITCH_ON 			TRUE
 #define SWITCH_OFF 			FALSE
 
-#define BUTTON_0			FALSE
+#define BUTTON_0			TRUE
 
 #define TA_SW1_3			FALSE
 #define TA_SW1_4			FALSE		/* FALSE: Tag - TRUE: Anchor */
@@ -77,7 +97,13 @@
 #define FASTRANGING 		SWITCH_OFF
 #endif
 
-uint8 s1switch = 0;
+
+#ifdef MATEO_IMPL
+uint32 s1switch = 0;
+#else
+ uint8 s1switch = 0;
+#endif
+
 int instance_anchaddr = 0;
 int dr_mode = 0;
 int chan, tagaddr, ancaddr;
@@ -129,7 +155,7 @@ chConfig_t chConfig[4] ={
 				1,       // non-standard SFD
 				(1025 + 64 - 32) //SFD timeout
 		},
-		//mode 2 - S1: 2 on, 3 off
+		//mode 2 - S1: 2 on, 3 off   //PRUEBAS TRABAJANDO EN ESTE MODO
 		{
 				2,              // channel
 				DWT_PRF_16M,    // prf
@@ -174,14 +200,33 @@ sfConfig_t sfConfig[4] ={
 				(10*28), //poll sleep delay
 				(20000)
 		},
-		//mode 2 - S1: 2 on, 3 off
+		//mode 2 - S1: 2 on, 3 off   // OJO TRABAJANDO EN ESTE MODO
 		{
-				(10),   // slot period ms
-				(10),   // number of slots (only 10 are used) - thus 100 ms superframe means 10 Hz location rate
-				(10*10), // superframe period (100 ms - gives 10 Hz)
-				(10*10), // poll sleep delay (tag sleep time, usually = superframe period)
+				(3),   // slot period ms
+				(130),   // number of slots (only 100 are used) - thus 390 ms superframe means 2.56 Hz location rate
+				(130*3), // superframe period (390 ms - gives 2.56 Hz)
+				(130*3), // poll sleep delay (tag sleep time, usually = superframe period)
 				(2500)
 		},
+
+//		//mode 2 - S1: 2 on, 3 off   // OJO TRABAJANDO EN ESTE MODO
+//		{
+//				(3),   // slot period ms
+//				(10),   // number of slots (only 10 are used) - thus 30 ms superframe means 33.3 Hz location rate
+//				(10*3), // superframe period (30 ms - gives 33.3 Hz)
+//				(10*3), // poll sleep delay (tag sleep time, usually = superframe period)
+//				(2500)
+//		},
+
+//		//mode 2 - S1: 2 on, 3 off   // OJO TRABAJANDO EN ESTE MODO
+//		{
+//				(10),   // slot period ms
+//				(10),   // number of slots (only 10 are used) - thus 100 ms superframe means 10 Hz location rate
+//				(10*10), // superframe period (100 ms - gives 10 Hz)
+//				(10*10), // poll sleep delay (tag sleep time, usually = superframe period)
+//				(2500)
+//		},
+
 		//mode 3 - S1: 2 off, 3 on
 		{
 				(28),    // slot period ms
@@ -203,12 +248,18 @@ sfConfig_t sfConfig[4] ={
 //
 //  Configure instance tag/anchor/etc... addresses
 //
-void addressconfigure(uint8 s1switch, uint8 mode)
+void addressconfigure(uint16 s1switch, uint16 mode)
 {
 	uint16 instAddress ;
+#ifdef MATEO_IMPL
+	instance_anchaddr = 	(((s1switch & SWS1_A1A_MODE) << 6) +((s1switch & SWS1_A2A_MODE) << 4) + ((s1switch & SWS1_A3A_MODE) << 2) +
+							(s1switch & SWS1_A4A_MODE) +
+							((s1switch & SWS1_A5A_MODE) >> 2)+ ((s1switch & SWS1_A6A_MODE) >> 4) + ((s1switch & SWS1_A7A_MODE) >> 6)) >> 4;
 
+	//instance_anchaddr = (s1switch & SWS1_ADD_MODE) >> 4;
+#else
 	instance_anchaddr = (((s1switch & SWS1_A1A_MODE) << 2) + (s1switch & SWS1_A2A_MODE) + ((s1switch & SWS1_A3A_MODE) >> 2)) >> 4;
-
+#endif
 	if(mode == ANCHOR)
 	{
 		if(instance_anchaddr > 4)		{
@@ -227,11 +278,11 @@ void addressconfigure(uint8 s1switch, uint8 mode)
 	instancesetaddresses(instAddress);
 }
 
-uint32 inittestapplication(uint8 s1switch);
+uint32 inittestapplication(uint16 s1switch);
 
 
 //returns the use case / operational mode
-int decarangingmode(uint8 s1switch)
+int decarangingmode(uint16 s1switch)
 {
 	int mode = 0;
 
@@ -248,7 +299,7 @@ int decarangingmode(uint8 s1switch)
 	return mode;
 }
 
-uint32 inittestapplication(uint8 s1switch)
+uint32 inittestapplication(uint16 s1switch)
 {
 	uint32 devID ;
 	instanceConfig_t instConfig;
@@ -351,7 +402,7 @@ void process_deca_irq(void)
 	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,RESET);
 }
 
-void uwbPrintRole(uint8 s1switch)
+void uwbPrintRole(uint16 s1switch)
 {
 	int role = instancegetrole();
 
@@ -381,7 +432,7 @@ void uwbPrintRole(uint8 s1switch)
 }
 
 
-void configure_continuous_txspectrum_mode(uint8 s1switch)
+void configure_continuous_txspectrum_mode(uint16 s1switch)
 {
 	sprintf((char*)&dataseq[0], "Continuous TX %s%d", (s1switch & SWS1_SHF_MODE) ? "S" : "L", chan);
 	uartWriteLineNoOS((char *) dataseq); //send some data
@@ -432,7 +483,20 @@ int uwb_setup(void)
 	uartWriteLineNoOS("DECAWAVE");
 	uartWriteLineNoOS(SOFTWARE_VER_STRING); // Also set at line #26 (Should make this from single value !!!)
 
+#ifdef MATEO_IMPL
+	s1switch = BUTTON_0 << 1 // is_switch_on(TA_SW1_2) << 2
+			| TA_SW1_3 << 2
+			| TA_SW1_4 << 3
+			| TA_SW1_5 << 4
+			| TA_SW1_6 << 5
+			| TA_SW1_7 << 6
+			| TA_SW1_8 << 7
+			| TA_SW1_9 << 8
+			| TA_SW1_10 << 9
+			| TA_SW1_11 << 10
+			| TA_SW1_12 << 11;
 
+#else
 	s1switch = BUTTON_0 << 1 // is_switch_on(TA_SW1_2) << 2
 			| TA_SW1_3 << 2
 			| TA_SW1_4 << 3
@@ -440,7 +504,7 @@ int uwb_setup(void)
 			| TA_SW1_6 << 5
 			| TA_SW1_7 << 6
 			| TA_SW1_8 << 7;
-
+#endif
 	port_DisableEXT_IRQ(); //disable ScenSor IRQ until we configure the device
 
 	uartWriteLineNoOS("DECAWAVE TREK");
