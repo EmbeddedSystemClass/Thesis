@@ -97,7 +97,13 @@
 #define FASTRANGING 		SWITCH_OFF
 #endif
 
-uint8 s1switch = 0;
+
+#ifdef MATEO_IMPL
+uint32 s1switch = 0;
+#else
+ uint8 s1switch = 0;
+#endif
+
 int instance_anchaddr = 0;
 int dr_mode = 0;
 int chan, tagaddr, ancaddr;
@@ -242,7 +248,7 @@ sfConfig_t sfConfig[4] ={
 //
 //  Configure instance tag/anchor/etc... addresses
 //
-void addressconfigure(uint8 s1switch, uint8 mode)
+void addressconfigure(uint16 s1switch, uint16 mode)
 {
 	uint16 instAddress ;
 #ifdef MATEO_IMPL
@@ -272,11 +278,11 @@ void addressconfigure(uint8 s1switch, uint8 mode)
 	instancesetaddresses(instAddress);
 }
 
-uint32 inittestapplication(uint8 s1switch);
+uint32 inittestapplication(uint16 s1switch);
 
 
 //returns the use case / operational mode
-int decarangingmode(uint8 s1switch)
+int decarangingmode(uint16 s1switch)
 {
 	int mode = 0;
 
@@ -293,7 +299,7 @@ int decarangingmode(uint8 s1switch)
 	return mode;
 }
 
-uint32 inittestapplication(uint8 s1switch)
+uint32 inittestapplication(uint16 s1switch)
 {
 	uint32 devID ;
 	instanceConfig_t instConfig;
@@ -396,7 +402,7 @@ void process_deca_irq(void)
 	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_1,RESET);
 }
 
-void uwbPrintRole(uint8 s1switch)
+void uwbPrintRole(uint16 s1switch)
 {
 	int role = instancegetrole();
 
@@ -426,7 +432,7 @@ void uwbPrintRole(uint8 s1switch)
 }
 
 
-void configure_continuous_txspectrum_mode(uint8 s1switch)
+void configure_continuous_txspectrum_mode(uint16 s1switch)
 {
 	sprintf((char*)&dataseq[0], "Continuous TX %s%d", (s1switch & SWS1_SHF_MODE) ? "S" : "L", chan);
 	uartWriteLineNoOS((char *) dataseq); //send some data
