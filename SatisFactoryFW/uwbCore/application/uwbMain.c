@@ -71,9 +71,9 @@
 #define TA_SW1_5			FALSE
 #define TA_SW1_6			FALSE
 #define TA_SW1_7			FALSE
-#define TA_SW1_8			FALSE
-#define TA_SW1_9			FALSE
-#define TA_SW1_10			FALSE
+#define TA_SW1_8			TRUE
+#define TA_SW1_9			TRUE
+#define TA_SW1_10			TRUE
 #define TA_SW1_11			TRUE
 
 #define TA_SW1_12			FALSE
