@@ -30,7 +30,7 @@
 
 #include "uart.h"
 
-#define MATEO_IMPL
+//#define MATEO_IMPL
 
 #define SWS1_SHF_MODE 0x02	//short frame mode (6.81M)
 #define SWS1_CH5_MODE 0x04	//channel 5 mode
