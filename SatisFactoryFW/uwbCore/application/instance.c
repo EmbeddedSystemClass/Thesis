@@ -619,7 +619,7 @@ int testapprun(instance_data_t *inst, int message)
                     {
 						//process ranging messages
 						fcode = fn_code;
-						tof_idx = srcAddr[0] & 0x3 ;
+						tof_idx = srcAddr[0] & 0x3 ; // REVISAR ACA, NO ESTOY SEGURO QUE DEBA SER UN 3
 
                         switch(fcode)
                         {
