@@ -87,11 +87,11 @@
 
 #define BUTTON_0			TRUE
 
-#define TA_SW1_3			FALSE
-#define TA_SW1_4			FALSE		/* FALSE: Tag - TRUE: Anchor */
+#define TA_SW1_3			TRUE
+#define TA_SW1_4			TRUE		/* FALSE: Tag - TRUE: Anchor */
 #define TA_SW1_5			FALSE
 #define TA_SW1_6			FALSE
-#define TA_SW1_7			TRUE
+#define TA_SW1_7			FALSE
 #define TA_SW1_8			FALSE
 
 #define FASTRANGING 		SWITCH_OFF
@@ -201,13 +201,13 @@ sfConfig_t sfConfig[4] ={
 				(20000)
 		},
 		//mode 2 - S1: 2 on, 3 off   // OJO TRABAJANDO EN ESTE MODO
-		{
-				(3),   // slot period ms
-				(130),   // number of slots (only 100 are used) - thus 390 ms superframe means 2.56 Hz location rate
-				(130*3), // superframe period (390 ms - gives 2.56 Hz)
-				(130*3), // poll sleep delay (tag sleep time, usually = superframe period)
-				(2500)
-		},
+//		{
+//				(3),   // slot period ms
+//				(130),   // number of slots (only 100 are used) - thus 390 ms superframe means 2.56 Hz location rate
+//				(130*3), // superframe period (390 ms - gives 2.56 Hz)
+//				(130*3), // poll sleep delay (tag sleep time, usually = superframe period)
+//				(2500)
+//		},
 
 //		//mode 2 - S1: 2 on, 3 off   // OJO TRABAJANDO EN ESTE MODO
 //		{
@@ -218,14 +218,14 @@ sfConfig_t sfConfig[4] ={
 //				(2500)
 //		},
 
-//		//mode 2 - S1: 2 on, 3 off   // OJO TRABAJANDO EN ESTE MODO
-//		{
-//				(10),   // slot period ms
-//				(10),   // number of slots (only 10 are used) - thus 100 ms superframe means 10 Hz location rate
-//				(10*10), // superframe period (100 ms - gives 10 Hz)
-//				(10*10), // poll sleep delay (tag sleep time, usually = superframe period)
-//				(2500)
-//		},
+		//mode 2 - S1: 2 on, 3 off   // OJO TRABAJANDO EN ESTE MODO
+		{
+				(10),   // slot period ms
+				(10),   // number of slots (only 10 are used) - thus 100 ms superframe means 10 Hz location rate
+				(10*10), // superframe period (100 ms - gives 10 Hz)
+				(10*10), // poll sleep delay (tag sleep time, usually = superframe period)
+				(2500)
+		},
 
 		//mode 3 - S1: 2 off, 3 on
 		{
