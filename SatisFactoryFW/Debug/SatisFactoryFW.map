@@ -19273,7 +19273,7 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000    0x27cfc
+.debug_info     0x00000000    0x27d00
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x482 ./uwbCore/platform/deca_mutex.o
  .debug_info    0x00000482      0xf44 ./uwbCore/platform/deca_port.o
@@ -19284,45 +19284,45 @@ END GROUP
  .debug_info    0x000068c8     0x17b9 ./uwbCore/application/instance.o
  .debug_info    0x00008081      0xc01 ./uwbCore/application/instance_calib.o
  .debug_info    0x00008c82     0x2a19 ./uwbCore/application/instance_common.o
- .debug_info    0x0000b69b     0x1f65 ./uwbCore/application/uwbMain.o
- .debug_info    0x0000d600      0x918 ./system/src/stm32f4xx/stm32f4xx_hal.o
- .debug_info    0x0000df18      0xc45 ./system/src/stm32f4xx/stm32f4xx_hal_cortex.o
- .debug_info    0x0000eb5d      0x72d ./system/src/stm32f4xx/stm32f4xx_hal_dma.o
- .debug_info    0x0000f28a      0x6f2 ./system/src/stm32f4xx/stm32f4xx_hal_gpio.o
- .debug_info    0x0000f97c     0x104c ./system/src/stm32f4xx/stm32f4xx_hal_rcc.o
- .debug_info    0x000109c8     0x1687 ./system/src/stm32f4xx/stm32f4xx_hal_spi.o
- .debug_info    0x0001204f     0x2e4b ./system/src/stm32f4xx/stm32f4xx_hal_tim.o
- .debug_info    0x00014e9a     0x12e9 ./system/src/stm32f4xx/stm32f4xx_hal_tim_ex.o
- .debug_info    0x00016183     0x11e8 ./system/src/stm32f4xx/stm32f4xx_hal_uart.o
- .debug_info    0x0001736b      0x112 ./system/src/newlib/_exit.o
- .debug_info    0x0001747d      0x125 ./system/src/newlib/_sbrk.o
- .debug_info    0x000175a2      0x420 ./system/src/newlib/_startup.o
- .debug_info    0x000179c2      0x1a9 ./system/src/newlib/_syscalls.o
- .debug_info    0x00017b6b      0x32b ./system/src/diag/Trace.o
- .debug_info    0x00017e96      0x114 ./system/src/diag/trace_impl.o
- .debug_info    0x00017faa      0x289 ./system/src/cortexm/_initialize_hardware.o
- .debug_info    0x00018233      0x295 ./system/src/cortexm/_reset_hardware.o
- .debug_info    0x000184c8      0x7a6 ./system/src/cortexm/exception_handlers.o
- .debug_info    0x00018c6e       0x9e ./system/src/cmsis/startup_stm32f411xe.o
- .debug_info    0x00018d0c      0x486 ./system/src/cmsis/system_stm32f4xx.o
- .debug_info    0x00019192     0x16f0 ./system/src/FreeRTOS/cmsis_os.o
- .debug_info    0x0001a882      0x314 ./system/src/FreeRTOS/heap_2.o
- .debug_info    0x0001ab96      0x29a ./system/src/FreeRTOS/list.o
- .debug_info    0x0001ae30      0x542 ./system/src/FreeRTOS/port.o
- .debug_info    0x0001b372     0x18cc ./system/src/FreeRTOS/queue.o
- .debug_info    0x0001cc3e     0x24dd ./system/src/FreeRTOS/tasks.o
- .debug_info    0x0001f11b     0x11a7 ./User/src/main.o
- .debug_info    0x000202c2      0x588 ./Peripheral/src/dma.o
- .debug_info    0x0002084a      0x7e8 ./Peripheral/src/gpio.o
- .debug_info    0x00021032      0xd26 ./Peripheral/src/i2c.o
- .debug_info    0x00021d58      0xc70 ./Peripheral/src/rgbLed.o
- .debug_info    0x000229c8      0xdfe ./Peripheral/src/sf_port.o
- .debug_info    0x000237c6      0xc0e ./Peripheral/src/spi.o
- .debug_info    0x000243d4     0x1770 ./Peripheral/src/uart.o
- .debug_info    0x00025b44      0xe3b ./DeviceSupport/src/stm32f4xx_hal_msp.o
- .debug_info    0x0002697f     0x137d ./DeviceSupport/src/stm32f4xx_it.o
+ .debug_info    0x0000b69b     0x1f69 ./uwbCore/application/uwbMain.o
+ .debug_info    0x0000d604      0x918 ./system/src/stm32f4xx/stm32f4xx_hal.o
+ .debug_info    0x0000df1c      0xc45 ./system/src/stm32f4xx/stm32f4xx_hal_cortex.o
+ .debug_info    0x0000eb61      0x72d ./system/src/stm32f4xx/stm32f4xx_hal_dma.o
+ .debug_info    0x0000f28e      0x6f2 ./system/src/stm32f4xx/stm32f4xx_hal_gpio.o
+ .debug_info    0x0000f980     0x104c ./system/src/stm32f4xx/stm32f4xx_hal_rcc.o
+ .debug_info    0x000109cc     0x1687 ./system/src/stm32f4xx/stm32f4xx_hal_spi.o
+ .debug_info    0x00012053     0x2e4b ./system/src/stm32f4xx/stm32f4xx_hal_tim.o
+ .debug_info    0x00014e9e     0x12e9 ./system/src/stm32f4xx/stm32f4xx_hal_tim_ex.o
+ .debug_info    0x00016187     0x11e8 ./system/src/stm32f4xx/stm32f4xx_hal_uart.o
+ .debug_info    0x0001736f      0x112 ./system/src/newlib/_exit.o
+ .debug_info    0x00017481      0x125 ./system/src/newlib/_sbrk.o
+ .debug_info    0x000175a6      0x420 ./system/src/newlib/_startup.o
+ .debug_info    0x000179c6      0x1a9 ./system/src/newlib/_syscalls.o
+ .debug_info    0x00017b6f      0x32b ./system/src/diag/Trace.o
+ .debug_info    0x00017e9a      0x114 ./system/src/diag/trace_impl.o
+ .debug_info    0x00017fae      0x289 ./system/src/cortexm/_initialize_hardware.o
+ .debug_info    0x00018237      0x295 ./system/src/cortexm/_reset_hardware.o
+ .debug_info    0x000184cc      0x7a6 ./system/src/cortexm/exception_handlers.o
+ .debug_info    0x00018c72       0x9e ./system/src/cmsis/startup_stm32f411xe.o
+ .debug_info    0x00018d10      0x486 ./system/src/cmsis/system_stm32f4xx.o
+ .debug_info    0x00019196     0x16f0 ./system/src/FreeRTOS/cmsis_os.o
+ .debug_info    0x0001a886      0x314 ./system/src/FreeRTOS/heap_2.o
+ .debug_info    0x0001ab9a      0x29a ./system/src/FreeRTOS/list.o
+ .debug_info    0x0001ae34      0x542 ./system/src/FreeRTOS/port.o
+ .debug_info    0x0001b376     0x18cc ./system/src/FreeRTOS/queue.o
+ .debug_info    0x0001cc42     0x24dd ./system/src/FreeRTOS/tasks.o
+ .debug_info    0x0001f11f     0x11a7 ./User/src/main.o
+ .debug_info    0x000202c6      0x588 ./Peripheral/src/dma.o
+ .debug_info    0x0002084e      0x7e8 ./Peripheral/src/gpio.o
+ .debug_info    0x00021036      0xd26 ./Peripheral/src/i2c.o
+ .debug_info    0x00021d5c      0xc70 ./Peripheral/src/rgbLed.o
+ .debug_info    0x000229cc      0xdfe ./Peripheral/src/sf_port.o
+ .debug_info    0x000237ca      0xc0e ./Peripheral/src/spi.o
+ .debug_info    0x000243d8     0x1770 ./Peripheral/src/uart.o
+ .debug_info    0x00025b48      0xe3b ./DeviceSupport/src/stm32f4xx_hal_msp.o
+ .debug_info    0x00026983     0x137d ./DeviceSupport/src/stm32f4xx_it.o
 
-.debug_abbrev   0x00000000     0x5c10
+.debug_abbrev   0x00000000     0x5bd8
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x19f ./uwbCore/platform/deca_mutex.o
  .debug_abbrev  0x0000019f      0x26e ./uwbCore/platform/deca_port.o
@@ -19333,43 +19333,43 @@ END GROUP
  .debug_abbrev  0x00000bc8      0x364 ./uwbCore/application/instance.o
  .debug_abbrev  0x00000f2c      0x220 ./uwbCore/application/instance_calib.o
  .debug_abbrev  0x0000114c      0x578 ./uwbCore/application/instance_common.o
- .debug_abbrev  0x000016c4      0x393 ./uwbCore/application/uwbMain.o
- .debug_abbrev  0x00001a57      0x2a0 ./system/src/stm32f4xx/stm32f4xx_hal.o
- .debug_abbrev  0x00001cf7      0x2aa ./system/src/stm32f4xx/stm32f4xx_hal_cortex.o
- .debug_abbrev  0x00001fa1      0x1d8 ./system/src/stm32f4xx/stm32f4xx_hal_dma.o
- .debug_abbrev  0x00002179      0x1cb ./system/src/stm32f4xx/stm32f4xx_hal_gpio.o
- .debug_abbrev  0x00002344      0x2b9 ./system/src/stm32f4xx/stm32f4xx_hal_rcc.o
- .debug_abbrev  0x000025fd      0x261 ./system/src/stm32f4xx/stm32f4xx_hal_spi.o
- .debug_abbrev  0x0000285e      0x24e ./system/src/stm32f4xx/stm32f4xx_hal_tim.o
- .debug_abbrev  0x00002aac      0x23b ./system/src/stm32f4xx/stm32f4xx_hal_tim_ex.o
- .debug_abbrev  0x00002ce7      0x272 ./system/src/stm32f4xx/stm32f4xx_hal_uart.o
- .debug_abbrev  0x00002f59       0xc0 ./system/src/newlib/_exit.o
- .debug_abbrev  0x00003019       0xbb ./system/src/newlib/_sbrk.o
- .debug_abbrev  0x000030d4      0x1c6 ./system/src/newlib/_startup.o
- .debug_abbrev  0x0000329a       0xe7 ./system/src/newlib/_syscalls.o
- .debug_abbrev  0x00003381      0x178 ./system/src/diag/Trace.o
- .debug_abbrev  0x000034f9       0xb4 ./system/src/diag/trace_impl.o
- .debug_abbrev  0x000035ad       0xd9 ./system/src/cortexm/_initialize_hardware.o
- .debug_abbrev  0x00003686       0xea ./system/src/cortexm/_reset_hardware.o
- .debug_abbrev  0x00003770      0x1ba ./system/src/cortexm/exception_handlers.o
- .debug_abbrev  0x0000392a       0x12 ./system/src/cmsis/startup_stm32f411xe.o
- .debug_abbrev  0x0000393c      0x104 ./system/src/cmsis/system_stm32f4xx.o
- .debug_abbrev  0x00003a40      0x38b ./system/src/FreeRTOS/cmsis_os.o
- .debug_abbrev  0x00003dcb      0x1b3 ./system/src/FreeRTOS/heap_2.o
- .debug_abbrev  0x00003f7e       0xdf ./system/src/FreeRTOS/list.o
- .debug_abbrev  0x0000405d      0x223 ./system/src/FreeRTOS/port.o
- .debug_abbrev  0x00004280      0x2c0 ./system/src/FreeRTOS/queue.o
- .debug_abbrev  0x00004540      0x316 ./system/src/FreeRTOS/tasks.o
- .debug_abbrev  0x00004856      0x29f ./User/src/main.o
- .debug_abbrev  0x00004af5      0x135 ./Peripheral/src/dma.o
- .debug_abbrev  0x00004c2a      0x181 ./Peripheral/src/gpio.o
- .debug_abbrev  0x00004dab      0x201 ./Peripheral/src/i2c.o
- .debug_abbrev  0x00004fac      0x1eb ./Peripheral/src/rgbLed.o
- .debug_abbrev  0x00005197      0x1a1 ./Peripheral/src/sf_port.o
- .debug_abbrev  0x00005338      0x1c8 ./Peripheral/src/spi.o
- .debug_abbrev  0x00005500      0x322 ./Peripheral/src/uart.o
- .debug_abbrev  0x00005822      0x1b3 ./DeviceSupport/src/stm32f4xx_hal_msp.o
- .debug_abbrev  0x000059d5      0x23b ./DeviceSupport/src/stm32f4xx_it.o
+ .debug_abbrev  0x000016c4      0x35b ./uwbCore/application/uwbMain.o
+ .debug_abbrev  0x00001a1f      0x2a0 ./system/src/stm32f4xx/stm32f4xx_hal.o
+ .debug_abbrev  0x00001cbf      0x2aa ./system/src/stm32f4xx/stm32f4xx_hal_cortex.o
+ .debug_abbrev  0x00001f69      0x1d8 ./system/src/stm32f4xx/stm32f4xx_hal_dma.o
+ .debug_abbrev  0x00002141      0x1cb ./system/src/stm32f4xx/stm32f4xx_hal_gpio.o
+ .debug_abbrev  0x0000230c      0x2b9 ./system/src/stm32f4xx/stm32f4xx_hal_rcc.o
+ .debug_abbrev  0x000025c5      0x261 ./system/src/stm32f4xx/stm32f4xx_hal_spi.o
+ .debug_abbrev  0x00002826      0x24e ./system/src/stm32f4xx/stm32f4xx_hal_tim.o
+ .debug_abbrev  0x00002a74      0x23b ./system/src/stm32f4xx/stm32f4xx_hal_tim_ex.o
+ .debug_abbrev  0x00002caf      0x272 ./system/src/stm32f4xx/stm32f4xx_hal_uart.o
+ .debug_abbrev  0x00002f21       0xc0 ./system/src/newlib/_exit.o
+ .debug_abbrev  0x00002fe1       0xbb ./system/src/newlib/_sbrk.o
+ .debug_abbrev  0x0000309c      0x1c6 ./system/src/newlib/_startup.o
+ .debug_abbrev  0x00003262       0xe7 ./system/src/newlib/_syscalls.o
+ .debug_abbrev  0x00003349      0x178 ./system/src/diag/Trace.o
+ .debug_abbrev  0x000034c1       0xb4 ./system/src/diag/trace_impl.o
+ .debug_abbrev  0x00003575       0xd9 ./system/src/cortexm/_initialize_hardware.o
+ .debug_abbrev  0x0000364e       0xea ./system/src/cortexm/_reset_hardware.o
+ .debug_abbrev  0x00003738      0x1ba ./system/src/cortexm/exception_handlers.o
+ .debug_abbrev  0x000038f2       0x12 ./system/src/cmsis/startup_stm32f411xe.o
+ .debug_abbrev  0x00003904      0x104 ./system/src/cmsis/system_stm32f4xx.o
+ .debug_abbrev  0x00003a08      0x38b ./system/src/FreeRTOS/cmsis_os.o
+ .debug_abbrev  0x00003d93      0x1b3 ./system/src/FreeRTOS/heap_2.o
+ .debug_abbrev  0x00003f46       0xdf ./system/src/FreeRTOS/list.o
+ .debug_abbrev  0x00004025      0x223 ./system/src/FreeRTOS/port.o
+ .debug_abbrev  0x00004248      0x2c0 ./system/src/FreeRTOS/queue.o
+ .debug_abbrev  0x00004508      0x316 ./system/src/FreeRTOS/tasks.o
+ .debug_abbrev  0x0000481e      0x29f ./User/src/main.o
+ .debug_abbrev  0x00004abd      0x135 ./Peripheral/src/dma.o
+ .debug_abbrev  0x00004bf2      0x181 ./Peripheral/src/gpio.o
+ .debug_abbrev  0x00004d73      0x201 ./Peripheral/src/i2c.o
+ .debug_abbrev  0x00004f74      0x1eb ./Peripheral/src/rgbLed.o
+ .debug_abbrev  0x0000515f      0x1a1 ./Peripheral/src/sf_port.o
+ .debug_abbrev  0x00005300      0x1c8 ./Peripheral/src/spi.o
+ .debug_abbrev  0x000054c8      0x322 ./Peripheral/src/uart.o
+ .debug_abbrev  0x000057ea      0x1b3 ./DeviceSupport/src/stm32f4xx_hal_msp.o
+ .debug_abbrev  0x0000599d      0x23b ./DeviceSupport/src/stm32f4xx_it.o
 
 .debug_line     0x00000000    0x19b26
  *(.debug_line)

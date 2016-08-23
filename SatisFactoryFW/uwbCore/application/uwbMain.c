@@ -64,9 +64,9 @@
 #define SWITCH_ON 			TRUE
 #define SWITCH_OFF 			FALSE
 
-#define BUTTON_0			TRUE
+#define BUTTON_0			FALSE
 
-#define TA_SW1_3			FALSE
+#define TA_SW1_3			TRUE
 #define TA_SW1_4			FALSE		/* FALSE: Tag - TRUE: Anchor */
 #define TA_SW1_5			FALSE
 #define TA_SW1_6			FALSE
@@ -144,7 +144,7 @@ typedef struct
 
 //Configuration for DecaRangeRTLS TREK Modes (4 default use cases selected by the switch S1 [2,3] on EVB1000, indexed 0 to 3 )
 chConfig_t chConfig[4] ={
-		//mode 1 - S1: 2 off, 3 off
+		//mode 0 - S1: 2 off, 3 off
 		{
 				2,              // channel
 				DWT_PRF_16M,    // prf
@@ -155,7 +155,7 @@ chConfig_t chConfig[4] ={
 				1,       // non-standard SFD
 				(1025 + 64 - 32) //SFD timeout
 		},
-		//mode 2 - S1: 2 on, 3 off   //PRUEBAS TRABAJANDO EN ESTE MODO
+		//mode 1 - S1: 2 on, 3 off   //PRUEBAS TRABAJANDO EN ESTE MODO
 		{
 				2,              // channel
 				DWT_PRF_16M,    // prf
@@ -166,7 +166,7 @@ chConfig_t chConfig[4] ={
 				0,       // non-standard SFD
 				(129 + 8 - 8) //SFD timeout
 		},
-		//mode 3 - S1: 2 off, 3 on
+		//mode 2 - S1: 2 off, 3 on
 		{
 				5,              // channel
 				DWT_PRF_16M,    // prf
@@ -177,7 +177,7 @@ chConfig_t chConfig[4] ={
 				1,       // non-standard SFD
 				(1025 + 64 - 32) //SFD timeout
 		},
-		//mode 4 - S1: 2 on, 3 on
+		//mode 3 - S1: 2 on, 3 on
 		{
 				5,              // channel
 				DWT_PRF_16M,    // prf
@@ -192,7 +192,17 @@ chConfig_t chConfig[4] ={
 
 //Slot and Superframe Configuration for DecaRangeRTLS TREK Modes (4 default use cases selected by the switch S1 [2,3] on EVB1000, indexed 0 to 3 )
 sfConfig_t sfConfig[4] ={
-		//mode 1 - S1: 2 off, 3 off
+		//mode 0 - S1: 2 off, 3 off
+#ifdef MATEO_IMPL
+
+		{
+				(28), //ms -
+				(130),   //thus 130 slots - thus 3.64s superframe means 0.27 Hz location rate (130 slots are needed as AtoA ranging takes 30+ ms)
+				(130*28), //superframe period
+				(130*28), //poll sleep delay
+				(20000)
+		},
+#else
 		{
 				(28), //ms -
 				(10),   //thus 10 slots - thus 280ms superframe means 3.57 Hz location rate (10 slots are needed as AtoA ranging takes 30+ ms)
@@ -200,7 +210,10 @@ sfConfig_t sfConfig[4] ={
 				(10*28), //poll sleep delay
 				(20000)
 		},
-		//mode 2 - S1: 2 on, 3 off   // OJO TRABAJANDO EN ESTE MODO
+#endif
+
+		//mode 1 - S1: 2 on, 3 off   // OJO TRABAJANDO EN ESTE MODO
+#ifdef MATEO_IMPL
 		{
 				(3),   // slot period ms
 				(130),   // number of slots (only 100 are used) - thus 390 ms superframe means 2.56 Hz location rate
@@ -217,25 +230,37 @@ sfConfig_t sfConfig[4] ={
 //				(10*3), // poll sleep delay (tag sleep time, usually = superframe period)
 //				(2500)
 //		},
-
-//		//mode 2 - S1: 2 on, 3 off   // OJO TRABAJANDO EN ESTE MODO
-//		{
-//				(10),   // slot period ms
-//				(10),   // number of slots (only 10 are used) - thus 100 ms superframe means 10 Hz location rate
-//				(10*10), // superframe period (100 ms - gives 10 Hz)
-//				(10*10), // poll sleep delay (tag sleep time, usually = superframe period)
-//				(2500)
-//		},
-
-		//mode 3 - S1: 2 off, 3 on
+#else
+		//mode 2 - S1: 2 on, 3 off   // OJO TRABAJANDO EN ESTE MODO
 		{
-				(28),    // slot period ms
-				(10),     // thus 10 slots - thus 280ms superframe means 3.57 Hz location rate
-				(10*28),  // superframe period
-				(10*28),  // poll sleep delay
+				(10),   // slot period ms
+				(10),   // number of slots (only 10 are used) - thus 100 ms superframe means 10 Hz location rate
+				(10*10), // superframe period (100 ms - gives 10 Hz)
+				(10*10), // poll sleep delay (tag sleep time, usually = superframe period)
+				(2500)
+		},
+#endif
+		//mode 2 - S1: 2 off, 3 on
+#ifdef MATEO_IMPL
+
+		{
+				(28), //ms -
+				(130),   //thus 130 slots - thus 3.64s superframe means 0.27 Hz location rate (130 slots are needed as AtoA ranging takes 30+ ms)
+				(130*28), //superframe period
+				(130*28), //poll sleep delay
 				(20000)
 		},
-		//mode 4 - S1: 2 on, 3 on
+#else
+		{
+				(28), //ms -
+				(10),   //thus 10 slots - thus 280ms superframe means 3.57 Hz location rate (10 slots are needed as AtoA ranging takes 30+ ms)
+				(10*28), //superframe period
+				(10*28), //poll sleep delay
+				(20000)
+		},
+#endif
+
+		//mode 3 - S1: 2 on, 3 on
 		{
 				(10),   // slot period ms
 				(10),   // number of slots (only 10 are used) - thus 100 ms superframe means 10 Hz location rate
