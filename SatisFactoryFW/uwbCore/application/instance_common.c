@@ -1170,7 +1170,7 @@ void instance_rxcallback(const dwt_callback_data_t *rxd)
 							uint8 index ;
 							instance_data[instance].rxResps[instance_data[instance].rangeNum]++;
 							dw_event.type_pend = tagrxreenable(sourceAddress); //responseTO decremented above...
-							index = RRXT0 + 5*(sourceAddress & 0x3);
+							index = RRXT0 + 5*(sourceAddress & 0x3); //USANDO SOLO 3 ANCHORS, NO ES NECESARIO EL ULTIMO INDICE, EL FINAL MESSAGE PUEDE SER MAS PEQUEÑO INCLUSO
 
 							instance_data[instance].rxResponseMask |= (0x1 << (sourceAddress & 0x3)); //add anchor ID to the mask
 							// Write Response RX time field of Final message

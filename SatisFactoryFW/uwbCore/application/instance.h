@@ -21,6 +21,7 @@ extern "C" {
 #include "deca_types.h"
 #include "deca_device_api.h"
 #define MATEO_IMPL
+//#define NUM_ANCHORTEST
 /******************************************************************************************************************
 ********************* NOTES on DW (MP) features/options ***********************************************************
 *******************************************************************************************************************/
@@ -55,8 +56,14 @@ extern "C" {
 //lengths including the Decaranging Message Function Code byte
 #define TAG_POLL_MSG_LEN                    2				// FunctionCode(1), Range Num (1)
 #define ANCH_RESPONSE_MSG_LEN               8               // FunctionCode(1), Sleep Correction Time (2), Measured_TOF_Time(4), Range Num (1) (previous)
+
+#ifdef NUM_ANCHORTEST
+#define TAG_FINAL_MSG_LEN                   28              // FunctionCode(1), Range Num (1), Poll_TxTime(5),
+															// Resp0_RxTime(5), Resp1_RxTime(5), Resp2_RxTime(5), Resp3_RxTime(5), Final_TxTime(5), Valid Response Mask (1)
+#else
 #define TAG_FINAL_MSG_LEN                   33              // FunctionCode(1), Range Num (1), Poll_TxTime(5),
 															// Resp0_RxTime(5), Resp1_RxTime(5), Resp2_RxTime(5), Resp3_RxTime(5), Final_TxTime(5), Valid Response Mask (1)
+#endif
 
 #define MAX_MAC_MSG_DATA_LEN                (TAG_FINAL_MSG_LEN) //max message len of the above
 
@@ -88,12 +95,16 @@ extern "C" {
 #ifdef MATEO_IMPL
 #define MAX_TAG_LIST_SIZE				(128)
 #define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
+#define MAX_ANCHOR_LIST_SIZE			(3) //this is limited to 3 in this application
+#define NUM_EXPECTED_RESPONSES			(2) //e.g. MAX_ANCHOR_LIST_SIZE - 1
+
+
 #else
 #define MAX_TAG_LIST_SIZE				(8)
-#endif
-
 #define MAX_ANCHOR_LIST_SIZE			(4) //this is limited to 4 in this application
 #define NUM_EXPECTED_RESPONSES			(3) //e.g. MAX_ANCHOR_LIST_SIZE - 1
+#endif
+
 #define NUM_EXPECTED_RESPONSES_ANC		(1) //anchors A0, A1 and A2 are involved in anchor to anchor ranging
 #define NUM_EXPECTED_RESPONSES_ANC0		(2) //anchor A0 expects response from A1 and A2
 
