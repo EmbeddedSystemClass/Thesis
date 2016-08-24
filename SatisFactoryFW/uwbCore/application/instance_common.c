@@ -964,8 +964,14 @@ void ancprepareresponse(uint16 sourceAddress, uint8 srcAddr_index, uint8 fcode_i
 		//find the time in the current superframe
 		currentSlotTime = uTimeStamp % instance_data[instance].sframePeriod;
 
-		//this is the slot time the poll should be received in (Mask 0x07 for the 8 MAX tags we support in TREK)
+#ifdef MATEO_IMPL
+		//this is the slot time the poll should be received in (Mask 0x07 for the 8 MAX tags we support in TREK)  //MODIFY HERE TO INCREASE THE EXPECTED SLOT TIME
+		expectedSlotTime = (sourceAddress&0xFF) * (FREQUENCY*(instance_data[instance].slotPeriod)); //
+#else
+		//this is the slot time the poll should be received in (Mask 0x07 for the 8 MAX tags we support in TREK)  //MODIFY HERE TO INCREASE THE EXPECTED SLOT TIME
 		expectedSlotTime = (sourceAddress&0xFF) * instance_data[instance].slotPeriod; //
+
+#endif
 
 		//error = expectedSlotTime - currentSlotTime
 		error = expectedSlotTime - currentSlotTime;

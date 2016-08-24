@@ -87,6 +87,7 @@ extern "C" {
 
 #ifdef MATEO_IMPL
 #define MAX_TAG_LIST_SIZE				(128)
+#define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
 #else
 #define MAX_TAG_LIST_SIZE				(8)
 #endif
