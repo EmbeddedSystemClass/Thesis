@@ -87,6 +87,7 @@ extern "C" {
 
 #ifdef MATEO_IMPL
 #define MAX_TAG_LIST_SIZE				(128)
+#define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
 #else
 #define MAX_TAG_LIST_SIZE				(8)
 #endif
@@ -125,6 +126,7 @@ extern "C" {
 #define TOFR                                3				// ToF (n-1) 4 bytes
 #define TOFRN								7				// range number 1 byte
 #define POLL_RNUM                           1               // Poll message range number
+
 
 //this it the delay used for configuring the receiver on delay (wait for response delay)
 //NOTE: this RX_RESPONSE_TURNAROUND is dependent on the microprocessor and code optimisations
