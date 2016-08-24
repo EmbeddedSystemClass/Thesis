@@ -641,7 +641,7 @@ uint8 tagrxreenable(uint16 sourceAddress)
 	uint8 anc = sourceAddress & 0x3;
 	int instance = 0;
 
-	switch(anc)
+	switch(anc) //revisar si se debe reducir el numero de casos hasta 2
 	{
 		//if we got Response from anchor 3 - this is the last expected response - send the final
 		case 3:

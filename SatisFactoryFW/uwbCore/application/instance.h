@@ -22,6 +22,8 @@ extern "C" {
 #include "deca_device_api.h"
 #define MATEO_IMPL
 //#define NUM_ANCHORTEST
+
+
 /******************************************************************************************************************
 ********************* NOTES on DW (MP) features/options ***********************************************************
 *******************************************************************************************************************/
@@ -93,20 +95,24 @@ extern "C" {
 #define MAX_USER_PAYLOAD_STRING	MAX_USER_PAYLOAD_STRING_LL
 
 #ifdef MATEO_IMPL
-#define MAX_TAG_LIST_SIZE				(128)
-#define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
-#define MAX_ANCHOR_LIST_SIZE			(3) //this is limited to 3 in this application
-#define NUM_EXPECTED_RESPONSES			(2) //e.g. MAX_ANCHOR_LIST_SIZE - 1
-
-
+	#define MAX_TAG_LIST_SIZE				(128)
+	#define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
 #else
-#define MAX_TAG_LIST_SIZE				(8)
-#define MAX_ANCHOR_LIST_SIZE			(4) //this is limited to 4 in this application
-#define NUM_EXPECTED_RESPONSES			(3) //e.g. MAX_ANCHOR_LIST_SIZE - 1
+	#define MAX_TAG_LIST_SIZE				(8)
 #endif
 
-#define NUM_EXPECTED_RESPONSES_ANC		(1) //anchors A0, A1 and A2 are involved in anchor to anchor ranging
-#define NUM_EXPECTED_RESPONSES_ANC0		(2) //anchor A0 expects response from A1 and A2
+#ifdef NUM_ANCHORTEST
+	#define MAX_ANCHOR_LIST_SIZE			(3) //this is limited to 3 in this application
+	#define NUM_EXPECTED_RESPONSES			(2) //e.g. MAX_ANCHOR_LIST_SIZE - 1
+	#define NUM_EXPECTED_RESPONSES_ANC		(1) //anchors A0, A1 and A2 are involved in anchor to anchor ranging
+	#define NUM_EXPECTED_RESPONSES_ANC0		(2) //anchor A0 expects response from A1 and A2
+#else
+	#define MAX_ANCHOR_LIST_SIZE			(4) //this is limited to 4 in this application
+	#define NUM_EXPECTED_RESPONSES			(3) //e.g. MAX_ANCHOR_LIST_SIZE - 1
+	#define NUM_EXPECTED_RESPONSES_ANC		(1) //anchors A0, A1 and A2 are involved in anchor to anchor ranging
+	#define NUM_EXPECTED_RESPONSES_ANC0		(2) //anchor A0 expects response from A1 and A2
+#endif
+
 
 #define GATEWAY_ANCHOR_ADDR				(0x8000)
 #define A1_ANCHOR_ADDR					(0x8001)
@@ -130,8 +136,20 @@ extern "C" {
 #define RRXT1                               12				// A1 Response RX time
 #define RRXT2                               17				// A2 Response RX time
 #define RRXT3                               22				// A3 Response RX time
+
+
+#ifdef NUM_ANCHORTEST
+
+#define FTXT                                22				// Final TX time
+#define VRESP                               27				// Mask of valid response times (e.g. if bit 1 = A0's response time is valid)
+
+#else
+
 #define FTXT                                27				// Final TX time
 #define VRESP                               32				// Mask of valid response times (e.g. if bit 1 = A0's response time is valid)
+
+#endif
+
 #define RES_TAG_SLP0                        1               // Response tag sleep correction LSB
 #define RES_TAG_SLP1                        2               // Response tag sleep correction MSB
 #define TOFR                                3				// ToF (n-1) 4 bytes

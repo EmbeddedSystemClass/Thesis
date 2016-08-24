@@ -67,14 +67,14 @@
 #define BUTTON_0			FALSE
 
 #define TA_SW1_3			TRUE
-#define TA_SW1_4			FALSE		/* FALSE: Tag - TRUE: Anchor */
+#define TA_SW1_4			TRUE		/* FALSE: Tag - TRUE: Anchor */
 #define TA_SW1_5			FALSE
 #define TA_SW1_6			FALSE
 #define TA_SW1_7			FALSE
 #define TA_SW1_8			FALSE
-#define TA_SW1_9			TRUE
+#define TA_SW1_9			FALSE
 #define TA_SW1_10			FALSE
-#define TA_SW1_11			TRUE
+#define TA_SW1_11			FALSE
 
 #define TA_SW1_12			FALSE
 

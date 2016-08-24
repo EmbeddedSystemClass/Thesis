@@ -500,7 +500,7 @@ int testapprun(instance_data_t *inst, int message)
 
 		                // Write Calculated TX time field of Final message
 						memcpy(&(inst->msg_f.messageData[FTXT]), (uint8 *)&tagCalculatedFinalTxTime, 5);
-		                // Write Poll TX time field of Final message
+						// Write Poll TX time field of Final message
 						memcpy(&(inst->msg_f.messageData[PTXT]), (uint8 *)&inst->txu.tagPollTxTime, 5);
 
 						//change the w4r for the second and remaining anchors to 50 us
