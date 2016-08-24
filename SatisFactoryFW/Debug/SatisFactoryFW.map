@@ -1949,7 +1949,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x11e ./uwbCore/application/instance_common.o
  .debug_macro   0x00000000      0x143 ./uwbCore/application/instance_common.o
  .debug_macro   0x00000000      0x261 ./uwbCore/application/instance_common.o
- .debug_macro   0x00000000      0x1d8 ./uwbCore/application/instance_common.o
+ .debug_macro   0x00000000      0x1df ./uwbCore/application/instance_common.o
  .group         0x00000000        0x8 ./uwbCore/application/uwbMain.o
  .group         0x00000000        0x8 ./uwbCore/application/uwbMain.o
  .group         0x00000000        0x8 ./uwbCore/application/uwbMain.o
@@ -2100,7 +2100,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x82 ./uwbCore/application/uwbMain.o
  .debug_macro   0x00000000       0x34 ./uwbCore/application/uwbMain.o
  .debug_macro   0x00000000      0x23d ./uwbCore/application/uwbMain.o
- .debug_macro   0x00000000      0x1d2 ./uwbCore/application/uwbMain.o
+ .debug_macro   0x00000000      0x1d9 ./uwbCore/application/uwbMain.o
  .debug_macro   0x00000000       0x2e ./uwbCore/application/uwbMain.o
  .debug_macro   0x00000000       0x28 ./uwbCore/application/uwbMain.o
  .debug_macro   0x00000000       0x3b ./uwbCore/application/uwbMain.o
@@ -19493,7 +19493,7 @@ END GROUP
  .debug_frame   0x00004fac       0x60 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-reallocr.o)
  .debug_frame   0x0000500c       0x28 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu\libgcc.a(_aeabi_uldivmod.o)
 
-.debug_str      0x00000000    0x75300
+.debug_str      0x00000000    0x7530e
  *(.debug_str)
  .debug_str     0x00000000    0x60655 ./uwbCore/platform/deca_mutex.o
                               0x609c1 (size before relaxing)
@@ -19507,83 +19507,83 @@ END GROUP
                                0xdd7a (size before relaxing)
  .debug_str     0x0006c0ca      0x16c ./uwbCore/decadriver/deca_range_tables.o
                                0x9168 (size before relaxing)
- .debug_str     0x0006c236     0x11b7 ./uwbCore/application/instance.o
-                              0x665b7 (size before relaxing)
- .debug_str     0x0006d3ed       0x3d ./uwbCore/application/instance_calib.o
-                              0x615ba (size before relaxing)
- .debug_str     0x0006d42a      0x546 ./uwbCore/application/instance_common.o
-                              0x61f00 (size before relaxing)
- .debug_str     0x0006d970      0x689 ./uwbCore/application/uwbMain.o
-                              0x6c5a1 (size before relaxing)
- .debug_str     0x0006dff9      0x4bc ./system/src/stm32f4xx/stm32f4xx_hal.o
+ .debug_str     0x0006c236     0x11c5 ./uwbCore/application/instance.o
+                              0x665c5 (size before relaxing)
+ .debug_str     0x0006d3fb       0x3d ./uwbCore/application/instance_calib.o
+                              0x615c8 (size before relaxing)
+ .debug_str     0x0006d438      0x546 ./uwbCore/application/instance_common.o
+                              0x61f0e (size before relaxing)
+ .debug_str     0x0006d97e      0x689 ./uwbCore/application/uwbMain.o
+                              0x6c5af (size before relaxing)
+ .debug_str     0x0006e007      0x4bc ./system/src/stm32f4xx/stm32f4xx_hal.o
                               0x5dbe8 (size before relaxing)
- .debug_str     0x0006e4b5      0x232 ./system/src/stm32f4xx/stm32f4xx_hal_cortex.o
+ .debug_str     0x0006e4c3      0x232 ./system/src/stm32f4xx/stm32f4xx_hal_cortex.o
                               0x5d922 (size before relaxing)
- .debug_str     0x0006e6e7      0x183 ./system/src/stm32f4xx/stm32f4xx_hal_dma.o
+ .debug_str     0x0006e6f5      0x183 ./system/src/stm32f4xx/stm32f4xx_hal_dma.o
                               0x5d5c4 (size before relaxing)
- .debug_str     0x0006e86a      0x1da ./system/src/stm32f4xx/stm32f4xx_hal_gpio.o
+ .debug_str     0x0006e878      0x1da ./system/src/stm32f4xx/stm32f4xx_hal_gpio.o
                               0x5d59d (size before relaxing)
- .debug_str     0x0006ea44      0x381 ./system/src/stm32f4xx/stm32f4xx_hal_rcc.o
+ .debug_str     0x0006ea52      0x381 ./system/src/stm32f4xx/stm32f4xx_hal_rcc.o
                               0x5d750 (size before relaxing)
- .debug_str     0x0006edc5      0x374 ./system/src/stm32f4xx/stm32f4xx_hal_spi.o
+ .debug_str     0x0006edd3      0x374 ./system/src/stm32f4xx/stm32f4xx_hal_spi.o
                               0x5da0c (size before relaxing)
- .debug_str     0x0006f139      0xe6f ./system/src/stm32f4xx/stm32f4xx_hal_tim.o
+ .debug_str     0x0006f147      0xe6f ./system/src/stm32f4xx/stm32f4xx_hal_tim.o
                               0x5e386 (size before relaxing)
- .debug_str     0x0006ffa8      0x4e0 ./system/src/stm32f4xx/stm32f4xx_hal_tim_ex.o
+ .debug_str     0x0006ffb6      0x4e0 ./system/src/stm32f4xx/stm32f4xx_hal_tim_ex.o
                               0x5dc3e (size before relaxing)
- .debug_str     0x00070488      0x4b2 ./system/src/stm32f4xx/stm32f4xx_hal_uart.o
+ .debug_str     0x00070496      0x4b2 ./system/src/stm32f4xx/stm32f4xx_hal_uart.o
                               0x5d9ff (size before relaxing)
- .debug_str     0x0007093a       0x54 ./system/src/newlib/_exit.o
+ .debug_str     0x00070948       0x54 ./system/src/newlib/_exit.o
                                0x5ebd (size before relaxing)
- .debug_str     0x0007098e      0x366 ./system/src/newlib/_sbrk.o
+ .debug_str     0x0007099c      0x366 ./system/src/newlib/_sbrk.o
                                0x461e (size before relaxing)
- .debug_str     0x00070cf4      0x191 ./system/src/newlib/_startup.o
+ .debug_str     0x00070d02      0x191 ./system/src/newlib/_startup.o
                                0x411c (size before relaxing)
- .debug_str     0x00070e85      0x6cb ./system/src/newlib/_syscalls.o
+ .debug_str     0x00070e93      0x6cb ./system/src/newlib/_syscalls.o
                                0x6618 (size before relaxing)
- .debug_str     0x00071550      0x185 ./system/src/diag/Trace.o
+ .debug_str     0x0007155e      0x185 ./system/src/diag/Trace.o
                                0x67cd (size before relaxing)
- .debug_str     0x000716d5       0x42 ./system/src/diag/trace_impl.o
+ .debug_str     0x000716e3       0x42 ./system/src/diag/trace_impl.o
                               0x28da2 (size before relaxing)
- .debug_str     0x00071717       0x4e ./system/src/cortexm/_initialize_hardware.o
+ .debug_str     0x00071725       0x4e ./system/src/cortexm/_initialize_hardware.o
                               0x2629c (size before relaxing)
- .debug_str     0x00071765       0x28 ./system/src/cortexm/_reset_hardware.o
+ .debug_str     0x00071773       0x28 ./system/src/cortexm/_reset_hardware.o
                               0x2626c (size before relaxing)
- .debug_str     0x0007178d      0x19d ./system/src/cortexm/exception_handlers.o
+ .debug_str     0x0007179b      0x19d ./system/src/cortexm/exception_handlers.o
                               0x29baf (size before relaxing)
- .debug_str     0x0007192a       0x65 ./system/src/cmsis/system_stm32f4xx.o
+ .debug_str     0x00071938       0x65 ./system/src/cmsis/system_stm32f4xx.o
                               0x263d7 (size before relaxing)
- .debug_str     0x0007198f      0x72d ./system/src/FreeRTOS/cmsis_os.o
+ .debug_str     0x0007199d      0x72d ./system/src/FreeRTOS/cmsis_os.o
                                0xb734 (size before relaxing)
- .debug_str     0x000720bc      0x38c ./system/src/FreeRTOS/heap_2.o
+ .debug_str     0x000720ca      0x38c ./system/src/FreeRTOS/heap_2.o
                                0x9277 (size before relaxing)
- .debug_str     0x00072448      0x129 ./system/src/FreeRTOS/list.o
+ .debug_str     0x00072456      0x129 ./system/src/FreeRTOS/list.o
                                0x8891 (size before relaxing)
- .debug_str     0x00072571      0x7b4 ./system/src/FreeRTOS/port.o
+ .debug_str     0x0007257f      0x7b4 ./system/src/FreeRTOS/port.o
                                0x73cb (size before relaxing)
- .debug_str     0x00072d25      0x696 ./system/src/FreeRTOS/queue.o
+ .debug_str     0x00072d33      0x696 ./system/src/FreeRTOS/queue.o
                                0xa2e0 (size before relaxing)
- .debug_str     0x000733bb      0xe8f ./system/src/FreeRTOS/tasks.o
+ .debug_str     0x000733c9      0xe8f ./system/src/FreeRTOS/tasks.o
                                0xaa74 (size before relaxing)
- .debug_str     0x0007424a      0x328 ./User/src/main.o
+ .debug_str     0x00074258      0x328 ./User/src/main.o
                               0x65c56 (size before relaxing)
- .debug_str     0x00074572       0x18 ./Peripheral/src/dma.o
+ .debug_str     0x00074580       0x18 ./Peripheral/src/dma.o
                               0x5d649 (size before relaxing)
- .debug_str     0x0007458a       0x27 ./Peripheral/src/gpio.o
+ .debug_str     0x00074598       0x27 ./Peripheral/src/gpio.o
                               0x5d7a2 (size before relaxing)
- .debug_str     0x000745b1      0x2e8 ./Peripheral/src/i2c.o
+ .debug_str     0x000745bf      0x2e8 ./Peripheral/src/i2c.o
                               0x62ed1 (size before relaxing)
- .debug_str     0x00074899       0x84 ./Peripheral/src/rgbLed.o
+ .debug_str     0x000748a7       0x84 ./Peripheral/src/rgbLed.o
                               0x5d80a (size before relaxing)
- .debug_str     0x0007491d      0x313 ./Peripheral/src/sf_port.o
+ .debug_str     0x0007492b      0x313 ./Peripheral/src/sf_port.o
                               0x5db6a (size before relaxing)
- .debug_str     0x00074c30       0x32 ./Peripheral/src/spi.o
+ .debug_str     0x00074c3e       0x32 ./Peripheral/src/spi.o
                               0x5dc74 (size before relaxing)
- .debug_str     0x00074c62      0x448 ./Peripheral/src/uart.o
+ .debug_str     0x00074c70      0x448 ./Peripheral/src/uart.o
                               0x657a6 (size before relaxing)
- .debug_str     0x000750aa       0x55 ./DeviceSupport/src/stm32f4xx_hal_msp.o
+ .debug_str     0x000750b8       0x55 ./DeviceSupport/src/stm32f4xx_hal_msp.o
                               0x5dd7d (size before relaxing)
- .debug_str     0x000750ff      0x201 ./DeviceSupport/src/stm32f4xx_it.o
+ .debug_str     0x0007510d      0x201 ./DeviceSupport/src/stm32f4xx_it.o
                               0x6658c (size before relaxing)
 
 .debug_loc      0x00000000     0xf8da
@@ -19691,7 +19691,7 @@ OUTPUT(SatisFactoryFW.elf elf32-littlearm)
  .debug_ranges  0x00001940       0x30 ./DeviceSupport/src/stm32f4xx_hal_msp.o
  .debug_ranges  0x00001970       0xa0 ./DeviceSupport/src/stm32f4xx_it.o
 
-.debug_macro    0x00000000    0x18c99
+.debug_macro    0x00000000    0x18ca7
  .debug_macro   0x00000000      0x3d8 ./uwbCore/platform/deca_mutex.o
  .debug_macro   0x000003d8      0x89e ./uwbCore/platform/deca_mutex.o
  .debug_macro   0x00000c76      0x261 ./uwbCore/platform/deca_mutex.o
@@ -19802,70 +19802,70 @@ OUTPUT(SatisFactoryFW.elf elf32-littlearm)
  .debug_macro   0x00011793       0x58 ./uwbCore/decadriver/deca_params_init.o
  .debug_macro   0x000117eb      0x284 ./uwbCore/decadriver/deca_range_tables.o
  .debug_macro   0x00011a6f      0x41d ./uwbCore/application/instance.o
- .debug_macro   0x00011e8c      0x1d8 ./uwbCore/application/instance.o
- .debug_macro   0x00012064      0x3f5 ./uwbCore/application/instance_calib.o
- .debug_macro   0x00012459      0x1d2 ./uwbCore/application/instance_calib.o
- .debug_macro   0x0001262b      0x40c ./uwbCore/application/instance_common.o
- .debug_macro   0x00012a37      0x5a1 ./uwbCore/application/uwbMain.o
- .debug_macro   0x00012fd8       0x2e ./uwbCore/application/uwbMain.o
- .debug_macro   0x00013006       0x10 ./uwbCore/application/uwbMain.o
- .debug_macro   0x00013016       0x10 ./uwbCore/application/uwbMain.o
- .debug_macro   0x00013026      0x2fd ./system/src/stm32f4xx/stm32f4xx_hal.o
- .debug_macro   0x00013323      0x2af ./system/src/stm32f4xx/stm32f4xx_hal_cortex.o
- .debug_macro   0x000135d2      0x2b6 ./system/src/stm32f4xx/stm32f4xx_hal_dma.o
- .debug_macro   0x00013888      0x2e7 ./system/src/stm32f4xx/stm32f4xx_hal_gpio.o
- .debug_macro   0x00013b6f      0x2d9 ./system/src/stm32f4xx/stm32f4xx_hal_rcc.o
- .debug_macro   0x00013e48      0x2b5 ./system/src/stm32f4xx/stm32f4xx_hal_spi.o
- .debug_macro   0x000140fd      0x2b0 ./system/src/stm32f4xx/stm32f4xx_hal_tim.o
- .debug_macro   0x000143ad      0x2af ./system/src/stm32f4xx/stm32f4xx_hal_tim_ex.o
- .debug_macro   0x0001465c      0x2b7 ./system/src/stm32f4xx/stm32f4xx_hal_uart.o
- .debug_macro   0x00014913      0x131 ./system/src/newlib/_exit.o
- .debug_macro   0x00014a44      0x10e ./system/src/newlib/_exit.o
- .debug_macro   0x00014b52       0x86 ./system/src/newlib/_exit.o
- .debug_macro   0x00014bd8       0xda ./system/src/newlib/_sbrk.o
- .debug_macro   0x00014cb2       0x19 ./system/src/newlib/_sbrk.o
- .debug_macro   0x00014ccb      0x16d ./system/src/newlib/_sbrk.o
- .debug_macro   0x00014e38       0x10 ./system/src/newlib/_sbrk.o
- .debug_macro   0x00014e48      0x23b ./system/src/newlib/_sbrk.o
- .debug_macro   0x00015083       0xc8 ./system/src/newlib/_startup.o
- .debug_macro   0x0001514b      0x1ad ./system/src/newlib/_syscalls.o
- .debug_macro   0x000152f8       0x1c ./system/src/newlib/_syscalls.o
- .debug_macro   0x00015314       0x10 ./system/src/newlib/_syscalls.o
- .debug_macro   0x00015324      0x122 ./system/src/newlib/_syscalls.o
- .debug_macro   0x00015446       0x2b ./system/src/newlib/_syscalls.o
- .debug_macro   0x00015471      0x118 ./system/src/newlib/_syscalls.o
- .debug_macro   0x00015589      0x13e ./system/src/newlib/_syscalls.o
- .debug_macro   0x000156c7       0x16 ./system/src/newlib/_syscalls.o
- .debug_macro   0x000156dd      0x15e ./system/src/diag/Trace.o
- .debug_macro   0x0001583b       0x52 ./system/src/diag/Trace.o
- .debug_macro   0x0001588d      0x167 ./system/src/diag/trace_impl.o
- .debug_macro   0x000159f4       0x10 ./system/src/diag/trace_impl.o
- .debug_macro   0x00015a04       0xc8 ./system/src/diag/trace_impl.o
- .debug_macro   0x00015acc       0xbe ./system/src/diag/trace_impl.o
- .debug_macro   0x00015b8a       0x85 ./system/src/cortexm/_initialize_hardware.o
- .debug_macro   0x00015c0f       0x85 ./system/src/cortexm/_reset_hardware.o
- .debug_macro   0x00015c94      0x1ad ./system/src/cortexm/exception_handlers.o
- .debug_macro   0x00015e41       0x22 ./system/src/cortexm/exception_handlers.o
- .debug_macro   0x00015e63       0x10 ./system/src/cortexm/exception_handlers.o
- .debug_macro   0x00015e73       0x8d ./system/src/cmsis/system_stm32f4xx.o
- .debug_macro   0x00015f00      0x196 ./system/src/FreeRTOS/cmsis_os.o
- .debug_macro   0x00016096       0xd1 ./system/src/FreeRTOS/cmsis_os.o
- .debug_macro   0x00016167      0x18c ./system/src/FreeRTOS/heap_2.o
- .debug_macro   0x000162f3      0x15e ./system/src/FreeRTOS/list.o
- .debug_macro   0x00016451      0x167 ./system/src/FreeRTOS/port.o
- .debug_macro   0x000165b8      0x1d0 ./system/src/FreeRTOS/queue.o
- .debug_macro   0x00016788      0x20c ./system/src/FreeRTOS/tasks.o
- .debug_macro   0x00016994       0x16 ./system/src/FreeRTOS/tasks.o
- .debug_macro   0x000169aa      0x4ec ./User/src/main.o
- .debug_macro   0x00016e96       0x16 ./User/src/main.o
- .debug_macro   0x00016eac       0x52 ./User/src/main.o
- .debug_macro   0x00016efe      0x2b9 ./Peripheral/src/dma.o
- .debug_macro   0x000171b7      0x2be ./Peripheral/src/gpio.o
- .debug_macro   0x00017475       0x10 ./Peripheral/src/gpio.o
- .debug_macro   0x00017485      0x395 ./Peripheral/src/i2c.o
- .debug_macro   0x0001781a      0x2c4 ./Peripheral/src/rgbLed.o
- .debug_macro   0x00017ade      0x2b9 ./Peripheral/src/sf_port.o
- .debug_macro   0x00017d97      0x2c2 ./Peripheral/src/spi.o
- .debug_macro   0x00018059      0x490 ./Peripheral/src/uart.o
- .debug_macro   0x000184e9      0x2af ./DeviceSupport/src/stm32f4xx_hal_msp.o
- .debug_macro   0x00018798      0x501 ./DeviceSupport/src/stm32f4xx_it.o
+ .debug_macro   0x00011e8c      0x1df ./uwbCore/application/instance.o
+ .debug_macro   0x0001206b      0x3f5 ./uwbCore/application/instance_calib.o
+ .debug_macro   0x00012460      0x1d9 ./uwbCore/application/instance_calib.o
+ .debug_macro   0x00012639      0x40c ./uwbCore/application/instance_common.o
+ .debug_macro   0x00012a45      0x5a1 ./uwbCore/application/uwbMain.o
+ .debug_macro   0x00012fe6       0x2e ./uwbCore/application/uwbMain.o
+ .debug_macro   0x00013014       0x10 ./uwbCore/application/uwbMain.o
+ .debug_macro   0x00013024       0x10 ./uwbCore/application/uwbMain.o
+ .debug_macro   0x00013034      0x2fd ./system/src/stm32f4xx/stm32f4xx_hal.o
+ .debug_macro   0x00013331      0x2af ./system/src/stm32f4xx/stm32f4xx_hal_cortex.o
+ .debug_macro   0x000135e0      0x2b6 ./system/src/stm32f4xx/stm32f4xx_hal_dma.o
+ .debug_macro   0x00013896      0x2e7 ./system/src/stm32f4xx/stm32f4xx_hal_gpio.o
+ .debug_macro   0x00013b7d      0x2d9 ./system/src/stm32f4xx/stm32f4xx_hal_rcc.o
+ .debug_macro   0x00013e56      0x2b5 ./system/src/stm32f4xx/stm32f4xx_hal_spi.o
+ .debug_macro   0x0001410b      0x2b0 ./system/src/stm32f4xx/stm32f4xx_hal_tim.o
+ .debug_macro   0x000143bb      0x2af ./system/src/stm32f4xx/stm32f4xx_hal_tim_ex.o
+ .debug_macro   0x0001466a      0x2b7 ./system/src/stm32f4xx/stm32f4xx_hal_uart.o
+ .debug_macro   0x00014921      0x131 ./system/src/newlib/_exit.o
+ .debug_macro   0x00014a52      0x10e ./system/src/newlib/_exit.o
+ .debug_macro   0x00014b60       0x86 ./system/src/newlib/_exit.o
+ .debug_macro   0x00014be6       0xda ./system/src/newlib/_sbrk.o
+ .debug_macro   0x00014cc0       0x19 ./system/src/newlib/_sbrk.o
+ .debug_macro   0x00014cd9      0x16d ./system/src/newlib/_sbrk.o
+ .debug_macro   0x00014e46       0x10 ./system/src/newlib/_sbrk.o
+ .debug_macro   0x00014e56      0x23b ./system/src/newlib/_sbrk.o
+ .debug_macro   0x00015091       0xc8 ./system/src/newlib/_startup.o
+ .debug_macro   0x00015159      0x1ad ./system/src/newlib/_syscalls.o
+ .debug_macro   0x00015306       0x1c ./system/src/newlib/_syscalls.o
+ .debug_macro   0x00015322       0x10 ./system/src/newlib/_syscalls.o
+ .debug_macro   0x00015332      0x122 ./system/src/newlib/_syscalls.o
+ .debug_macro   0x00015454       0x2b ./system/src/newlib/_syscalls.o
+ .debug_macro   0x0001547f      0x118 ./system/src/newlib/_syscalls.o
+ .debug_macro   0x00015597      0x13e ./system/src/newlib/_syscalls.o
+ .debug_macro   0x000156d5       0x16 ./system/src/newlib/_syscalls.o
+ .debug_macro   0x000156eb      0x15e ./system/src/diag/Trace.o
+ .debug_macro   0x00015849       0x52 ./system/src/diag/Trace.o
+ .debug_macro   0x0001589b      0x167 ./system/src/diag/trace_impl.o
+ .debug_macro   0x00015a02       0x10 ./system/src/diag/trace_impl.o
+ .debug_macro   0x00015a12       0xc8 ./system/src/diag/trace_impl.o
+ .debug_macro   0x00015ada       0xbe ./system/src/diag/trace_impl.o
+ .debug_macro   0x00015b98       0x85 ./system/src/cortexm/_initialize_hardware.o
+ .debug_macro   0x00015c1d       0x85 ./system/src/cortexm/_reset_hardware.o
+ .debug_macro   0x00015ca2      0x1ad ./system/src/cortexm/exception_handlers.o
+ .debug_macro   0x00015e4f       0x22 ./system/src/cortexm/exception_handlers.o
+ .debug_macro   0x00015e71       0x10 ./system/src/cortexm/exception_handlers.o
+ .debug_macro   0x00015e81       0x8d ./system/src/cmsis/system_stm32f4xx.o
+ .debug_macro   0x00015f0e      0x196 ./system/src/FreeRTOS/cmsis_os.o
+ .debug_macro   0x000160a4       0xd1 ./system/src/FreeRTOS/cmsis_os.o
+ .debug_macro   0x00016175      0x18c ./system/src/FreeRTOS/heap_2.o
+ .debug_macro   0x00016301      0x15e ./system/src/FreeRTOS/list.o
+ .debug_macro   0x0001645f      0x167 ./system/src/FreeRTOS/port.o
+ .debug_macro   0x000165c6      0x1d0 ./system/src/FreeRTOS/queue.o
+ .debug_macro   0x00016796      0x20c ./system/src/FreeRTOS/tasks.o
+ .debug_macro   0x000169a2       0x16 ./system/src/FreeRTOS/tasks.o
+ .debug_macro   0x000169b8      0x4ec ./User/src/main.o
+ .debug_macro   0x00016ea4       0x16 ./User/src/main.o
+ .debug_macro   0x00016eba       0x52 ./User/src/main.o
+ .debug_macro   0x00016f0c      0x2b9 ./Peripheral/src/dma.o
+ .debug_macro   0x000171c5      0x2be ./Peripheral/src/gpio.o
+ .debug_macro   0x00017483       0x10 ./Peripheral/src/gpio.o
+ .debug_macro   0x00017493      0x395 ./Peripheral/src/i2c.o
+ .debug_macro   0x00017828      0x2c4 ./Peripheral/src/rgbLed.o
+ .debug_macro   0x00017aec      0x2b9 ./Peripheral/src/sf_port.o
+ .debug_macro   0x00017da5      0x2c2 ./Peripheral/src/spi.o
+ .debug_macro   0x00018067      0x490 ./Peripheral/src/uart.o
+ .debug_macro   0x000184f7      0x2af ./DeviceSupport/src/stm32f4xx_hal_msp.o
+ .debug_macro   0x000187a6      0x501 ./DeviceSupport/src/stm32f4xx_it.o
