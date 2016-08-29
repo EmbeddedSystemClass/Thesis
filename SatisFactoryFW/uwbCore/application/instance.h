@@ -22,6 +22,7 @@ extern "C" {
 #include "deca_device_api.h"
 #define MATEO_IMPL
 //#define NUM_ANCHORTEST
+//#define NUM_ANCHORTEST2
 
 
 /******************************************************************************************************************
@@ -59,7 +60,7 @@ extern "C" {
 #define TAG_POLL_MSG_LEN                    2				// FunctionCode(1), Range Num (1)
 #define ANCH_RESPONSE_MSG_LEN               8               // FunctionCode(1), Sleep Correction Time (2), Measured_TOF_Time(4), Range Num (1) (previous)
 
-#ifdef NUM_ANCHORTEST
+#ifdef NUM_ANCHORTEST2
 #define TAG_FINAL_MSG_LEN                   28              // FunctionCode(1), Range Num (1), Poll_TxTime(5),
 															// Resp0_RxTime(5), Resp1_RxTime(5), Resp2_RxTime(5), Resp3_RxTime(5), Final_TxTime(5), Valid Response Mask (1)
 #else
@@ -95,8 +96,33 @@ extern "C" {
 #define MAX_USER_PAYLOAD_STRING	MAX_USER_PAYLOAD_STRING_LL
 
 #ifdef MATEO_IMPL
-	#define MAX_TAG_LIST_SIZE				(128)
-	#define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
+
+#define SWITCH_ON 			TRUE
+#define SWITCH_OFF 			FALSE
+
+/* *
+ * Position
+ * * 0->SetOn
+ * * 1->Mode
+ * * 2->Channel
+ * * 3->Unit
+ * * 4,5,6,7... Data...
+ * * n->Reserved
+ * */
+#define SET_ON				FALSE  // FALSE = ON , True =OFF (This switch should be set to ON)
+#define DATA_RATE			FALSE  // FALSE = 110kbps , TRUE = 6,81Mbps
+#define OPERATION_CHANNEL	TRUE   // FALSE = Channel 2 (3.993 GHz) , TRUE = Channel 5(6.489 GHz)
+#define DEVICE_TYPE			FALSE  // FALSE = TAG , TRUE = ANCHOR
+#define RESERVED_SW			FALSE  // This switch should be set to FALSE
+
+#define NUM_DISP 10
+#define NUM_DATA_ARRAY 12
+
+
+
+#define MAX_TAG_LIST_SIZE				(128)
+#define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
+
 #else
 	#define MAX_TAG_LIST_SIZE				(8)
 #endif
@@ -138,7 +164,7 @@ extern "C" {
 #define RRXT3                               22				// A3 Response RX time
 
 
-#ifdef NUM_ANCHORTEST
+#ifdef NUM_ANCHORTEST2
 
 #define FTXT                                22				// Final TX time
 #define VRESP                               27				// Mask of valid response times (e.g. if bit 1 = A0's response time is valid)

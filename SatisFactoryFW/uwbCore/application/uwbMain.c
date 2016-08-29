@@ -36,20 +36,11 @@
 #define SWS1_CH5_MODE 0x04	//channel 5 mode
 #define SWS1_ANC_MODE 0x08  //anchor mode
 
-#ifdef MATEO_IMPL
-#define SWS1_A1A_MODE 0x10  //anchor/tag address A1
-#define SWS1_A2A_MODE 0x20  //anchor/tag address A2
-#define SWS1_A3A_MODE 0x40  //anchor/tag address A3
-#define SWS1_A4A_MODE 0x80  //anchor/tag address A4
-#define SWS1_A5A_MODE 0x100  //anchor/tag address A5
-#define SWS1_A6A_MODE 0x200  //anchor/tag address A6
-#define SWS1_A7A_MODE 0x400  //anchor/tag address A7
 
-#else
 #define SWS1_A1A_MODE 0x10  //anchor/tag address A1
 #define SWS1_A2A_MODE 0x20  //anchor/tag address A2
 #define SWS1_A3A_MODE 0x40  //anchor/tag address A3
-#endif
+
 
 #define SWS1_USB2SPI_MODE 0x78  //USB to SPI mode
 #define SWS1_TXSPECT_MODE 0x38  //Continuous TX spectrum mode
@@ -59,26 +50,11 @@
 
 /* Defines used to substitute buttons and pins for porting to SatisFactory*/
 #ifdef MATEO_IMPL
+
 #define SWS1_ADD_MODE 0x7f0  //GET THE TAG/ANCHOR ADDRESS
+//all the definitions are in the instance.h file
+bool TA_SW3[NUM_DATA_ARRAY] = {SET_ON, DATA_RATE, OPERATION_CHANNEL, DEVICE_TYPE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, RESERVED_SW};
 
-#define SWITCH_ON 			TRUE
-#define SWITCH_OFF 			FALSE
-
-#define BUTTON_0			FALSE
-
-#define TA_SW1_3			TRUE
-#define TA_SW1_4			TRUE		/* FALSE: Tag - TRUE: Anchor */
-#define TA_SW1_5			FALSE
-#define TA_SW1_6			FALSE
-#define TA_SW1_7			FALSE
-#define TA_SW1_8			FALSE
-#define TA_SW1_9			FALSE
-#define TA_SW1_10			FALSE
-#define TA_SW1_11			FALSE
-
-#define TA_SW1_12			FALSE
-
-#define FASTRANGING 		SWITCH_OFF
 
 #else
 
@@ -275,11 +251,12 @@ sfConfig_t sfConfig[4] ={
 //
 void addressconfigure(uint16 s1switch, uint16 mode)
 {
-	uint16 instAddress ;
+	uint16 instAddress = 0;
 #ifdef MATEO_IMPL
-	instance_anchaddr = 	(((s1switch & SWS1_A1A_MODE) << 6) +((s1switch & SWS1_A2A_MODE) << 4) + ((s1switch & SWS1_A3A_MODE) << 2) +
-							(s1switch & SWS1_A4A_MODE) +
-							((s1switch & SWS1_A5A_MODE) >> 2)+ ((s1switch & SWS1_A6A_MODE) >> 4) + ((s1switch & SWS1_A7A_MODE) >> 6)) >> 4;
+
+	for(int i=(NUM_DATA_ARRAY-2) ; i>3 ; i--){
+		instance_anchaddr |= TA_SW3[i] << (NUM_DATA_ARRAY-2-i);
+	}
 
 	//instance_anchaddr = (s1switch & SWS1_ADD_MODE) >> 4;
 #else
@@ -509,17 +486,21 @@ int uwb_setup(void)
 	uartWriteLineNoOS(SOFTWARE_VER_STRING); // Also set at line #26 (Should make this from single value !!!)
 
 #ifdef MATEO_IMPL
-	s1switch = BUTTON_0 << 1 // is_switch_on(TA_SW1_2) << 2
-			| TA_SW1_3 << 2
-			| TA_SW1_4 << 3
-			| TA_SW1_5 << 4
-			| TA_SW1_6 << 5
-			| TA_SW1_7 << 6
-			| TA_SW1_8 << 7
-			| TA_SW1_9 << 8
-			| TA_SW1_10 << 9
-			| TA_SW1_11 << 10
-			| TA_SW1_12 << 11;
+	/*s1switch = TA_SW3[0] << 1 // is_switch_on(TA_SW1_2) << 2
+			 | TA_SW3[1] << 2
+			 | TA_SW3[2] << 3
+			 | TA_SW3[3] << 4
+			 | TA_SW3[4] << 5
+			 | TA_SW3[5] << 6
+			 | TA_SW3[6] << 7
+			 | TA_SW3[7] << 8
+			 | TA_SW3[8] << 9
+			 | TA_SW3[9] << 10
+			 | TA_SW3[10] << 11;*/
+
+	for(int i=0 ; i < NUM_DATA_ARRAY ; i++){
+		s1switch |= TA_SW3[i] << i;
+	}
 
 #else
 	s1switch = BUTTON_0 << 1 // is_switch_on(TA_SW1_2) << 2
