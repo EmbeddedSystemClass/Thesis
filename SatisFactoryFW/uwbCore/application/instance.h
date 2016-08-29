@@ -100,28 +100,20 @@ extern "C" {
 #define SWITCH_ON 			TRUE
 #define SWITCH_OFF 			FALSE
 
-/* *
- * Position
- * * 0->SetOn
- * * 1->Mode
- * * 2->Channel
- * * 3->Unit
- * * 4,5,6,7... Data...
- * * n->Reserved
- * */
 #define SET_ON				FALSE  // FALSE = ON , True =OFF (This switch should be set to ON)
 #define DATA_RATE			FALSE  // FALSE = 110kbps , TRUE = 6,81Mbps
 #define OPERATION_CHANNEL	TRUE   // FALSE = Channel 2 (3.993 GHz) , TRUE = Channel 5(6.489 GHz)
 #define DEVICE_TYPE			FALSE  // FALSE = TAG , TRUE = ANCHOR
 #define RESERVED_SW			FALSE  // This switch should be set to FALSE
 
-#define NUM_DISP 10
-#define NUM_DATA_ARRAY 12
-
-
-
 #define MAX_TAG_LIST_SIZE				(128)
 #define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
+#define TOTAL_NUMBER_OF_SLOTS			(MAX_TAG_LIST_SIZE+2)
+#define SLOT_SIZE 						(28)
+#define SUPERFRAME_SIZE					(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS)
+#define SCHEDULED_FINAL_DELAY			(20000)  //
+
+void Init_Param(void);
 
 #else
 	#define MAX_TAG_LIST_SIZE				(8)

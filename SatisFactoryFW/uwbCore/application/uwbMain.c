@@ -53,7 +53,23 @@
 
 #define SWS1_ADD_MODE 0x7f0  //GET THE TAG/ANCHOR ADDRESS
 //all the definitions are in the instance.h file
-bool TA_SW3[NUM_DATA_ARRAY] = {SET_ON, DATA_RATE, OPERATION_CHANNEL, DEVICE_TYPE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, RESERVED_SW};
+
+/* *
+ * Position
+ * * 0->SetOn
+ * * 1->Mode
+ * * 2->Channel
+ * * 3->Unit
+ * * 4,5,6,7... Data...
+ * * n->Reserved
+ * */
+
+#define NUM_DISP 10
+
+#define NUM_DATA_ARRAY 12
+//extern bool TA_SW3[NUM_DATA_ARRAY];
+//bool TA_SW3[NUM_DATA_ARRAY] = {SET_ON, DATA_RATE, OPERATION_CHANNEL, DEVICE_TYPE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, RESERVED_SW};
+bool *TA_SW3;
 
 
 #else
@@ -172,11 +188,11 @@ sfConfig_t sfConfig[4] ={
 #ifdef MATEO_IMPL
 
 		{
-				(28), //ms -
-				(130),   //thus 130 slots - thus 3.64s superframe means 0.27 Hz location rate (130 slots are needed as AtoA ranging takes 30+ ms)
-				(130*28), //superframe period
-				(130*28), //poll sleep delay
-				(20000)
+				(SLOT_SIZE), //ms -
+				(TOTAL_NUMBER_OF_SLOTS),   //thus 130 slots - thus 3.64s superframe means 0.27 Hz location rate (130 slots are needed as AtoA ranging takes 30+ ms)
+				(SUPERFRAME_SIZE), //superframe period
+				(SUPERFRAME_SIZE), //poll sleep delay
+				(SCHEDULED_FINAL_DELAY)
 		},
 #else
 		{
@@ -220,11 +236,11 @@ sfConfig_t sfConfig[4] ={
 #ifdef MATEO_IMPL
 
 		{
-				(28), //ms -
-				(130),   //thus 130 slots - thus 3.64s superframe means 0.27 Hz location rate (130 slots are needed as AtoA ranging takes 30+ ms)
-				(130*28), //superframe period
-				(130*28), //poll sleep delay
-				(20000)
+				(SLOT_SIZE), //ms -
+				(TOTAL_NUMBER_OF_SLOTS),   //thus 130 slots - thus 3.64s superframe means 0.27 Hz location rate (130 slots are needed as AtoA ranging takes 30+ ms)
+				(SUPERFRAME_SIZE), //superframe period
+				(SUPERFRAME_SIZE), //poll sleep delay
+				(SCHEDULED_FINAL_DELAY)
 		},
 #else
 		{
@@ -249,7 +265,7 @@ sfConfig_t sfConfig[4] ={
 //
 //  Configure instance tag/anchor/etc... addresses
 //
-void addressconfigure(uint16 s1switch, uint16 mode)
+void addressconfigure(uint16 mode)
 {
 	uint16 instAddress = 0;
 #ifdef MATEO_IMPL
@@ -303,6 +319,8 @@ int decarangingmode(uint16 s1switch)
 
 uint32 inittestapplication(uint16 s1switch)
 {
+	Init_Param();
+
 	uint32 devID ;
 	instanceConfig_t instConfig;
 	int result;
@@ -352,7 +370,7 @@ uint32 inittestapplication(uint16 s1switch)
 		instance_mode = ANCHOR;
 	}
 
-	addressconfigure(s1switch, instance_mode) ;                            // set up initial payload configuration
+	addressconfigure(instance_mode) ;                            // set up initial payload configuration
 
 	if((instance_mode == ANCHOR) && (instance_anchaddr > 0x4))
 	{
@@ -705,5 +723,30 @@ void UwbProcessInterruptTask(void const * argument) {
 
 		//osDelay(1);
 	}
+}
+
+void Init_Param(void){
+
+	bool id_disp[4] = {FALSE, FALSE, FALSE, TRUE};
+
+
+	int n_disp = (int) ceil(log2((double)NUM_DISP));
+	int n_array = 4 + n_disp + 1;
+
+	TA_SW3[0] = SET_ON;
+	TA_SW3[1] = DATA_RATE;
+	TA_SW3[2] = OPERATION_CHANNEL;
+	TA_SW3[3] = DEVICE_TYPE;
+
+	for(int i=4; i<n_array-1; i++){
+		TA_SW3[i] = id_disp[i-4];
+	}
+
+	TA_SW3[n_array-1] = RESERVED_SW;
+
+
+	//bool pruebas= TA_SW3;
+
+
 }
 
