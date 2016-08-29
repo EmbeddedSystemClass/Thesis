@@ -727,26 +727,33 @@ void UwbProcessInterruptTask(void const * argument) {
 
 void Init_Param(void){
 
-	bool id_disp[4] = {FALSE, FALSE, FALSE, TRUE};
-
+	int id_disp[4] = {1, 0, 1, 1};
+	int id_aux = 2;
 
 	int n_disp = (int) ceil(log2((double)NUM_DISP));
 	int n_array = 4 + n_disp + 1;
 
-	TA_SW3[0] = SET_ON;
-	TA_SW3[1] = DATA_RATE;
-	TA_SW3[2] = OPERATION_CHANNEL;
-	TA_SW3[3] = DEVICE_TYPE;
-
-	for(int i=4; i<n_array-1; i++){
-		TA_SW3[i] = id_disp[i-4];
+	int id_aux2[n_disp];
+	long dividend = id_aux;
+	for(int j=0; j<=n_disp; j++){
+		id_aux2[j] = dividend % 2;
+		dividend /= 2;
 	}
 
-	TA_SW3[n_array-1] = RESERVED_SW;
+	static bool Aux[9];
+	Aux[0] = SET_ON;
+	Aux[1] = DATA_RATE;
+	Aux[2] = OPERATION_CHANNEL;
+	Aux[3] = DEVICE_TYPE;
 
+	for(int i=4; i<n_array-1; i++){
+		Aux[i] = (bool)id_aux2[i-4];
+	}
 
-	//bool pruebas= TA_SW3;
+	Aux[n_array-1] = RESERVED_SW;
 
+	bool *Aux2 = &Aux[0];
+	;
 
 }
 
