@@ -108,7 +108,7 @@ int MaskAddr;
 //Device Parameters
 #define NUM_DISP 						(127) // 	Number of Tag to Use
 #define DEVICE_ID 						(15) // Device ID in Decimal
-#define MAX_TAG_LIST_SIZE				(128)
+#define MAX_TAG_LIST_SIZE				(128) // 2^n , N the dimension of the binary representation
 #define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
 
 
