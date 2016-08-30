@@ -51,7 +51,6 @@
 /* Defines used to substitute buttons and pins for porting to SatisFactory*/
 #ifdef MATEO_IMPL
 
-#define SWS1_ADD_MODE 0x7f0  //GET THE TAG/ANCHOR ADDRESS
 //all the definitions are in the instance.h file
 
 /* *
@@ -64,10 +63,12 @@
  * * n->Reserved
  * */
 
-#define NUM_DISP 20
 
-bool *TA_SW3;
-int NUM_DATA_ARRAY;
+
+extern bool *TA_SW3;
+extern int NUM_DATA_ARRAY;
+extern int Naddress;
+extern int MaskAddr;
 
 
 #else
@@ -206,21 +207,14 @@ sfConfig_t sfConfig[4] ={
 		//mode 1 - S1: 2 on, 3 off   // OJO TRABAJANDO EN ESTE MODO
 #ifdef MATEO_IMPL
 		{
-				(3),   // slot period ms
-				(130),   // number of slots (only 100 are used) - thus 390 ms superframe means 2.56 Hz location rate
-				(130*3), // superframe period (390 ms - gives 2.56 Hz)
-				(130*3), // poll sleep delay (tag sleep time, usually = superframe period)
-				(2500)
+				(SLOT_SIZE_HDR),   // slot period ms
+				(TOTAL_NUMBER_OF_SLOTS),   // number of slots (only 100 are used) - thus 390 ms superframe means 2.56 Hz location rate
+				(SUPERFRAME_SIZE_HDR), // superframe period (390 ms - gives 2.56 Hz)
+				(SUPERFRAME_SIZE_HDR), // poll sleep delay (tag sleep time, usually = superframe period)
+				(SCHEDULED_FINAL_DELAY_HDR)
 		},
 
-//		//mode 2 - S1: 2 on, 3 off   // OJO TRABAJANDO EN ESTE MODO
-//		{
-//				(3),   // slot period ms
-//				(10),   // number of slots (only 10 are used) - thus 30 ms superframe means 33.3 Hz location rate
-//				(10*3), // superframe period (30 ms - gives 33.3 Hz)
-//				(10*3), // poll sleep delay (tag sleep time, usually = superframe period)
-//				(2500)
-//		},
+
 #else
 		//mode 2 - S1: 2 on, 3 off   // OJO TRABAJANDO EN ESTE MODO
 		{
@@ -252,13 +246,25 @@ sfConfig_t sfConfig[4] ={
 #endif
 
 		//mode 3 - S1: 2 on, 3 on
+#ifdef MATEO_IMPL
+		{
+				(SLOT_SIZE_HDR),   // slot period ms
+				(TOTAL_NUMBER_OF_SLOTS),   // number of slots (only 100 are used) - thus 390 ms superframe means 2.56 Hz location rate
+				(SUPERFRAME_SIZE_HDR), // superframe period (390 ms - gives 2.56 Hz)
+				(SUPERFRAME_SIZE_HDR), // poll sleep delay (tag sleep time, usually = superframe period)
+				(SCHEDULED_FINAL_DELAY_HDR)
+		}
+
+#else
+		//mode 2 - S1: 2 on, 3 off   // OJO TRABAJANDO EN ESTE MODO
 		{
 				(10),   // slot period ms
 				(10),   // number of slots (only 10 are used) - thus 100 ms superframe means 10 Hz location rate
 				(10*10), // superframe period (100 ms - gives 10 Hz)
-				(10*10), // poll sleep (tag sleep time, usually = superframe period)
-				(2500) // this is the Poll to Final delay - 2ms (NOTE: if using 6.81 so only 1 frame per ms allowed LDC)
+				(10*10), // poll sleep delay (tag sleep time, usually = superframe period)
+				(2500)
 		}
+#endif
 };
 // ======================================================
 //
@@ -271,7 +277,6 @@ void addressconfigure(uint16 mode)
 
 	instance_anchaddr = Init_instance_anchaddr;
 
-	//instance_anchaddr = (s1switch & SWS1_ADD_MODE) >> 4;
 #else
 	instance_anchaddr = (((s1switch & SWS1_A1A_MODE) << 2) + (s1switch & SWS1_A2A_MODE) + ((s1switch & SWS1_A3A_MODE) >> 2)) >> 4;
 #endif
@@ -514,6 +519,7 @@ int uwb_setup(void)
 		Init_instance_anchaddr |= TA_SW3[i] << (NUM_DATA_ARRAY-2-i);
 	}
 
+	MaskAddr = pow(2,Naddress)-1 ;
 
 
 //	free(TA_SW3);
@@ -726,7 +732,7 @@ void UwbProcessInterruptTask(void const * argument) {
 void Init_Param(void){
 
 
-	const int Naddress = (int) ceil(log2((double)NUM_DISP));
+	Naddress = (int) ceil(log2((double)NUM_DISP));
 	NUM_DATA_ARRAY = 4 + Naddress + 1;
 
 	int BinaryArray[Naddress];
@@ -736,7 +742,7 @@ void Init_Param(void){
 		dividend /= 2;
 	}
 
-	bool *SWInit = calloc(NUM_DATA_ARRAY,sizeof(bool));
+	bool *SWInit = pvPortMalloc(NUM_DATA_ARRAY*sizeof(bool));
 	SWInit[0] = SET_ON;
 	SWInit[1] = DATA_RATE;
 	SWInit[2] = OPERATION_CHANNEL;
@@ -751,6 +757,6 @@ void Init_Param(void){
 	TA_SW3 = &SWInit[0];
 
 
-	free(SWInit);
+	vPortFree(SWInit);
 }
 

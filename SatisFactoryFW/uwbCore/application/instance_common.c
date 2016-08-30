@@ -18,6 +18,7 @@
 #include "instance.h"
 #define MATEO_IMPL
 
+extern int MaskAddr;
 // -------------------------------------------------------------------------------------------------------------------
 //      Data Definitions
 // -------------------------------------------------------------------------------------------------------------------
@@ -923,7 +924,7 @@ void ancprepareresponse(uint16 sourceAddress, uint8 srcAddr_index, uint8 fcode_i
 {
 	uint16 frameLength = 0;
 #ifdef MATEO_IMPL
-	uint8 tof_idx = (sourceAddress) & 0x7f ;
+	uint8 tof_idx = (sourceAddress) & MaskAddr ;
 #else
 	uint8 tof_idx = (sourceAddress) & 0x7 ;
 #endif
@@ -1130,7 +1131,7 @@ void instance_rxcallback(const dwt_callback_data_t *rxd)
 						}
 #ifdef MATEO_IMPL
 						instance_data[instance].rxRespsIdx = (int8) ((dw_event.msgu.frame[POLL_RNUM+fcode_index] & 0xf)
-																+ ((sourceAddress&0x7f) << 4));
+																+ ((sourceAddress&MaskAddr) << 4));
 #else
 						instance_data[instance].rxRespsIdx = (int8) ((dw_event.msgu.frame[POLL_RNUM+fcode_index] & 0xf)
 																+ ((sourceAddress&0x7) << 4));
@@ -1150,7 +1151,7 @@ void instance_rxcallback(const dwt_callback_data_t *rxd)
 
 						dw_event.type_pend = anctxorrxreenable(instance_data[instance].instanceAddress16, 2+0);
 #ifdef MATEO_IMPL
-						instance_data[instance].tof[sourceAddress & 0x7f] = INVALID_TOF; //clear ToF ..
+						instance_data[instance].tof[sourceAddress & MaskAddr] = INVALID_TOF; //clear ToF ..
 #else
 						instance_data[instance].tof[sourceAddress & 0x7] = INVALID_TOF; //clear ToF ..
 #endif

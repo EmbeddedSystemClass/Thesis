@@ -18,6 +18,9 @@
 
 #include "instance.h"
 #define MATEO_IMPL
+extern int MaskAddr;
+
+
 // -------------------------------------------------------------------------------------------------------------------
 
 
@@ -632,7 +635,7 @@ int testapprun(instance_data_t *inst, int message)
 								{
 
 									#ifdef MATEO_IMPL
-									inst->rangeNumA[srcAddr[0]&0x7f] = messageData[POLL_RNUM]; //when anchor receives a poll, we need to remember the new range number
+									inst->rangeNumA[srcAddr[0]&MaskAddr] = messageData[POLL_RNUM]; //when anchor receives a poll, we need to remember the new range number
 
 									#else		//OJOOOOOO ACA SE COMPARA CON EL NUMERO DE TAGS, ACA DEBE HABER UN CAMBIO
 									inst->rangeNumA[srcAddr[0]&0x7] = messageData[POLL_RNUM]; //when anchor receives a poll, we need to remember the new range number
@@ -812,7 +815,7 @@ int testapprun(instance_data_t *inst, int message)
 
 #ifdef MATEO_IMPL
 								if((RTLS_DEMO_MSG_TAG_FINAL == fcode) &&
-										(inst->rangeNumA[srcAddr[0]&0x7f] != messageData[POLL_RNUM])) //Final's range number needs to match Poll's or else discard this message
+										(inst->rangeNumA[srcAddr[0]&MaskAddr] != messageData[POLL_RNUM])) //Final's range number needs to match Poll's or else discard this message
 #else
 									if((RTLS_DEMO_MSG_TAG_FINAL == fcode) &&
 											(inst->rangeNumA[srcAddr[0]&0x7] != messageData[POLL_RNUM])) //Final's range number needs to match Poll's or else discard this message
@@ -891,7 +894,7 @@ int testapprun(instance_data_t *inst, int message)
 									//time-of-flight
 #ifdef MATEO_IMPL
 
-									inst->tof[inst->newRangeTagAddress & 0x7f] = tof;  ///OJOOO CAMBIAR NUMERO DE TAGS
+									inst->tof[inst->newRangeTagAddress & MaskAddr] = tof;  ///OJOOO CAMBIAR NUMERO DE TAGS
 #else
 									inst->tof[inst->newRangeTagAddress & 0x7] = tof;  ///OJOOO CAMBIAR NUMERO DE TAGS
 
