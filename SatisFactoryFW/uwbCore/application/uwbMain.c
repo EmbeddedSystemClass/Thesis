@@ -64,12 +64,10 @@
  * * n->Reserved
  * */
 
-#define NUM_DISP 10
+#define NUM_DISP 20
 
-#define NUM_DATA_ARRAY 12
-//extern bool TA_SW3[NUM_DATA_ARRAY];
-//bool TA_SW3[NUM_DATA_ARRAY] = {SET_ON, DATA_RATE, OPERATION_CHANNEL, DEVICE_TYPE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, RESERVED_SW};
 bool *TA_SW3;
+int NUM_DATA_ARRAY;
 
 
 #else
@@ -92,6 +90,7 @@ bool *TA_SW3;
 
 #ifdef MATEO_IMPL
 uint32 s1switch = 0;
+int Init_instance_anchaddr = 0;
 #else
  uint8 s1switch = 0;
 #endif
@@ -270,9 +269,7 @@ void addressconfigure(uint16 mode)
 	uint16 instAddress = 0;
 #ifdef MATEO_IMPL
 
-	for(int i=(NUM_DATA_ARRAY-2) ; i>3 ; i--){
-		instance_anchaddr |= TA_SW3[i] << (NUM_DATA_ARRAY-2-i);
-	}
+	instance_anchaddr = Init_instance_anchaddr;
 
 	//instance_anchaddr = (s1switch & SWS1_ADD_MODE) >> 4;
 #else
@@ -319,7 +316,7 @@ int decarangingmode(uint16 s1switch)
 
 uint32 inittestapplication(uint16 s1switch)
 {
-	Init_Param();
+
 
 	uint32 devID ;
 	instanceConfig_t instConfig;
@@ -503,22 +500,23 @@ int uwb_setup(void)
 	uartWriteLineNoOS("DECAWAVE");
 	uartWriteLineNoOS(SOFTWARE_VER_STRING); // Also set at line #26 (Should make this from single value !!!)
 
+
+
 #ifdef MATEO_IMPL
-	/*s1switch = TA_SW3[0] << 1 // is_switch_on(TA_SW1_2) << 2
-			 | TA_SW3[1] << 2
-			 | TA_SW3[2] << 3
-			 | TA_SW3[3] << 4
-			 | TA_SW3[4] << 5
-			 | TA_SW3[5] << 6
-			 | TA_SW3[6] << 7
-			 | TA_SW3[7] << 8
-			 | TA_SW3[8] << 9
-			 | TA_SW3[9] << 10
-			 | TA_SW3[10] << 11;*/
+
+	Init_Param();
 
 	for(int i=0 ; i < NUM_DATA_ARRAY ; i++){
 		s1switch |= TA_SW3[i] << i;
 	}
+
+	for(int i=(NUM_DATA_ARRAY-2) ; i>3 ; i--){
+		Init_instance_anchaddr |= TA_SW3[i] << (NUM_DATA_ARRAY-2-i);
+	}
+
+
+
+//	free(TA_SW3);
 
 #else
 	s1switch = BUTTON_0 << 1 // is_switch_on(TA_SW1_2) << 2
@@ -727,33 +725,32 @@ void UwbProcessInterruptTask(void const * argument) {
 
 void Init_Param(void){
 
-	int id_disp[4] = {1, 0, 1, 1};
-	int id_aux = 2;
 
-	int n_disp = (int) ceil(log2((double)NUM_DISP));
-	int n_array = 4 + n_disp + 1;
+	const int Naddress = (int) ceil(log2((double)NUM_DISP));
+	NUM_DATA_ARRAY = 4 + Naddress + 1;
 
-	int id_aux2[n_disp];
-	long dividend = id_aux;
-	for(int j=0; j<=n_disp; j++){
-		id_aux2[j] = dividend % 2;
+	int BinaryArray[Naddress];
+	long dividend = DEVICE_ID;
+	for(int j=Naddress-1; j>=0; j--){
+		BinaryArray[j] = dividend % 2;
 		dividend /= 2;
 	}
 
-	static bool Aux[9];
-	Aux[0] = SET_ON;
-	Aux[1] = DATA_RATE;
-	Aux[2] = OPERATION_CHANNEL;
-	Aux[3] = DEVICE_TYPE;
+	bool *SWInit = calloc(NUM_DATA_ARRAY,sizeof(bool));
+	SWInit[0] = SET_ON;
+	SWInit[1] = DATA_RATE;
+	SWInit[2] = OPERATION_CHANNEL;
+	SWInit[3] = DEVICE_TYPE;
 
-	for(int i=4; i<n_array-1; i++){
-		Aux[i] = (bool)id_aux2[i-4];
+	for(int i=4; i<NUM_DATA_ARRAY-1; i++){
+		SWInit[i] = (bool)BinaryArray[i-4];
 	}
 
-	Aux[n_array-1] = RESERVED_SW;
+	SWInit[NUM_DATA_ARRAY-1] = RESERVED_SW;
 
-	bool *Aux2 = &Aux[0];
-	;
+	TA_SW3 = &SWInit[0];
 
+
+	free(SWInit);
 }
 

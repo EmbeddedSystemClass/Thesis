@@ -105,6 +105,7 @@ extern "C" {
 #define OPERATION_CHANNEL	TRUE   // FALSE = Channel 2 (3.993 GHz) , TRUE = Channel 5(6.489 GHz)
 #define DEVICE_TYPE			FALSE  // FALSE = TAG , TRUE = ANCHOR
 #define RESERVED_SW			FALSE  // This switch should be set to FALSE
+#define DEVICE_ID 			(23)	   // Device ID in Decimal
 
 #define MAX_TAG_LIST_SIZE				(128)
 #define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
