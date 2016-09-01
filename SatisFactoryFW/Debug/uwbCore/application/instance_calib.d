@@ -4,6 +4,7 @@ uwbCore/application/instance_calib.o: \
  C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\uwbCore\decadriver/deca_device_api.h \
  ../uwbCore/application/instance.h \
  C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\uwbCore\decadriver/deca_types.h \
+ ../uwbCore/application/parameter.h \
  C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\uwbCore\platform/deca_port.h \
  c:\users\damag\documents\mateo\polito\thesis\gitrepository\satisfactoryfw\user\inc\compiler.h \
  C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\system\include\cmsis/stm32f4xx.h \
@@ -46,6 +47,8 @@ C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\uwbCor
 ../uwbCore/application/instance.h:
 
 C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\uwbCore\decadriver/deca_types.h:
+
+../uwbCore/application/parameter.h:
 
 C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\uwbCore\platform/deca_port.h:
 

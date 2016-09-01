@@ -13,7 +13,9 @@
 #include "compiler.h"
 #include "deca_device_api.h"
 #include "instance.h"
+#include "parameter.h"
 #include "deca_port.h"
+
 
 // -------------------------------------------------------------------------------------------------------------------
 

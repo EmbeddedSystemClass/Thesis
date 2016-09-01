@@ -39,7 +39,7 @@ uwbCore/application/instance.o: ../uwbCore/application/instance.c \
  C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\uwbCore\decadriver/deca_types.h \
  C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\uwbCore\decadriver/deca_regs.h \
  C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\uwbCore\decadriver/deca_version.h \
- ../uwbCore/application/instance.h
+ ../uwbCore/application/instance.h ../uwbCore/application/parameter.h
 
 C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\User\inc/compiler.h:
 
@@ -122,3 +122,5 @@ C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\uwbCor
 C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\uwbCore\decadriver/deca_version.h:
 
 ../uwbCore/application/instance.h:
+
+../uwbCore/application/parameter.h:

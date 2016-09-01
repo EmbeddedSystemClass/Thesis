@@ -15,6 +15,7 @@
 //#include "port.h"
 
 #include "instance.h"
+#include "parameter.h"
 
 #include "deca_types.h"
 
@@ -23,6 +24,7 @@
 #include "../../User/inc/compiler.h"
 
 #include "instance.h"
+#include "parameter.h"
 #include "deca_types.h"
 #include "deca_regs.h"
 #include "deca_spi.h"
@@ -52,6 +54,7 @@
 #ifdef MATEO_IMPL
 
 //all the definitions are in the instance.h file
+// all the parameters are in the #include "parameter.h" file
 
 /* *
  * Position

@@ -3,6 +3,7 @@ uwbCore/application/uwbMain.o: ../uwbCore/application/uwbMain.c \
  ../uwbCore/application/instance.h \
  C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\uwbCore\decadriver/deca_types.h \
  C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\uwbCore\decadriver/deca_device_api.h \
+ ../uwbCore/application/parameter.h \
  C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\uwbCore\application/uwbMain.h \
  C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\system\include\cmsis/stm32f4xx.h \
  C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\system\include\cmsis/stm32f411xe.h \
@@ -66,6 +67,8 @@ C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\User\i
 C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\uwbCore\decadriver/deca_types.h:
 
 C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\uwbCore\decadriver/deca_device_api.h:
+
+../uwbCore/application/parameter.h:
 
 C:\Users\damag\Documents\MATEO\POLITO\Thesis\gitrepository\SatisFactoryFW\uwbCore\application/uwbMain.h:
 
