@@ -2,13 +2,7 @@
  *  @file    parameter.h
  *  @brief   Device input parameters
  *
- * @attention
- *
- * Copyright 2015 (c) DecaWave Ltd, Dublin, Ireland.
- *
- * All rights reserved.
- *
- * @author DecaWave
+ * Created by: Mateo Giraldo
  */
 
 #ifndef _PARAMETER_H_
@@ -23,72 +17,120 @@ extern "C" {
 #include "deca_device_api.h"
 #include "compiler.h"
 #define MATEO_IMPL
-
-//#define NUM_ANCHORTEST
-//#define NUM_ANCHORTEST2
+#define NUM_ANCHORTEST
+#define NUM_ANCHORTEST2
 
 #ifdef MATEO_IMPL
 
-
-bool *TA_SW3;
-int NUM_DATA_ARRAY;
-int Naddress;
-int MaskAddr;
-
-
-//Device Parameters
-#define NUM_DISP 						(50) // 	Number of Tag to Use NUM_DISP - 1
-#define DEVICE_ID 						(3) // Device ID in Decimal From 0 to
-#define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
-#define DEVICE_TYPE						TRUE  // FALSE = TAG , TRUE = ANCHOR
-#define DATA_RATE						FALSE  // FALSE = 110kbps , TRUE = 6,81Mbps
-#define OPERATION_CHANNEL				TRUE   // FALSE = Channel 2 (3.993 GHz) , TRUE = Channel 5(6.489 GHz)
-
-#define MAX_TAG_LIST_SIZE				(NUM_DISP) //
-
-#if (DEVICE_ID > NUM_DISP)
-	#error "Device ID wrong! (greater than NUM_DISP)"
-#endif
-
-//LOWER DATA RATE
-#define TOTAL_NUMBER_OF_SLOTS			(MAX_TAG_LIST_SIZE+2)
-#define SLOT_SIZE 						(23)
-#define SUPERFRAME_SIZE					(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS)
-#define SCHEDULED_FINAL_DELAY			(17500)  //
-
-// HIGHER DATA RATE
-#define TOTAL_NUMBER_OF_SLOTS			(MAX_TAG_LIST_SIZE+2)
-#define SLOT_SIZE_HDR 					(2.3)
-#define SUPERFRAME_SIZE_HDR				(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS)
-#define SCHEDULED_FINAL_DELAY_HDR		(2100)  //
+	bool *TA_SW3;
+	int NUM_DATA_ARRAY;
+	int Naddress;
+	int MaskAddr;
 
 
+	//--------------------------------------------------- DEVICE PARAMETERS ---------------------------------------------------------//
 
-#define SWITCH_ON 			TRUE
-#define SWITCH_OFF 			FALSE
-#define SET_ON				FALSE  // FALSE = ON , True =OFF (This switch should be set to ON)
-#define RESERVED_SW			FALSE  // This switch should be set to FALSE
+	#define NUM_DISP 						(50) // 	Number of Tag to Use
+	#define DEVICE_ID 						(2) // Device ID in Decimal From 0 to (NUM_DISP - 1)
+	#define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
+	#define DEVICE_TYPE						TRUE  // FALSE = TAG , TRUE = ANCHOR
+	#define DATA_RATE						FALSE  // FALSE = 110kbps , TRUE = 6,81Mbps
+	#define OPERATION_CHANNEL				TRUE   // FALSE = Channel 2 (3.993 GHz) , TRUE = Channel 5(6.489 GHz)
 
-void Init_Param(void);
+	#define MAX_TAG_LIST_SIZE				(NUM_DISP) //
+    #define TOTAL_NUMBER_OF_SLOTS			(MAX_TAG_LIST_SIZE+2)
+
+	#if (DEVICE_ID > NUM_DISP)
+		#error "Device ID wrong! (greater than NUM_DISP)"
+	#endif
+
+	#ifdef NUM_ANCHORTEST
+
+	//------------------------------------------------WORKING FOR 2D LOCALIZATION (ONLY 3 ANCHORS)------------------------------------------------------------//
+
+		#define MAX_ANCHOR_LIST_SIZE			(3) //this is limited to 3 in this application
+		#define NUM_EXPECTED_RESPONSES			(MAX_ANCHOR_LIST_SIZE-1) //e.g. MAX_ANCHOR_LIST_SIZE - 1
+		#define NUM_EXPECTED_RESPONSES_ANC		(1) //anchors A0, A1 and A2 are involved in anchor to anchor ranging
+		#define NUM_EXPECTED_RESPONSES_ANC0		(2) //anchor A0 expects response from A1 and A2
+
+		#ifdef NUM_ANCHORTEST2
+  //-------------------------------------------------SHORTER FINAL MESSAGE SIZE------------------------------------------------------------//
+			#define FTXT                                22				// Final TX time
+			#define VRESP                               27				// Mask of valid response times (e.g. if bit 1 = A0's response time is valid)
+			#define TAG_FINAL_MSG_LEN                   28				//FunctionCode(1), Range Num (1), Poll_TxTime(5),
+																		// Resp0_RxTime(5), Resp1_RxTime(5), Resp2_RxTime(5), Final_TxTime(5), Valid Response Mask (1)
+
+	//------------------------------------------------SHORTER FRAMES------------------------------------------------------------//
+			//LOWER DATA RATE
+
+			#define SLOT_SIZE 						(19.5)
+			#define SUPERFRAME_SIZE					(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS)
+			#define SCHEDULED_FINAL_DELAY			(14400)  // Because we does not need the time to wait for the response of the anchor 4
+
+			// HIGHER DATA RATE
+			#define SLOT_SIZE_HDR 					(2)
+			#define SUPERFRAME_SIZE_HDR				(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS)
+			#define SCHEDULED_FINAL_DELAY_HDR		(1700)  //
+
+
+		#else
+	//------------------------------------------------LARGER FINAL MSG LENGTH AND FRAMES------------------------------------------------------------//
+
+			#define TAG_FINAL_MSG_LEN                   33              // FunctionCode(1), Range Num (1), Poll_TxTime(5),														// Resp0_RxTime(5), Resp1_RxTime(5), Resp2_RxTime(5), Resp3_RxTime(5), Final_TxTime(5), Valid Response Mask (1)
+			#define FTXT                                27				// Final TX time
+			#define VRESP                               32				// Mask of valid response times (e.g. if bit 1 = A0's response time is valid)
+
+		//LOWER DATA RATE
+			#define SLOT_SIZE 						(23)
+			#define SUPERFRAME_SIZE					(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS)
+			#define SCHEDULED_FINAL_DELAY			(17500)  //
+
+			// HIGHER DATA RATE
+			#define SLOT_SIZE_HDR 					(2.3)
+			#define SUPERFRAME_SIZE_HDR				(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS)
+			#define SCHEDULED_FINAL_DELAY_HDR		(2000)  //
+
+		#endif
+
+
+	#else
+	//------------------------------------------------WORKING FOR 3D LOCALIZATION (4 ANCHORS)------------------------------------------------------------//
+
+		#define MAX_ANCHOR_LIST_SIZE			(4) //this is limited to 4 in this application
+		#define NUM_EXPECTED_RESPONSES			(3) //e.g. MAX_ANCHOR_LIST_SIZE - 1
+		#define NUM_EXPECTED_RESPONSES_ANC		(1) //anchors A0, A1 and A2 are involved in anchor to anchor ranging
+		#define NUM_EXPECTED_RESPONSES_ANC0		(2) //anchor A0 expects response from A1 and A2
+
+	//------------------------------------------------LARGER FINAL MSG LENGTH AND FRAMES------------------------------------------------------------//
+
+		#define TAG_FINAL_MSG_LEN                   33              // FunctionCode(1), Range Num (1), Poll_TxTime(5),														// Resp0_RxTime(5), Resp1_RxTime(5), Resp2_RxTime(5), Resp3_RxTime(5), Final_TxTime(5), Valid Response Mask (1)
+		#define FTXT                                27				// Final TX time
+		#define VRESP                               32				// Mask of valid response times (e.g. if bit 1 = A0's response time is valid)
+
+		//LOWER DATA RATE
+		#define SLOT_SIZE 						(23)
+		#define SUPERFRAME_SIZE					(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS)
+		#define SCHEDULED_FINAL_DELAY			(17500)  //
+
+		// HIGHER DATA RATE
+		#define SLOT_SIZE_HDR 					(2.3)
+		#define SUPERFRAME_SIZE_HDR				(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS)
+		#define SCHEDULED_FINAL_DELAY_HDR		(2000)  //
+
+
+	#endif
+
+
+	#define SWITCH_ON 			TRUE
+	#define SWITCH_OFF 			FALSE
+	#define SET_ON				FALSE  // FALSE = ON , True =OFF (This switch should be set to ON)
+	#define RESERVED_SW			FALSE  // This switch should be set to FALSE
+
+	void Init_Param(void);
 
 
 #else
 	#define MAX_TAG_LIST_SIZE				(8)
-#endif
-
-
-#ifdef NUM_ANCHORTEST
-
-	#define MAX_ANCHOR_LIST_SIZE			(3) //this is limited to 3 in this application
-	#define NUM_EXPECTED_RESPONSES			(MAX_ANCHOR_LIST_SIZE-1) //e.g. MAX_ANCHOR_LIST_SIZE - 1
-	#define NUM_EXPECTED_RESPONSES_ANC		(1) //anchors A0, A1 and A2 are involved in anchor to anchor ranging
-	#define NUM_EXPECTED_RESPONSES_ANC0		(2) //anchor A0 expects response from A1 and A2
-
-#else
-	#define MAX_ANCHOR_LIST_SIZE			(4) //this is limited to 4 in this application
-	#define NUM_EXPECTED_RESPONSES			(3) //e.g. MAX_ANCHOR_LIST_SIZE - 1
-	#define NUM_EXPECTED_RESPONSES_ANC		(1) //anchors A0, A1 and A2 are involved in anchor to anchor ranging
-	#define NUM_EXPECTED_RESPONSES_ANC0		(2) //anchor A0 expects response from A1 and A2
 #endif
 
 

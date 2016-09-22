@@ -732,6 +732,8 @@ void UwbProcessInterruptTask(void const * argument) {
 	}
 }
 
+
+// Configure the Virtual Switch on the Device dependent on the input parameters on parameter.h
 void Init_Param(void){
 
 

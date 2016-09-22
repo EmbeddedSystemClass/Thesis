@@ -60,13 +60,7 @@ extern "C" {
 #define TAG_POLL_MSG_LEN                    2				// FunctionCode(1), Range Num (1)
 #define ANCH_RESPONSE_MSG_LEN               8               // FunctionCode(1), Sleep Correction Time (2), Measured_TOF_Time(4), Range Num (1) (previous)
 
-#ifdef NUM_ANCHORTEST2
-#define TAG_FINAL_MSG_LEN                   28              // FunctionCode(1), Range Num (1), Poll_TxTime(5),
-															// Resp0_RxTime(5), Resp1_RxTime(5), Resp2_RxTime(5), Resp3_RxTime(5), Final_TxTime(5), Valid Response Mask (1)
-#else
-#define TAG_FINAL_MSG_LEN                   33              // FunctionCode(1), Range Num (1), Poll_TxTime(5),
-															// Resp0_RxTime(5), Resp1_RxTime(5), Resp2_RxTime(5), Resp3_RxTime(5), Final_TxTime(5), Valid Response Mask (1)
-#endif
+
 
 #define MAX_MAC_MSG_DATA_LEN                (TAG_FINAL_MSG_LEN) //max message len of the above
 
@@ -97,7 +91,6 @@ extern "C" {
 
 
 
-
 #define GATEWAY_ANCHOR_ADDR				(0x8000)
 #define A1_ANCHOR_ADDR					(0x8001)
 #define A2_ANCHOR_ADDR					(0x8002)
@@ -121,18 +114,6 @@ extern "C" {
 #define RRXT2                               17				// A2 Response RX time
 #define RRXT3                               22				// A3 Response RX time
 
-
-#ifdef NUM_ANCHORTEST2
-
-#define FTXT                                22				// Final TX time
-#define VRESP                               27				// Mask of valid response times (e.g. if bit 1 = A0's response time is valid)
-
-#else
-
-#define FTXT                                27				// Final TX time
-#define VRESP                               32				// Mask of valid response times (e.g. if bit 1 = A0's response time is valid)
-
-#endif
 
 #define RES_TAG_SLP0                        1               // Response tag sleep correction LSB
 #define RES_TAG_SLP1                        2               // Response tag sleep correction MSB
@@ -385,7 +366,7 @@ typedef struct
 	int32   tagSleepCorrection2;
 
     //diagnostic counters/data, results and logging
-    uint32 tof[MAX_TAG_LIST_SIZE]; //this is an array which holds last ToF from particular tag (ID 0-7)
+    uint32 tof[MAX_TAG_LIST_SIZE]; //this is an array which holds last ToF from particular tag (ID 0-7) // improved (ID 0-(NUM_DISP -1))
 
     //this is an array which holds last ToF to each anchor it should
     uint32 tofArray[MAX_ANCHOR_LIST_SIZE]; //contain 4 ToF to 4 anchors all relating to same range number sequence
