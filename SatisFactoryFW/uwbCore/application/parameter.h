@@ -17,8 +17,8 @@ extern "C" {
 #include "deca_device_api.h"
 #include "compiler.h"
 #define MATEO_IMPL
-#define NUM_ANCHORTEST
-#define NUM_ANCHORTEST2
+//#define NUM_ANCHORTEST
+//#define NUM_ANCHORTEST2
 
 #ifdef MATEO_IMPL
 

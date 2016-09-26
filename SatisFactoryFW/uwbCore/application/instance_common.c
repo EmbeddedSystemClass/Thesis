@@ -17,7 +17,7 @@
 
 #include "instance.h"
 #include "parameter.h"
-#define MATEO_IMPL
+
 
 extern int MaskAddr;
 // -------------------------------------------------------------------------------------------------------------------
