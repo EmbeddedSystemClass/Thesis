@@ -17,10 +17,11 @@ extern "C" {
 #include "deca_device_api.h"
 #include "compiler.h"
 #define MATEO_IMPL
-//#define NUM_ANCHORTEST
-//#define NUM_ANCHORTEST2
 
 #ifdef MATEO_IMPL
+
+	#define LOCALIZATION_2D   // UnComment to work with 2D localization
+	#define SHORT_FRAME_2D  // UnComment to use shorter frames in 2D localization
 
 	bool *TA_SW3;
 	int NUM_DATA_ARRAY;
@@ -44,7 +45,7 @@ extern "C" {
 		#error "Device ID wrong! (greater than NUM_DISP)"
 	#endif
 
-	#ifdef NUM_ANCHORTEST
+	#ifdef LOCALIZATION_2D
 
 	//------------------------------------------------WORKING FOR 2D LOCALIZATION (ONLY 3 ANCHORS)------------------------------------------------------------//
 
@@ -53,7 +54,7 @@ extern "C" {
 		#define NUM_EXPECTED_RESPONSES_ANC		(1) //anchors A0, A1 and A2 are involved in anchor to anchor ranging
 		#define NUM_EXPECTED_RESPONSES_ANC0		(2) //anchor A0 expects response from A1 and A2
 
-		#ifdef NUM_ANCHORTEST2
+		#ifdef SHORT_FRAME_2D
   //-------------------------------------------------SHORTER FINAL MESSAGE SIZE------------------------------------------------------------//
 			#define FTXT                                22				// Final TX time
 			#define VRESP                               27				// Mask of valid response times (e.g. if bit 1 = A0's response time is valid)
@@ -65,7 +66,7 @@ extern "C" {
 
 			#define SLOT_SIZE 						(19.5)
 			#define SUPERFRAME_SIZE					(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS)
-			#define SCHEDULED_FINAL_DELAY			(14400)  // Because we does not need the time to wait for the response of the anchor 4
+			#define SCHEDULED_FINAL_DELAY			(14400)  // No need to wait for the response of the anchor 4
 
 			// HIGHER DATA RATE
 			#define SLOT_SIZE_HDR 					(2)
@@ -97,13 +98,13 @@ extern "C" {
 	//------------------------------------------------WORKING FOR 3D LOCALIZATION (4 ANCHORS)------------------------------------------------------------//
 
 		#define MAX_ANCHOR_LIST_SIZE			(4) //this is limited to 4 in this application
-		#define NUM_EXPECTED_RESPONSES			(3) //e.g. MAX_ANCHOR_LIST_SIZE - 1
+		#define NUM_EXPECTED_RESPONSES			(MAX_ANCHOR_LIST_SIZE-1) //e.g. MAX_ANCHOR_LIST_SIZE - 1
 		#define NUM_EXPECTED_RESPONSES_ANC		(1) //anchors A0, A1 and A2 are involved in anchor to anchor ranging
 		#define NUM_EXPECTED_RESPONSES_ANC0		(2) //anchor A0 expects response from A1 and A2
 
 	//------------------------------------------------LARGER FINAL MSG LENGTH AND FRAMES------------------------------------------------------------//
 
-		#define TAG_FINAL_MSG_LEN                   33              // FunctionCode(1), Range Num (1), Poll_TxTime(5),														// Resp0_RxTime(5), Resp1_RxTime(5), Resp2_RxTime(5), Resp3_RxTime(5), Final_TxTime(5), Valid Response Mask (1)
+		#define TAG_FINAL_MSG_LEN                   33              // FunctionCode(1), Range Num (1), Poll_TxTime(5),	// Resp0_RxTime(5), Resp1_RxTime(5), Resp2_RxTime(5), Resp3_RxTime(5), Final_TxTime(5), Valid Response Mask (1)
 		#define FTXT                                27				// Final TX time
 		#define VRESP                               32				// Mask of valid response times (e.g. if bit 1 = A0's response time is valid)
 
@@ -135,7 +136,7 @@ extern "C" {
 
 
 //this it the delay used for configuring the receiver on delay (wait for response delay)
-//NOTE: this RX_RESPONSE_TURNAROUND is dependent on the microprocessor and code optimisations
+//NOTE: this RX_RESPONSE_TURNAROUND is dependent on the microprocessor and code optimizations
 #define RX_RESPONSEX_TURNAROUND (50) //takes about 100 us for response to come back
 #define RX_RESPONSE1_TURNAROUND (200) //takes about 200 us for the 1st response to come back (from A0)
 #define RX_RESPONSE1_TURNAROUND_6M81 (300) //takes about 100 us for response to come back

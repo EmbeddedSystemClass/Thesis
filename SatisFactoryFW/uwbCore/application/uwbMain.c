@@ -731,6 +731,7 @@ void UwbProcessInterruptTask(void const * argument) {
 	}
 }
 
+#ifdef MATEO_IMPL
 
 // Configure the Virtual Switch on the Device dependent on the input parameters on parameter.h
 void Init_Param(void){
@@ -764,3 +765,4 @@ void Init_Param(void){
 	vPortFree(SWInit);
 }
 
+#endif

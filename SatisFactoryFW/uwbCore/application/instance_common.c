@@ -454,13 +454,13 @@ double instancegetidist(int idx) //get instantaneous range
 {
     double x ;
 #ifdef MATEO_IMPL
-		#ifdef NUM_ANCHORTEST
+		#ifdef LOCALIZATION_2D
     		idx &= (MAX_ANCHOR_LIST_SIZE);
 		#else
 			idx &= (MAX_ANCHOR_LIST_SIZE - 1);
 		#endif
 #else
-    idx &= (MAX_ANCHOR_LIST_SIZE - 1);  // AN ERROR HERE WHEN WE ARE USING ONLY 3 ANCHORS
+    idx &= (MAX_ANCHOR_LIST_SIZE - 1);  //
 #endif
 
     x = inst_idist[idx];
@@ -472,7 +472,7 @@ double instancegetidistraw(int idx) //get instantaneous range (uncorrected)
 {
     double x ;
 #ifdef MATEO_IMPL
-		#ifdef NUM_ANCHORTEST
+		#ifdef LOCALIZATION_2D
     		idx &= (MAX_ANCHOR_LIST_SIZE);
 		#else
 			idx &= (MAX_ANCHOR_LIST_SIZE - 1);
@@ -491,7 +491,7 @@ int instancegetidist_mm(int idx) //get instantaneous range
 {
     int x ;
 #ifdef MATEO_IMPL
-		#ifdef NUM_ANCHORTEST
+		#ifdef LOCALIZATION_2D
     		idx &= (MAX_ANCHOR_LIST_SIZE);
 		#else
 			idx &= (MAX_ANCHOR_LIST_SIZE - 1);
@@ -508,7 +508,7 @@ int instancegetidistraw_mm(int idx) //get instantaneous range (uncorrected)
 {
     int x ;
 #ifdef MATEO_IMPL
-		#ifdef NUM_ANCHORTEST
+		#ifdef LOCALIZATION_2D
     		idx &= (MAX_ANCHOR_LIST_SIZE);
 		#else
 			idx &= (MAX_ANCHOR_LIST_SIZE - 1);
