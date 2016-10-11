@@ -288,11 +288,13 @@ void addressconfigure(uint16 mode)
 #ifdef MATEO_IMPL
 
 		if(instance_anchaddr > NUM_ANCHOR)		{
+			instAddress = GATEWAY_ANCHOR_ADDR | MaskAddr ; //listener
+		}
 #else
 		if(instance_anchaddr > 4)		{
-#endif
 			instAddress = GATEWAY_ANCHOR_ADDR | 0x4 ; //listener
 		}
+#endif
 		else
 		{
 			instAddress = GATEWAY_ANCHOR_ADDR | instance_anchaddr;
