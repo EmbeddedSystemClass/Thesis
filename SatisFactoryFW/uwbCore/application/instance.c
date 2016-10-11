@@ -178,7 +178,13 @@ int testapprun(instance_data_t *inst, int message)
                     dwt_setpanid(inst->panID);
 
                     //set source address
+					#ifdef MATEO_IMPL
+                    inst->shortAdd_idx = (inst->instanceAddress16 & MaskAddr) ;
+
+					#else
                     inst->shortAdd_idx = (inst->instanceAddress16 & 0x3) ;
+					#endif
+
                     dwt_setaddress16(inst->instanceAddress16);
 
                 	//if address = 0x8000
@@ -623,7 +629,12 @@ int testapprun(instance_data_t *inst, int message)
                     {
 						//process ranging messages
 						fcode = fn_code;
+#ifdef MATEO_IMPL
+						tof_idx = srcAddr[0] & MaskAddr ;
+
+#else
 						tof_idx = srcAddr[0] & 0x3 ;
+#endif
 
                         switch(fcode)
                         {
@@ -738,7 +749,63 @@ int testapprun(instance_data_t *inst, int message)
                                 	inst->testAppState = TA_RXE_WAIT ;              // wait for next frame
 								}*/
 
+#ifdef MATEO_IMPL
 								if(fcode == RTLS_DEMO_MSG_ANCH_RESP) //tag to anchor mode
+								{
+									if(currentRangeNum == inst->rangeNum) //these are the previous ranges...
+									{
+										//copy the ToF and put into array (array holds last 4 ToFs)
+										memcpy(&inst->tofArray[(srcAddr[0]&MaskAddr)], &(messageData[TOFR]), 4);
+
+										//check if the ToF is valid, this makes sure we only report valid ToFs
+										//e.g. consider the case of reception of response from anchor a1 (we are anchor a2)
+										//if a1 got a Poll with previous Range number but got no Final, then the response will have
+										//the correct range number but the range will be INVALID_TOF
+										if(inst->tofArray[(srcAddr[0]&MaskAddr)] != INVALID_TOF)
+										{
+											inst->rxResponseMask |= (0x1 << (srcAddr[0]&MaskAddr));
+										}
+
+									}
+									else
+									{
+										if(inst->tofArray[(srcAddr[0]&MaskAddr)] != INVALID_TOF)
+										{
+											inst->tofArray[(srcAddr[0]&MaskAddr)] = INVALID_TOF;
+										}
+									}
+
+
+								}
+
+								else //anchor to anchor (only gateway processes anchor to anchor ToFs)
+								{
+									//report the correct set of ranges (ranges from anchors A1, A2 need to match owns range number)
+									if((inst->gatewayAnchor)&&(currentRangeNum == inst->rangeNumAnc)) //these are the previous ranges...
+									{
+										inst->rangeNumAAnc[0] = inst->rangeNumAnc ;
+
+										//once A0 receives A2's response then it can report the 3 ToFs.
+										if(inst->rxResps[inst->rangeNumAnc] == 3)
+										//if(A2_ANCHOR_ADDR == (srcAddr[0] | ((uint32)(srcAddr[1] << 8))))
+										{
+											//copy the ToF and put into array, the array should have 3 ToFs A0-A1, A0-A2 and A1-A2
+											memcpy(&inst->tofArrayAnc[(srcAddr[0]+dstAddr[0])&MaskAddr], &(messageData[TOFR]), 4);
+											//calculate all anchor - anchor ranges... and report
+											inst->newRange = instance_calcranges(&inst->tofArrayAnc[0], MAX_ANCHOR_LIST_SIZE, TOF_REPORT_A2A, &inst->rxResponseMaskAnc);
+											inst->rxResponseMaskReport = inst->rxResponseMaskAnc;
+											inst->rxResponseMaskAnc = 0;
+											inst->newRangeTime = dw_event->uTimeStamp ;
+										}
+										else
+										{
+											//copy the ToF and put into array (array holds last 4 ToFs)
+											memcpy(&inst->tofArrayAnc[(srcAddr[0]+dstAddr[0])&MaskAddr], &(messageData[TOFR]), 4);
+										}
+									}
+								}
+#else
+                            	if(fcode == RTLS_DEMO_MSG_ANCH_RESP) //tag to anchor mode
 								{
 									if(currentRangeNum == inst->rangeNum) //these are the previous ranges...
 									{
@@ -765,6 +832,7 @@ int testapprun(instance_data_t *inst, int message)
 
 
 								}
+
 								else //anchor to anchor (only gateway processes anchor to anchor ToFs)
 								{
 									//report the correct set of ranges (ranges from anchors A1, A2 need to match owns range number)
@@ -791,6 +859,8 @@ int testapprun(instance_data_t *inst, int message)
 										}
 									}
 								}
+
+#endif
 
                             }
                             break; //RTLS_DEMO_MSG_ANCH_RESP

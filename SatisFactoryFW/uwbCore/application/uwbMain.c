@@ -284,7 +284,13 @@ void addressconfigure(uint16 mode)
 #endif
 	if(mode == ANCHOR)
 	{
+
+#ifdef MATEO_IMPL
+
+		if(instance_anchaddr > NUM_ANCHOR)		{
+#else
 		if(instance_anchaddr > 4)		{
+#endif
 			instAddress = GATEWAY_ANCHOR_ADDR | 0x4 ; //listener
 		}
 		else
@@ -376,10 +382,17 @@ uint32 inittestapplication(uint16 s1switch)
 
 	addressconfigure(instance_mode) ;                            // set up initial payload configuration
 
+#ifdef MATEO_IMPL
+	if((instance_mode == ANCHOR) && (instance_anchaddr > NUM_ANCHOR))
+	{
+		instance_mode = LISTENER;
+	}
+#else
 	if((instance_mode == ANCHOR) && (instance_anchaddr > 0x4))
 	{
 		instance_mode = LISTENER;
 	}
+#endif
 
 	instancesetrole(instance_mode) ;     // Set this instance role
 

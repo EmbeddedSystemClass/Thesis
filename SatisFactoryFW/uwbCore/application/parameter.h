@@ -52,6 +52,7 @@ extern "C" {
 	#define DEVICE_TYPE						FALSE  // FALSE = TAG , TRUE = ANCHOR
 	#define DATA_RATE						FALSE  // FALSE = 110kbps , TRUE = 6,81Mbps
 	#define OPERATION_CHANNEL				TRUE   // FALSE = Channel 2 (3.993 GHz) , TRUE = Channel 5(6.489 GHz)
+	#define NUM_ANCHOR						(4)   // Number of expected responses
 
 	#define MAX_TAG_LIST_SIZE				(NUM_DISP) //
     #define TOTAL_NUMBER_OF_SLOTS			(MAX_TAG_LIST_SIZE+2)
@@ -71,10 +72,10 @@ extern "C" {
 
 		#ifdef SHORT_FRAME_2D
   //-------------------------------------------------SHORTER FINAL MESSAGE SIZE------------------------------------------------------------//
-			#define FTXT                                22				// Final TX time
-			#define VRESP                               27				// Mask of valid response times (e.g. if bit 1 = A0's response time is valid)
-			#define TAG_FINAL_MSG_LEN                   28				//FunctionCode(1), Range Num (1), Poll_TxTime(5),
-																		// Resp0_RxTime(5), Resp1_RxTime(5), Resp2_RxTime(5), Final_TxTime(5), Valid Response Mask (1)
+			#define TAG_FINAL_MSG_LEN                   28	//FunctionCode(1), Range Num (1), Poll_TxTime(5), // Resp0_RxTime(5), Resp1_RxTime(5), Resp2_RxTime(5), Final_TxTime(5), Valid Response Mask (1)
+			#define FTXT                                22	// Final TX time
+			#define VRESP                               27	// Mask of valid response times (e.g. if bit 1 = A0's response time is valid)
+
 
 	//------------------------------------------------SHORTER FRAMES------------------------------------------------------------//
 			//LOWER DATA RATE
@@ -92,9 +93,9 @@ extern "C" {
 		#else
 	//------------------------------------------------LARGER FINAL MSG LENGTH AND FRAMES------------------------------------------------------------//
 
-			#define TAG_FINAL_MSG_LEN                   33              // FunctionCode(1), Range Num (1), Poll_TxTime(5),														// Resp0_RxTime(5), Resp1_RxTime(5), Resp2_RxTime(5), Resp3_RxTime(5), Final_TxTime(5), Valid Response Mask (1)
-			#define FTXT                                27				// Final TX time
-			#define VRESP                               32				// Mask of valid response times (e.g. if bit 1 = A0's response time is valid)
+			#define TAG_FINAL_MSG_LEN                   (33)        // FunctionCode(1), Range Num (1), Poll_TxTime(5),// Resp0_RxTime(5), Resp1_RxTime(5), Resp2_RxTime(5), Resp3_RxTime(5), Final_TxTime(5), Valid Response Mask (1)
+			#define FTXT                                (27)		// Final TX time
+			#define VRESP                               (32)		// Mask of valid response times (e.g. if bit 1 = A0's response time is valid)
 
 		//LOWER DATA RATE
 			#define SLOT_SIZE 						((TIME_RESP_1+(TIME_RESP_OTHERS*3)+(TIME_FINAL*2)+MARGIN_FINAL_DELAY)/1000) // slot period in ms
@@ -112,26 +113,26 @@ extern "C" {
 	#else
 	//------------------------------------------------WORKING FOR 3D LOCALIZATION (4 ANCHORS)------------------------------------------------------------//
 
-		#define MAX_ANCHOR_LIST_SIZE			(4) //this is limited to 4 in this application
+		#define MAX_ANCHOR_LIST_SIZE			(NUM_ANCHOR) //this is limited to 4 in this application
 		#define NUM_EXPECTED_RESPONSES			(MAX_ANCHOR_LIST_SIZE-1) //e.g. MAX_ANCHOR_LIST_SIZE - 1
 		#define NUM_EXPECTED_RESPONSES_ANC		(1) //anchors A0, A1 and A2 are involved in anchor to anchor ranging
 		#define NUM_EXPECTED_RESPONSES_ANC0		(2) //anchor A0 expects response from A1 and A2
 
 	//------------------------------------------------LARGER FINAL MSG LENGTH AND FRAMES------------------------------------------------------------//
 
-		#define TAG_FINAL_MSG_LEN                   33              // FunctionCode(1), Range Num (1), Poll_TxTime(5),	// Resp0_RxTime(5), Resp1_RxTime(5), Resp2_RxTime(5), Resp3_RxTime(5), Final_TxTime(5), Valid Response Mask (1)
-		#define FTXT                                27				// Final TX time
-		#define VRESP                               32				// Mask of valid response times (e.g. if bit 1 = A0's response time is valid)
+		#define TAG_FINAL_MSG_LEN                   (13+((NUM_ANCHOR)*5))        // FunctionCode(1), Range Num (1), Poll_TxTime(5),	// Resp0_RxTime(5), Resp1_RxTime(5), Resp2_RxTime(5), Resp3_RxTime(5), Final_TxTime(5), Valid Response Mask (1)
+		#define FTXT                                (TAG_FINAL_MSG_LEN-6)		// Final TX time
+		#define VRESP                               (TAG_FINAL_MSG_LEN-1)		// Mask of valid response times (e.g. if bit 1 = A0's response time is valid)
 
 		//LOWER DATA RATE
-		#define SLOT_SIZE 						((TIME_RESP_1+(TIME_RESP_OTHERS*3)+(TIME_FINAL*2)+MARGIN_FINAL_DELAY)/1000) // slot period in ms
+		#define SLOT_SIZE 						((TIME_RESP_1+(TIME_RESP_OTHERS*(NUM_ANCHOR-1))+(TIME_FINAL*2)+MARGIN_FINAL_DELAY)/1000) // slot period in ms
 		#define SUPERFRAME_SIZE					(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS) // Super frame period in ms
-		#define SCHEDULED_FINAL_DELAY			(TIME_RESP_1+(TIME_RESP_OTHERS*3)+TIME_FINAL+MARGIN_FINAL_DELAY)  // scheduled final delay in ms
+		#define SCHEDULED_FINAL_DELAY			(TIME_RESP_1+(TIME_RESP_OTHERS*(NUM_ANCHOR-1))+TIME_FINAL+MARGIN_FINAL_DELAY)  // scheduled final delay in ms
 
 		// HIGHER DATA RATE
-		#define SLOT_SIZE_HDR 					((TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*3)+(TIME_FINAL_HDR*2)+MARGIN_FINAL_DELAY_HDR)/1000) // slot period in ms
+		#define SLOT_SIZE_HDR 					((TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*(NUM_ANCHOR-1))+(TIME_FINAL_HDR*2)+MARGIN_FINAL_DELAY_HDR)/1000) // slot period in ms
 		#define SUPERFRAME_SIZE_HDR				(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS) // Super frame period in ms
-		#define SCHEDULED_FINAL_DELAY_HDR		(TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*3)+TIME_FINAL_HDR+MARGIN_FINAL_DELAY_HDR)  // scheduled final delay in ms
+		#define SCHEDULED_FINAL_DELAY_HDR		(TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*(NUM_ANCHOR-1))+TIME_FINAL_HDR+MARGIN_FINAL_DELAY_HDR)  // scheduled final delay in ms
 
 
 	#endif

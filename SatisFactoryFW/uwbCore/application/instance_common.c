@@ -457,7 +457,7 @@ double instancegetidist(int idx) //get instantaneous range
 		#ifdef LOCALIZATION_2D
     		idx &= (MAX_ANCHOR_LIST_SIZE);
 		#else
-			idx &= (MAX_ANCHOR_LIST_SIZE - 1);
+			idx &= (MaskAddr);
 		#endif
 #else
     idx &= (MAX_ANCHOR_LIST_SIZE - 1);  //
@@ -475,7 +475,7 @@ double instancegetidistraw(int idx) //get instantaneous range (uncorrected)
 		#ifdef LOCALIZATION_2D
     		idx &= (MAX_ANCHOR_LIST_SIZE);
 		#else
-			idx &= (MAX_ANCHOR_LIST_SIZE - 1);
+			idx &= (MaskAddr);
 		#endif
 
 #else
@@ -494,7 +494,7 @@ int instancegetidist_mm(int idx) //get instantaneous range
 		#ifdef LOCALIZATION_2D
     		idx &= (MAX_ANCHOR_LIST_SIZE);
 		#else
-			idx &= (MAX_ANCHOR_LIST_SIZE - 1);
+			idx &= (MaskAddr);
 		#endif
 
 #else
@@ -511,7 +511,7 @@ int instancegetidistraw_mm(int idx) //get instantaneous range (uncorrected)
 		#ifdef LOCALIZATION_2D
     		idx &= (MAX_ANCHOR_LIST_SIZE);
 		#else
-			idx &= (MAX_ANCHOR_LIST_SIZE - 1);
+			idx &= (MaskAddr);
 		#endif
 
 #else
@@ -668,16 +668,28 @@ void instance_txcallback(const dwt_callback_data_t *txd)
 uint8 tagrxreenable(uint16 sourceAddress)
 {
 	uint8 type_pend = DWT_SIG_DW_IDLE;
-	uint8 anc = sourceAddress & 0x3;
+#ifdef MATEO_IMPL
+	uint8 anc = sourceAddress & MaskAddr;
+#else
+	uint8 anc = sourceAddress & MaskAddr;
+#endif
+
 	int instance = 0;
 
-	switch(anc) //revisar si se debe reducir el numero de casos hasta 2
+	switch(anc) //r
 	{
+#ifdef MATEO_IMPL
+		//if we got Response from last anchor - this is the last expected response - send the final
+		case NUM_EXPECTED_RESPONSES:
+		type_pend = DWT_SIG_DW_IDLE;
+		break;
+	#else
 		//if we got Response from anchor 3 - this is the last expected response - send the final
 		case 3:
-			type_pend = DWT_SIG_DW_IDLE;
-			break;
+		type_pend = DWT_SIG_DW_IDLE;
+		break;
 
+#endif
 		//if we got Response from anchor 0, 1, or 2 - go back to wait for next anchor's response
 		case 0:
 		case 1:
@@ -709,9 +721,13 @@ uint8 tagrxreenable(uint16 sourceAddress)
 uint8 ancsendfinalorrxreenable(uint16 sourceAddress)
 {
 	uint8 type_pend = DWT_SIG_DW_IDLE;
+#ifdef MATEO_IMPL
+	uint8 anc = sourceAddress & MaskAddr;
+	int instance = 0;
+#else
 	uint8 anc = sourceAddress & 0x3;
 	int instance = 0;
-
+#endif
 	if(instance_data[instance].instanceAddress16 == GATEWAY_ANCHOR_ADDR)
 	{
 		switch(anc)
@@ -914,7 +930,12 @@ void handle_error_unknownframe(event_data_t dw_event)
 void ancprepareresponse2(uint16 sourceAddress, uint8 srcAddr_index, uint8 fcode_index, uint8 *frame)
 {
 	uint16 frameLength = 0;
+#ifdef MATEO_IMPL
+	uint8 tof_idx = (sourceAddress) & MaskAddr ;
+
+#else
 	uint8 tof_idx = (sourceAddress) & 0x3 ;
+#endif
 	int instance = 0;
 
 	instance_data[instance].psduLength = frameLength = ANCH_RESPONSE_MSG_LEN + FRAME_CRTL_AND_ADDRESS_S + FRAME_CRC;
@@ -1121,8 +1142,16 @@ void instance_rxcallback(const dwt_callback_data_t *rxd)
 						}
 
 						//update the response index and number of responses received tables
+						#ifdef MATEO_IMPL
+						instance_data[instance].rxRespsIdx = (uint8) ((dw_event.msgu.frame[POLL_RNUM+fcode_index] & 0xf)
+																+ (((sourceAddress&MaskAddr) + 8) << 4));
+						#else
 						instance_data[instance].rxRespsIdx = (uint8) ((dw_event.msgu.frame[POLL_RNUM+fcode_index] & 0xf)
 																+ (((sourceAddress&0x3) + 8) << 4));
+						#endif
+
+
+
 						instance_data[instance].rxResps[instance_data[instance].rxRespsIdx] = 0;
 						//debug LED on
 						//led_on(LED_PC9);
@@ -1138,13 +1167,20 @@ void instance_rxcallback(const dwt_callback_data_t *rxd)
 
 						//set the bast reply time (the actual will be Poll rx time + instance_data[0].fixedReplyDelayAnc)
 						instance_data[instance].delayedReplyTime = dw_event.timeStamp32h ;
-						instance_data[instance].responseTO = (instance_data[instance].instanceAddress16 - sourceAddress) & 0x3; //set number of expected responses
 
+						#ifdef MATEO_IMPL
+						instance_data[instance].responseTO = (instance_data[instance].instanceAddress16 - sourceAddress) & MaskAddr; //set number of expected responses
+						#else
+						instance_data[instance].responseTO = (instance_data[instance].instanceAddress16 - sourceAddress) & 0x3; //set number of expected responses
+						#endif
 						dw_event.type_pend = anctxorrxreenable(instance_data[instance].instanceAddress16, 2+1);
 
+						#ifdef MATEO_IMPL
+						instance_data[instance].tofAnc[sourceAddress & MaskAddr] = INVALID_TOF; //clear ToF ..
+						#else
 						instance_data[instance].tofAnc[sourceAddress & 0x3] = INVALID_TOF; //clear ToF ..
 						//debug LED off
-						//led_off(LED_PC9);
+						#endif		//led_off(LED_PC9);
 						break;
 					}
 
@@ -1200,11 +1236,20 @@ void instance_rxcallback(const dwt_callback_data_t *rxd)
 							uint8 index ;
 							instance_data[instance].rxResps[instance_data[instance].rangeNum]++;
 							dw_event.type_pend = tagrxreenable(sourceAddress); //responseTO decremented above...
-							index = RRXT0 + 5*(sourceAddress & 0x3); //USANDO SOLO 3 ANCHORS, NO ES NECESARIO EL ULTIMO INDICE, EL FINAL MESSAGE PUEDE SER MAS PEQUEÑO INCLUSO
 
+							#ifdef MATEO_IMPL
+
+							index = RRXT0 + 5*(sourceAddress & MaskAddr); //USANDO SOLO 3 ANCHORS, NO ES NECESARIO EL ULTIMO INDICE, EL FINAL MESSAGE PUEDE SER MAS PEQUEÑO INCLUSO
+							instance_data[instance].rxResponseMask |= (0x1 << (sourceAddress & MaskAddr)); //add anchor ID to the mask
+							// Write Response RX time field of Final message
+							memcpy(&(instance_data[instance].msg_f.messageData[index]), rxTimeStamp, 5);
+
+							#else
+							index = RRXT0 + 5*(sourceAddress & 0x3); //USANDO SOLO 3 ANCHORS, NO ES NECESARIO EL ULTIMO INDICE, EL FINAL MESSAGE PUEDE SER MAS PEQUEÑO INCLUSO
 							instance_data[instance].rxResponseMask |= (0x1 << (sourceAddress & 0x3)); //add anchor ID to the mask
 							// Write Response RX time field of Final message
 							memcpy(&(instance_data[instance].msg_f.messageData[index]), rxTimeStamp, 5);
+							#endif
 
 						}
 						else if (instance_data[instance].mode == ANCHOR_RNG) //A0 and A1 only when ranging to other anchors
