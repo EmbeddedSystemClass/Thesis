@@ -71,6 +71,8 @@ extern bool *TA_SW3;
 extern int NUM_DATA_ARRAY;
 extern int Naddress;
 extern int MaskAddr;
+extern int time_final = TIME_FINAL;
+
 
 
 #else
@@ -445,7 +447,7 @@ void uwbPrintRole(uint16 s1switch)
 {
 	int role = instancegetrole();
 
-	sprintf((char*)&dataseq[0], "DecaRangeRTLS %s%d", (s1switch & SWS1_SHF_MODE) ? "S" : "L", chan);
+	sprintf((char*)&dataseq[0], "DecaRangeRTLS %s%d -----%d", (s1switch & SWS1_SHF_MODE) ? "S" : "L", chan, time_final);
 	uartWriteLineNoOS((char *) dataseq); //send some data
 
 	tagaddr = instance_anchaddr;
@@ -464,10 +466,18 @@ void uwbPrintRole(uint16 s1switch)
 	}
 	else
 	{
-		ancaddr = 4;
+#ifdef MATEO_IMPL
+		ancaddr = NUM_ANCHOR;
 		sprintf((char*)&dataseq1[0], "Listener ");
 		uartWriteLineNoOS((char *) dataseq1); //send some data
 	}
+#else
+	ancaddr = 4;
+	sprintf((char*)&dataseq1[0], "Listener ");
+	uartWriteLineNoOS((char *) dataseq1); //send some data
+}
+#endif
+
 }
 
 

@@ -27,6 +27,27 @@ extern "C" {
 	int NUM_DATA_ARRAY;
 	int Naddress;
 	int MaskAddr;
+	int time_final;
+
+
+
+
+	//--------------------------------------------------- DEVICE PARAMETERS ---------------------------------------------------------//
+
+	#define NUM_DISP 						(10) // 	Number of Tag to Use
+	#define DEVICE_ID 						(6) // Device ID in Decimal From 0 to (NUM_DISP - 1)
+	#define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
+	#define DEVICE_TYPE						FALSE  // FALSE = TAG , TRUE = ANCHOR
+	#define DATA_RATE						FALSE  // FALSE = 110kbps , TRUE = 6,81Mbps
+	#define OPERATION_CHANNEL				TRUE   // FALSE = Channel 2 (3.993 GHz) , TRUE = Channel 5(6.489 GHz)
+	#define NUM_ANCHOR						(5)   // Number of expected responses
+
+	#define MAX_TAG_LIST_SIZE				(NUM_DISP) //
+    #define TOTAL_NUMBER_OF_SLOTS			(MAX_TAG_LIST_SIZE+2)
+
+	#if (DEVICE_ID > NUM_DISP)
+		#error "Device ID wrong! (greater than NUM_DISP)"
+	#endif
 
 	//--------------------------------------------------- OPTIMIZED TIMES ---------------------------------------------------------//
 
@@ -34,7 +55,8 @@ extern "C" {
 	//LOWER DATA RATE
 	#define TIME_RESP_1 			(2620)
 	#define TIME_RESP_OTHERS 		(3100)
-	#define TIME_FINAL 				(5500)
+	//#define TIME_FINAL 				((int)(966+1474+((((24+(NUM_ANCHOR*5))*8*8205.13)+172308)/1000)))
+	#define TIME_FINAL 				(6000)
 	#define MARGIN_FINAL_DELAY 		(80)
 
 	// HIGHER DATA RATE
@@ -43,23 +65,6 @@ extern "C" {
 	#define TIME_FINAL_HDR 			(300)
 	#define MARGIN_FINAL_DELAY_HDR 	(65)
 
-
-	//--------------------------------------------------- DEVICE PARAMETERS ---------------------------------------------------------//
-
-	#define NUM_DISP 						(100) // 	Number of Tag to Use
-	#define DEVICE_ID 						(30) // Device ID in Decimal From 0 to (NUM_DISP - 1)
-	#define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
-	#define DEVICE_TYPE						FALSE  // FALSE = TAG , TRUE = ANCHOR
-	#define DATA_RATE						FALSE  // FALSE = 110kbps , TRUE = 6,81Mbps
-	#define OPERATION_CHANNEL				TRUE   // FALSE = Channel 2 (3.993 GHz) , TRUE = Channel 5(6.489 GHz)
-	#define NUM_ANCHOR						(4)   // Number of expected responses
-
-	#define MAX_TAG_LIST_SIZE				(NUM_DISP) //
-    #define TOTAL_NUMBER_OF_SLOTS			(MAX_TAG_LIST_SIZE+2)
-
-	#if (DEVICE_ID > NUM_DISP)
-		#error "Device ID wrong! (greater than NUM_DISP)"
-	#endif
 
 	#ifdef LOCALIZATION_2D
 
@@ -157,6 +162,9 @@ extern "C" {
 #define RX_RESPONSE1_TURNAROUND (200) //takes about 200 us for the 1st response to come back (from A0)
 #define RX_RESPONSE1_TURNAROUND_6M81 (300) //takes about 100 us for response to come back
 #define RX_RESPONSE1_TURNAROUND_110K (300) //takes about 100 us for response to come back
+
+//#define RX_RESPONSE1_TURNAROUND_6M81 (NUM_EXPECTED_RESPONSES*100) //takes about 100 us for response to come back
+//#define RX_RESPONSE1_TURNAROUND_110K (NUM_EXPECTED_RESPONSES*100) //takes about 100 us for response to come back
 
 
 
