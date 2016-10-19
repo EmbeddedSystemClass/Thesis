@@ -29,18 +29,15 @@ extern "C" {
 	int MaskAddr;
 	int time_final;
 
-
-
-
 	//--------------------------------------------------- DEVICE PARAMETERS ---------------------------------------------------------//
 
 	#define NUM_DISP 						(10) // 	Number of Tag to Use
-	#define DEVICE_ID 						(6) // Device ID in Decimal From 0 to (NUM_DISP - 1)
+	#define DEVICE_ID 						(5) // Device ID in Decimal From 0 to (NUM_DISP - 1)
 	#define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
 	#define DEVICE_TYPE						FALSE  // FALSE = TAG , TRUE = ANCHOR
 	#define DATA_RATE						FALSE  // FALSE = 110kbps , TRUE = 6,81Mbps
 	#define OPERATION_CHANNEL				TRUE   // FALSE = Channel 2 (3.993 GHz) , TRUE = Channel 5(6.489 GHz)
-	#define NUM_ANCHOR						(5)   // Number of expected responses
+	#define NUM_ANCHOR						(7)   // Number of expected responses
 
 	#define MAX_TAG_LIST_SIZE				(NUM_DISP) //
     #define TOTAL_NUMBER_OF_SLOTS			(MAX_TAG_LIST_SIZE+2)
@@ -55,9 +52,13 @@ extern "C" {
 	//LOWER DATA RATE
 	#define TIME_RESP_1 			(2620)
 	#define TIME_RESP_OTHERS 		(3100)
-	//#define TIME_FINAL 				((int)(966+1474+((((24+(NUM_ANCHOR*5))*8*8205.13)+172308)/1000)))
-	#define TIME_FINAL 				(6000)
 	#define MARGIN_FINAL_DELAY 		(80)
+#if (NUM_ANCHOR>4)
+	//#define TIME_FINAL 				((int)(5500+(((((NUM_ANCHOR-4)*5)*8*8205.13)+172308)/1000)))
+	#define TIME_FINAL 				((int)(5500+((NUM_ANCHOR-4)*500)))
+#else
+	#define TIME_FINAL 				(5500)
+#endif
 
 	// HIGHER DATA RATE
 	#define TIME_RESP_1_HDR 		(320)
@@ -69,6 +70,7 @@ extern "C" {
 	#ifdef LOCALIZATION_2D
 
 	//------------------------------------------------WORKING FOR 2D LOCALIZATION (ONLY 3 ANCHORS)------------------------------------------------------------//
+
 
 		#define MAX_ANCHOR_LIST_SIZE			(3) //this is limited to 3 in this application
 		#define NUM_EXPECTED_RESPONSES			(MAX_ANCHOR_LIST_SIZE-1) //e.g. MAX_ANCHOR_LIST_SIZE - 1

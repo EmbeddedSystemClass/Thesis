@@ -447,7 +447,7 @@ void uwbPrintRole(uint16 s1switch)
 {
 	int role = instancegetrole();
 
-	sprintf((char*)&dataseq[0], "DecaRangeRTLS %s%d -----%d", (s1switch & SWS1_SHF_MODE) ? "S" : "L", chan, time_final);
+	sprintf((char*)&dataseq[0], "DecaRangeRTLS %s%d Time Final:%d", (s1switch & SWS1_SHF_MODE) ? "S" : "L", chan, time_final);
 	uartWriteLineNoOS((char *) dataseq); //send some data
 
 	tagaddr = instance_anchaddr;

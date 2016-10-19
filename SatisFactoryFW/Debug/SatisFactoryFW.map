@@ -290,7 +290,7 @@ mpuNewDataSemHandle
                     0x4               ./Peripheral/src/mpuMain.o
 htim1               0x3c              ./Peripheral/src/sf_port.o
 hdma_i2c1_rx        0x50              ./Peripheral/src/i2c.o
-inst_idistraw       0x28              ./uwbCore/application/instance_common.o
+inst_idistraw       0x38              ./uwbCore/application/instance_common.o
 uart2TxSemHandle    0x4               ./Peripheral/src/uart.o
 mpuNewDataTaskHandle
                     0x4               ./Peripheral/src/mpuMain.o
@@ -300,7 +300,7 @@ permanentBlinkTaskHandle
                     0x4               ./User/src/main.o
 uwbInterruptSemHandle
                     0x4               ./uwbCore/application/uwbMain.o
-instance_data       0x710             ./uwbCore/application/instance.o
+instance_data       0x728             ./uwbCore/application/instance.o
 huart2              0x40              ./Peripheral/src/uart.o
 chan                0x4               ./uwbCore/application/uwbMain.o
 rx_new              0x1               ./Peripheral/src/mpuMain.o
@@ -316,7 +316,7 @@ mpuCompassTaskHandle
                     0x4               ./Peripheral/src/mpuMain.o
 MaskAddr            0x4               ./uwbCore/application/instance.o
 hdma_spi3_rx        0x50              ./Peripheral/src/spi.o
-inst_idist          0x28              ./uwbCore/application/instance_common.o
+inst_idist          0x38              ./uwbCore/application/instance_common.o
 
 Discarded input sections
 
@@ -1841,7 +1841,7 @@ Discarded input sections
  .data          0x00000000        0x0 ./uwbCore/application/instance_common.o
  .bss           0x00000000        0x0 ./uwbCore/application/instance_common.o
  .text.instancecleardisttableall
-                0x00000000       0x48 ./uwbCore/application/instance_common.o
+                0x00000000       0x58 ./uwbCore/application/instance_common.o
  .text.instancesettagsleepdelay
                 0x00000000        0xc ./uwbCore/application/instance_common.o
  .text.instancegetrnum
@@ -17323,7 +17323,7 @@ END GROUP
                 0x2001fc00                __Main_Stack_Limit = (__stack - __Main_Stack_Size)
                 0x2001fc00                PROVIDE (_Main_Stack_Limit, __Main_Stack_Limit)
                 0x00000100                _Minimum_Stack_Size = 0x100
-                0x20006670                PROVIDE (_Heap_Begin, _end_noinit)
+                0x200066a8                PROVIDE (_Heap_Begin, _end_noinit)
                 0x2001fc00                PROVIDE (_Heap_Limit, (__stack - __Main_Stack_Size))
 
 .isr_vector     0x08000000      0x35c
@@ -17373,7 +17373,7 @@ END GROUP
  *(.flashtext .flashtext.*)
                 0x0800035c                . = ALIGN (0x4)
 
-.text           0x08000360    0x117c8
+.text           0x08000360    0x117d0
                 0x08000360                . = ALIGN (0x4)
  *(.text .text.*)
  .text.decamutexon
@@ -17575,8 +17575,9 @@ END GROUP
                 0x08001a08       0x5c ./uwbCore/application/instance.o
                 0x08001a08                instance_calcranges
  .text.testapprun
-                0x08001a64      0xa44 ./uwbCore/application/instance.o
+                0x08001a64      0xa40 ./uwbCore/application/instance.o
                 0x08001a64                testapprun
+ *fill*         0x080024a4        0x4 
  .text.instancesetreplydelay
                 0x080024a8      0x2e0 ./uwbCore/application/instance.o
                 0x080024a8                instancesetreplydelay
@@ -17630,84 +17631,85 @@ END GROUP
                 0x08002b30        0xc ./uwbCore/application/instance_common.o
                 0x08002b30                instancenewrangetim
  .text.instanceclearcounts
-                0x08002b3c       0x60 ./uwbCore/application/instance_common.o
+                0x08002b3c       0x68 ./uwbCore/application/instance_common.o
                 0x08002b3c                instanceclearcounts
  .text.instancereaddeviceid
-                0x08002b9c        0x4 ./uwbCore/application/instance_common.o
-                0x08002b9c                instancereaddeviceid
+                0x08002ba4        0x4 ./uwbCore/application/instance_common.o
+                0x08002ba4                instancereaddeviceid
  .text.instance_config
-                0x08002ba0      0x154 ./uwbCore/application/instance_common.o
-                0x08002ba0                instance_config
+                0x08002ba8      0x154 ./uwbCore/application/instance_common.o
+                0x08002ba8                instance_config
  .text.instancegetidist
-                0x08002cf4       0x1c ./uwbCore/application/instance_common.o
-                0x08002cf4                instancegetidist
+                0x08002cfc       0x1c ./uwbCore/application/instance_common.o
+                0x08002cfc                instancegetidist
  .text.instance_backtoanchor
-                0x08002d10       0x20 ./uwbCore/application/instance_common.o
-                0x08002d10                instance_backtoanchor
+                0x08002d18       0x20 ./uwbCore/application/instance_common.o
+                0x08002d18                instance_backtoanchor
  .text.inst_processrxtimeout
-                0x08002d30       0x90 ./uwbCore/application/instance_common.o
-                0x08002d30                inst_processrxtimeout
+                0x08002d38       0x90 ./uwbCore/application/instance_common.o
+                0x08002d38                inst_processrxtimeout
  .text.tagrxreenable
-                0x08002dc0       0x18 ./uwbCore/application/instance_common.o
-                0x08002dc0                tagrxreenable
+                0x08002dc8       0x18 ./uwbCore/application/instance_common.o
+                0x08002dc8                tagrxreenable
  .text.ancsendfinalorrxreenable
-                0x08002dd8       0x48 ./uwbCore/application/instance_common.o
-                0x08002dd8                ancsendfinalorrxreenable
+                0x08002de0       0x48 ./uwbCore/application/instance_common.o
+                0x08002de0                ancsendfinalorrxreenable
  .text.ancenablerx
-                0x08002e20       0x24 ./uwbCore/application/instance_common.o
-                0x08002e20                ancenablerx
+                0x08002e28       0x24 ./uwbCore/application/instance_common.o
+                0x08002e28                ancenablerx
  .text.anctxorrxreenable
-                0x08002e44      0x2a0 ./uwbCore/application/instance_common.o
-                0x08002e44                anctxorrxreenable
+                0x08002e4c      0x2a0 ./uwbCore/application/instance_common.o
+                0x08002e4c                anctxorrxreenable
  .text.ancprepareresponse2
-                0x080030e4      0x220 ./uwbCore/application/instance_common.o
-                0x080030e4                ancprepareresponse2
+                0x080030ec      0x220 ./uwbCore/application/instance_common.o
+                0x080030ec                ancprepareresponse2
  .text.ancprepareresponse
-                0x08003304      0x420 ./uwbCore/application/instance_common.o
-                0x08003304                ancprepareresponse
+                0x0800330c      0x414 ./uwbCore/application/instance_common.o
+                0x0800330c                ancprepareresponse
  .text.instance_putevent
-                0x08003724       0x50 ./uwbCore/application/instance_common.o
-                0x08003724                instance_putevent
+                0x08003720       0x50 ./uwbCore/application/instance_common.o
+                0x08003720                instance_putevent
  .text.handle_error_unknownframe
-                0x08003774      0x148 ./uwbCore/application/instance_common.o
-                0x08003774                handle_error_unknownframe
+                0x08003770      0x148 ./uwbCore/application/instance_common.o
+                0x08003770                handle_error_unknownframe
  .text.instance_rxcallback
-                0x080038bc      0x4e4 ./uwbCore/application/instance_common.o
-                0x080038bc                instance_rxcallback
+                0x080038b8      0x4e4 ./uwbCore/application/instance_common.o
+                0x080038b8                instance_rxcallback
  .text.instance_getevent
-                0x08003da0       0xa8 ./uwbCore/application/instance_common.o
-                0x08003da0                instance_getevent
+                0x08003d9c       0xa8 ./uwbCore/application/instance_common.o
+                0x08003d9c                instance_getevent
  .text.instance_clearevents
-                0x08003e48       0x34 ./uwbCore/application/instance_common.o
-                0x08003e48                instance_clearevents
+                0x08003e44       0x34 ./uwbCore/application/instance_common.o
+                0x08003e44                instance_clearevents
  .text.instance_init
-                0x08003e7c       0xa8 ./uwbCore/application/instance_common.o
-                0x08003e7c                instance_init
+                0x08003e78       0xa8 ./uwbCore/application/instance_common.o
+                0x08003e78                instance_init
  .text.instance_run
-                0x08003f24       0xe4 ./uwbCore/application/instance_common.o
-                0x08003f24                instance_run
+                0x08003f20       0xe4 ./uwbCore/application/instance_common.o
+                0x08003f20                instance_run
  .text.instance_notify_DW1000_inIDLE
-                0x08004008        0xc ./uwbCore/application/instance_common.o
-                0x08004008                instance_notify_DW1000_inIDLE
+                0x08004004        0xc ./uwbCore/application/instance_common.o
+                0x08004004                instance_notify_DW1000_inIDLE
  .text.instancesettxpower
-                0x08004014       0x24 ./uwbCore/application/instance_common.o
-                0x08004014                instancesettxpower
+                0x08004010       0x24 ./uwbCore/application/instance_common.o
+                0x08004010                instancesettxpower
  .text.instancesetantennadelays
-                0x08004038       0x28 ./uwbCore/application/instance_common.o
-                0x08004038                instancesetantennadelays
+                0x08004034       0x28 ./uwbCore/application/instance_common.o
+                0x08004034                instancesetantennadelays
  .text.NVIC_EnableIRQ
-                0x08004060       0x18 ./uwbCore/application/uwbMain.o
+                0x0800405c       0x18 ./uwbCore/application/uwbMain.o
  .text.NVIC_DisableIRQ
-                0x08004078       0x18 ./uwbCore/application/uwbMain.o
+                0x08004074       0x18 ./uwbCore/application/uwbMain.o
  .text.UwbMainTask
-                0x08004090      0x1c0 ./uwbCore/application/uwbMain.o
-                0x08004090                UwbMainTask
+                0x0800408c      0x1c0 ./uwbCore/application/uwbMain.o
+                0x0800408c                UwbMainTask
  .text.addressconfigure
-                0x08004250       0x44 ./uwbCore/application/uwbMain.o
-                0x08004250                addressconfigure
+                0x0800424c       0x44 ./uwbCore/application/uwbMain.o
+                0x0800424c                addressconfigure
  .text.decarangingmode
-                0x08004294       0x14 ./uwbCore/application/uwbMain.o
-                0x08004294                decarangingmode
+                0x08004290       0x14 ./uwbCore/application/uwbMain.o
+                0x08004290                decarangingmode
+ *fill*         0x080042a4        0x4 
  .text.inittestapplication
                 0x080042a8      0x140 ./uwbCore/application/uwbMain.o
                 0x080042a8                inittestapplication
@@ -18573,97 +18575,97 @@ END GROUP
                 0x080115e0                rfDelays
  .rodata        0x080115e4       0x28 ./uwbCore/application/uwbMain.o
  .rodata.str1.4
-                0x0801160c      0x118 ./uwbCore/application/uwbMain.o
-                                0x11c (size before relaxing)
+                0x0801160c      0x120 ./uwbCore/application/uwbMain.o
+                                0x124 (size before relaxing)
  .rodata.APBAHBPrescTable
-                0x08011724       0x10 ./system/src/stm32f4xx/stm32f4xx_hal_rcc.o
-                0x08011724                APBAHBPrescTable
+                0x0801172c       0x10 ./system/src/stm32f4xx/stm32f4xx_hal_rcc.o
+                0x0801172c                APBAHBPrescTable
  .rodata.str1.4
-                0x08011734      0x146 ./system/src/cortexm/exception_handlers.o
- *fill*         0x0801187a        0x2 
+                0x0801173c      0x146 ./system/src/cortexm/exception_handlers.o
+ *fill*         0x08011882        0x2 
  .rodata.str1.4
-                0x0801187c        0x5 ./system/src/FreeRTOS/tasks.o
- *fill*         0x08011881        0x3 
- .rodata        0x08011884       0x28 ./User/src/main.o
+                0x08011884        0x5 ./system/src/FreeRTOS/tasks.o
+ *fill*         0x08011889        0x3 
+ .rodata        0x0801188c       0x28 ./User/src/main.o
  .rodata.str1.4
-                0x080118ac       0x83 ./User/src/main.o
- *fill*         0x0801192f        0x1 
+                0x080118b4       0x83 ./User/src/main.o
+ *fill*         0x08011937        0x1 
  .rodata.str1.4
-                0x08011930       0x28 ./DeviceSupport/src/stm32f4xx_it.o
+                0x08011938       0x28 ./DeviceSupport/src/stm32f4xx_it.o
  .rodata.str1.4
-                0x08011958        0x4 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libm.a(lib_a-w_log.o)
+                0x08011960        0x4 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libm.a(lib_a-w_log.o)
                                   0x5 (size before relaxing)
  .rodata.str1.4
-                0x0801195c        0x4 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libm.a(lib_a-w_pow.o)
- .rodata.dp_h   0x08011960       0x10 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libm.a(lib_a-e_pow.o)
- .rodata.dp_l   0x08011970       0x10 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libm.a(lib_a-e_pow.o)
- .rodata.bp     0x08011980       0x10 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libm.a(lib_a-e_pow.o)
+                0x08011964        0x4 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libm.a(lib_a-w_pow.o)
+ .rodata.dp_h   0x08011968       0x10 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libm.a(lib_a-e_pow.o)
+ .rodata.dp_l   0x08011978       0x10 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libm.a(lib_a-e_pow.o)
+ .rodata.bp     0x08011988       0x10 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libm.a(lib_a-e_pow.o)
  .rodata.str1.4
                 0x00000000        0x1 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libm.a(lib_a-e_pow.o)
- .rodata.TWO52  0x08011990       0x10 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libm.a(lib_a-s_rint.o)
+ .rodata.TWO52  0x08011998       0x10 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libm.a(lib_a-s_rint.o)
  .rodata.str1.4
-                0x080119a0        0x2 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-impure.o)
- *fill*         0x080119a2        0x2 
+                0x080119a8        0x2 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-impure.o)
+ *fill*         0x080119aa        0x2 
  .rodata.zeroes.6911
-                0x080119a4       0x10 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-svfprintf.o)
+                0x080119ac       0x10 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-svfprintf.o)
  .rodata.blanks.6910
-                0x080119b4       0x10 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-svfprintf.o)
+                0x080119bc       0x10 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-svfprintf.o)
  .rodata.str1.4
-                0x080119c4       0x42 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-svfprintf.o)
- *fill*         0x08011a06        0x2 
+                0x080119cc       0x42 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-svfprintf.o)
+ *fill*         0x08011a0e        0x2 
  .rodata.str1.4
-                0x08011a08       0x10 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-dtoa.o)
+                0x08011a10       0x10 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-dtoa.o)
                                  0x12 (size before relaxing)
  .rodata.str1.4
-                0x08011a18        0xc d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-locale.o)
+                0x08011a20        0xc d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-locale.o)
                                  0x12 (size before relaxing)
- *fill*         0x08011a24        0x4 
+ *fill*         0x08011a2c        0x4 
  .rodata.__mprec_tens
-                0x08011a28       0xc8 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-mprec.o)
-                0x08011a28                __mprec_tens
+                0x08011a30       0xc8 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-mprec.o)
+                0x08011a30                __mprec_tens
  .rodata.p05.5302
-                0x08011af0        0xc d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-mprec.o)
- *fill*         0x08011afc        0x4 
+                0x08011af8        0xc d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-mprec.o)
+ *fill*         0x08011b04        0x4 
  .rodata.__mprec_bigtens
-                0x08011b00       0x28 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-mprec.o)
-                0x08011b00                __mprec_bigtens
+                0x08011b08       0x28 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-mprec.o)
+                0x08011b08                __mprec_bigtens
  *(vtable)
  *(.eh_frame*)
- .eh_frame      0x08011b28        0x0 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-strcmp.o)
+ .eh_frame      0x08011b30        0x0 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-strcmp.o)
                                  0x70 (size before relaxing)
  *(.glue_7)
  .glue_7        0x00000000        0x0 linker stubs
  *(.glue_7t)
  .glue_7t       0x00000000        0x0 linker stubs
 
-.vfp11_veneer   0x08011b28        0x0
+.vfp11_veneer   0x08011b30        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x08011b28        0x0
+.v4_bx          0x08011b30        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x08011b28        0x0
+.iplt           0x08011b30        0x0
  .iplt          0x00000000        0x0 ./uwbCore/platform/deca_mutex.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x08011b28                __exidx_start = .
+                0x08011b30                __exidx_start = .
 
-.ARM.exidx      0x08011b28        0x8
+.ARM.exidx      0x08011b30        0x8
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
- .ARM.exidx     0x08011b28        0x8 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu\libgcc.a(_divdi3.o)
- .ARM.exidx     0x08011b30        0x0 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu\libgcc.a(_udivdi3.o)
+ .ARM.exidx     0x08011b30        0x8 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu\libgcc.a(_divdi3.o)
+ .ARM.exidx     0x08011b38        0x0 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu\libgcc.a(_udivdi3.o)
                                   0x8 (size before relaxing)
-                0x08011b30                __exidx_end = .
+                0x08011b38                __exidx_end = .
 
-.rel.dyn        0x08011b30        0x0
+.rel.dyn        0x08011b38        0x0
  .rel.iplt      0x00000000        0x0 ./uwbCore/platform/deca_mutex.o
-                0x08011b30                . = ALIGN (0x4)
-                0x08011b30                _etext = .
-                0x08011b30                __etext = .
-                0x08011b30                _sidata = _etext
+                0x08011b38                . = ALIGN (0x4)
+                0x08011b38                _etext = .
+                0x08011b38                __etext = .
+                0x08011b38                _sidata = _etext
 
-.data           0x20000000      0xaf4 load address 0x08011b30
+.data           0x20000000      0xaf4 load address 0x08011b38
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _sdata = .
                 0x20000000                __data_start__ = .
@@ -18720,10 +18722,10 @@ END GROUP
                 0x20000af4                _edata = .
                 0x20000af4                __data_end__ = .
 
-.igot.plt       0x20000af4        0x0 load address 0x08012624
+.igot.plt       0x20000af4        0x0 load address 0x0801262c
  .igot.plt      0x00000000        0x0 ./uwbCore/platform/deca_mutex.o
 
-.bss            0x20000af8     0x5b78 load address 0x08012628
+.bss            0x20000af8     0x5bb0 load address 0x08012630
                 0x20000af8                . = ALIGN (0x4)
                 0x20000af8                __bss_start__ = .
                 0x20000af8                _sbss = .
@@ -18835,76 +18837,76 @@ END GROUP
  COMMON         0x200059cc       0x28 ./uwbCore/decadriver/deca_device.o
                 0x200059cc                last_status
  *fill*         0x200059f4        0x4 
- COMMON         0x200059f8      0x724 ./uwbCore/application/instance.o
+ COMMON         0x200059f8      0x73c ./uwbCore/application/instance.o
                 0x200059f8                TA_SW3
                 0x200059fc                Naddress
                 0x20005a00                NUM_DATA_ARRAY
                 0x20005a08                instance_data
-                0x20006118                MaskAddr
- *fill*         0x2000611c        0x4 
- COMMON         0x20006120      0x140 ./uwbCore/application/instance_common.o
-                0x20006120                inst_tdist
-                0x20006170                inst_idistraw
-                0x20006198                dw_event_g
-                0x20006238                inst_idist
- COMMON         0x20006260       0xbc ./uwbCore/application/uwbMain.o
-                0x20006260                uwbProcessInterruptTaskHandle
-                0x20006264                uwbMainTaskHandle
-                0x20006268                uwbInitTaskHandle
-                0x2000626c                tagaddr
-                0x20006270                dataseq
-                0x200062c0                dataseq1
-                0x20006310                uwbInterruptSemHandle
-                0x20006314                chan
-                0x20006318                ancaddr
- COMMON         0x2000631c        0x4 ./system/src/newlib/_syscalls.o
-                0x2000631c                errno
- COMMON         0x20006320        0xc ./User/src/main.o
-                0x20006320                defaultTaskHandle
-                0x20006324                permanentBlinkTaskHandle
-                0x20006328                permanentBlinkTaskHandle2
- COMMON         0x2000632c       0xe8 ./Peripheral/src/i2c.o
-                0x2000632c                hdma_i2c1_tx
-                0x2000637c                hi2c1
-                0x200063b8                i2c1RxSemHandle
-                0x200063bc                i2c1TxSemHandle
-                0x200063c0                hdma_i2c1_rx
-                0x20006410                i2c1LockSemHandle
- COMMON         0x20006414       0x5c ./Peripheral/src/sf_port.o
-                0x20006414                hrtc
-                0x20006434                htim1
- COMMON         0x20006470       0xf8 ./Peripheral/src/spi.o
-                0x20006470                hspi3
-                0x200064c8                hdma_spi3_tx
-                0x20006518                hdma_spi3_rx
- COMMON         0x20006568      0x108 ./Peripheral/src/uart.o
-                0x20006568                hdma_usart2_rx
-                0x200065b8                uartRxString
-                0x200065d8                hdma_usart2_tx
-                0x20006628                uart2TxSemHandle
-                0x2000662c                uart2RxSemHandle
-                0x20006630                huart2
+                0x20006130                MaskAddr
+ *fill*         0x20006134        0x4 
+ COMMON         0x20006138      0x160 ./uwbCore/application/instance_common.o
+                0x20006138                inst_tdist
+                0x20006188                inst_idistraw
+                0x200061c0                dw_event_g
+                0x20006260                inst_idist
+ COMMON         0x20006298       0xbc ./uwbCore/application/uwbMain.o
+                0x20006298                uwbProcessInterruptTaskHandle
+                0x2000629c                uwbMainTaskHandle
+                0x200062a0                uwbInitTaskHandle
+                0x200062a4                tagaddr
+                0x200062a8                dataseq
+                0x200062f8                dataseq1
+                0x20006348                uwbInterruptSemHandle
+                0x2000634c                chan
+                0x20006350                ancaddr
+ COMMON         0x20006354        0x4 ./system/src/newlib/_syscalls.o
+                0x20006354                errno
+ COMMON         0x20006358        0xc ./User/src/main.o
+                0x20006358                defaultTaskHandle
+                0x2000635c                permanentBlinkTaskHandle
+                0x20006360                permanentBlinkTaskHandle2
+ COMMON         0x20006364       0xe8 ./Peripheral/src/i2c.o
+                0x20006364                hdma_i2c1_tx
+                0x200063b4                hi2c1
+                0x200063f0                i2c1RxSemHandle
+                0x200063f4                i2c1TxSemHandle
+                0x200063f8                hdma_i2c1_rx
+                0x20006448                i2c1LockSemHandle
+ COMMON         0x2000644c       0x5c ./Peripheral/src/sf_port.o
+                0x2000644c                hrtc
+                0x2000646c                htim1
+ COMMON         0x200064a8       0xf8 ./Peripheral/src/spi.o
+                0x200064a8                hspi3
+                0x20006500                hdma_spi3_tx
+                0x20006550                hdma_spi3_rx
+ COMMON         0x200065a0      0x108 ./Peripheral/src/uart.o
+                0x200065a0                hdma_usart2_rx
+                0x200065f0                uartRxString
+                0x20006610                hdma_usart2_tx
+                0x20006660                uart2TxSemHandle
+                0x20006664                uart2RxSemHandle
+                0x20006668                huart2
  *(.bss_end .bss_end.*)
-                0x20006670                . = ALIGN (0x4)
-                0x20006670                __bss_end__ = .
-                0x20006670                _ebss = .
+                0x200066a8                . = ALIGN (0x4)
+                0x200066a8                __bss_end__ = .
+                0x200066a8                _ebss = .
 
-.noinit         0x20006670        0x0
-                0x20006670                . = ALIGN (0x4)
-                0x20006670                _noinit = .
+.noinit         0x200066a8        0x0
+                0x200066a8                . = ALIGN (0x4)
+                0x200066a8                _noinit = .
  *(.noinit .noinit.*)
-                0x20006670                . = ALIGN (0x4)
-                0x20006670                _end_noinit = .
-                0x20006670                PROVIDE (end, _end_noinit)
-                0x20006670                PROVIDE (_end, _end_noinit)
-                0x20006670                PROVIDE (__end, _end_noinit)
-                0x20006670                PROVIDE (__end__, _end_noinit)
+                0x200066a8                . = ALIGN (0x4)
+                0x200066a8                _end_noinit = .
+                0x200066a8                PROVIDE (end, _end_noinit)
+                0x200066a8                PROVIDE (_end, _end_noinit)
+                0x200066a8                PROVIDE (__end, _end_noinit)
+                0x200066a8                PROVIDE (__end__, _end_noinit)
 
-._check_stack   0x20006670      0x100 load address 0x080181a0
-                0x20006670                . = ALIGN (0x4)
-                0x20006770                . = (. + _Minimum_Stack_Size)
- *fill*         0x20006670      0x100 
-                0x20006770                . = ALIGN (0x4)
+._check_stack   0x200066a8      0x100 load address 0x080181e0
+                0x200066a8                . = ALIGN (0x4)
+                0x200067a8                . = (. + _Minimum_Stack_Size)
+ *fill*         0x200066a8      0x100 
+                0x200067a8                . = ALIGN (0x4)
 
 .bss_CCMRAM
  *(.bss.CCMRAM .bss.CCMRAM.*)
@@ -19304,7 +19306,7 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000    0x27fd1
+.debug_info     0x00000000    0x27fd9
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x482 ./uwbCore/platform/deca_mutex.o
  .debug_info    0x00000482      0xf44 ./uwbCore/platform/deca_port.o
@@ -19312,46 +19314,46 @@ END GROUP
  .debug_info    0x00001d71     0x46c6 ./uwbCore/decadriver/deca_device.o
  .debug_info    0x00006437      0x26c ./uwbCore/decadriver/deca_params_init.o
  .debug_info    0x000066a3      0x225 ./uwbCore/decadriver/deca_range_tables.o
- .debug_info    0x000068c8     0x1811 ./uwbCore/application/instance.o
- .debug_info    0x000080d9      0xc59 ./uwbCore/application/instance_calib.o
- .debug_info    0x00008d32     0x2a58 ./uwbCore/application/instance_common.o
- .debug_info    0x0000b78a     0x214b ./uwbCore/application/uwbMain.o
- .debug_info    0x0000d8d5      0x918 ./system/src/stm32f4xx/stm32f4xx_hal.o
- .debug_info    0x0000e1ed      0xc45 ./system/src/stm32f4xx/stm32f4xx_hal_cortex.o
- .debug_info    0x0000ee32      0x72d ./system/src/stm32f4xx/stm32f4xx_hal_dma.o
- .debug_info    0x0000f55f      0x6f2 ./system/src/stm32f4xx/stm32f4xx_hal_gpio.o
- .debug_info    0x0000fc51     0x104c ./system/src/stm32f4xx/stm32f4xx_hal_rcc.o
- .debug_info    0x00010c9d     0x1687 ./system/src/stm32f4xx/stm32f4xx_hal_spi.o
- .debug_info    0x00012324     0x2e4b ./system/src/stm32f4xx/stm32f4xx_hal_tim.o
- .debug_info    0x0001516f     0x12e9 ./system/src/stm32f4xx/stm32f4xx_hal_tim_ex.o
- .debug_info    0x00016458     0x11e8 ./system/src/stm32f4xx/stm32f4xx_hal_uart.o
- .debug_info    0x00017640      0x112 ./system/src/newlib/_exit.o
- .debug_info    0x00017752      0x125 ./system/src/newlib/_sbrk.o
- .debug_info    0x00017877      0x420 ./system/src/newlib/_startup.o
- .debug_info    0x00017c97      0x1a9 ./system/src/newlib/_syscalls.o
- .debug_info    0x00017e40      0x32b ./system/src/diag/Trace.o
- .debug_info    0x0001816b      0x114 ./system/src/diag/trace_impl.o
- .debug_info    0x0001827f      0x289 ./system/src/cortexm/_initialize_hardware.o
- .debug_info    0x00018508      0x295 ./system/src/cortexm/_reset_hardware.o
- .debug_info    0x0001879d      0x7a6 ./system/src/cortexm/exception_handlers.o
- .debug_info    0x00018f43       0x9e ./system/src/cmsis/startup_stm32f411xe.o
- .debug_info    0x00018fe1      0x486 ./system/src/cmsis/system_stm32f4xx.o
- .debug_info    0x00019467     0x16f0 ./system/src/FreeRTOS/cmsis_os.o
- .debug_info    0x0001ab57      0x314 ./system/src/FreeRTOS/heap_2.o
- .debug_info    0x0001ae6b      0x29a ./system/src/FreeRTOS/list.o
- .debug_info    0x0001b105      0x542 ./system/src/FreeRTOS/port.o
- .debug_info    0x0001b647     0x18cc ./system/src/FreeRTOS/queue.o
- .debug_info    0x0001cf13     0x24dd ./system/src/FreeRTOS/tasks.o
- .debug_info    0x0001f3f0     0x11a7 ./User/src/main.o
- .debug_info    0x00020597      0x588 ./Peripheral/src/dma.o
- .debug_info    0x00020b1f      0x7e8 ./Peripheral/src/gpio.o
- .debug_info    0x00021307      0xd26 ./Peripheral/src/i2c.o
- .debug_info    0x0002202d      0xc70 ./Peripheral/src/rgbLed.o
- .debug_info    0x00022c9d      0xdfe ./Peripheral/src/sf_port.o
- .debug_info    0x00023a9b      0xc0e ./Peripheral/src/spi.o
- .debug_info    0x000246a9     0x1770 ./Peripheral/src/uart.o
- .debug_info    0x00025e19      0xe3b ./DeviceSupport/src/stm32f4xx_hal_msp.o
- .debug_info    0x00026c54     0x137d ./DeviceSupport/src/stm32f4xx_it.o
+ .debug_info    0x000068c8     0x180f ./uwbCore/application/instance.o
+ .debug_info    0x000080d7      0xc57 ./uwbCore/application/instance_calib.o
+ .debug_info    0x00008d2e     0x2a66 ./uwbCore/application/instance_common.o
+ .debug_info    0x0000b794     0x2149 ./uwbCore/application/uwbMain.o
+ .debug_info    0x0000d8dd      0x918 ./system/src/stm32f4xx/stm32f4xx_hal.o
+ .debug_info    0x0000e1f5      0xc45 ./system/src/stm32f4xx/stm32f4xx_hal_cortex.o
+ .debug_info    0x0000ee3a      0x72d ./system/src/stm32f4xx/stm32f4xx_hal_dma.o
+ .debug_info    0x0000f567      0x6f2 ./system/src/stm32f4xx/stm32f4xx_hal_gpio.o
+ .debug_info    0x0000fc59     0x104c ./system/src/stm32f4xx/stm32f4xx_hal_rcc.o
+ .debug_info    0x00010ca5     0x1687 ./system/src/stm32f4xx/stm32f4xx_hal_spi.o
+ .debug_info    0x0001232c     0x2e4b ./system/src/stm32f4xx/stm32f4xx_hal_tim.o
+ .debug_info    0x00015177     0x12e9 ./system/src/stm32f4xx/stm32f4xx_hal_tim_ex.o
+ .debug_info    0x00016460     0x11e8 ./system/src/stm32f4xx/stm32f4xx_hal_uart.o
+ .debug_info    0x00017648      0x112 ./system/src/newlib/_exit.o
+ .debug_info    0x0001775a      0x125 ./system/src/newlib/_sbrk.o
+ .debug_info    0x0001787f      0x420 ./system/src/newlib/_startup.o
+ .debug_info    0x00017c9f      0x1a9 ./system/src/newlib/_syscalls.o
+ .debug_info    0x00017e48      0x32b ./system/src/diag/Trace.o
+ .debug_info    0x00018173      0x114 ./system/src/diag/trace_impl.o
+ .debug_info    0x00018287      0x289 ./system/src/cortexm/_initialize_hardware.o
+ .debug_info    0x00018510      0x295 ./system/src/cortexm/_reset_hardware.o
+ .debug_info    0x000187a5      0x7a6 ./system/src/cortexm/exception_handlers.o
+ .debug_info    0x00018f4b       0x9e ./system/src/cmsis/startup_stm32f411xe.o
+ .debug_info    0x00018fe9      0x486 ./system/src/cmsis/system_stm32f4xx.o
+ .debug_info    0x0001946f     0x16f0 ./system/src/FreeRTOS/cmsis_os.o
+ .debug_info    0x0001ab5f      0x314 ./system/src/FreeRTOS/heap_2.o
+ .debug_info    0x0001ae73      0x29a ./system/src/FreeRTOS/list.o
+ .debug_info    0x0001b10d      0x542 ./system/src/FreeRTOS/port.o
+ .debug_info    0x0001b64f     0x18cc ./system/src/FreeRTOS/queue.o
+ .debug_info    0x0001cf1b     0x24dd ./system/src/FreeRTOS/tasks.o
+ .debug_info    0x0001f3f8     0x11a7 ./User/src/main.o
+ .debug_info    0x0002059f      0x588 ./Peripheral/src/dma.o
+ .debug_info    0x00020b27      0x7e8 ./Peripheral/src/gpio.o
+ .debug_info    0x0002130f      0xd26 ./Peripheral/src/i2c.o
+ .debug_info    0x00022035      0xc70 ./Peripheral/src/rgbLed.o
+ .debug_info    0x00022ca5      0xdfe ./Peripheral/src/sf_port.o
+ .debug_info    0x00023aa3      0xc0e ./Peripheral/src/spi.o
+ .debug_info    0x000246b1     0x1770 ./Peripheral/src/uart.o
+ .debug_info    0x00025e21      0xe3b ./DeviceSupport/src/stm32f4xx_hal_msp.o
+ .debug_info    0x00026c5c     0x137d ./DeviceSupport/src/stm32f4xx_it.o
 
 .debug_abbrev   0x00000000     0x5c2c
  *(.debug_abbrev)
@@ -19402,7 +19404,7 @@ END GROUP
  .debug_abbrev  0x0000583e      0x1b3 ./DeviceSupport/src/stm32f4xx_hal_msp.o
  .debug_abbrev  0x000059f1      0x23b ./DeviceSupport/src/stm32f4xx_it.o
 
-.debug_line     0x00000000    0x19c21
+.debug_line     0x00000000    0x19c1f
  *(.debug_line)
  .debug_line    0x00000000      0x85b ./uwbCore/platform/deca_mutex.o
  .debug_line    0x0000085b      0xa0d ./uwbCore/platform/deca_port.o
@@ -19410,46 +19412,46 @@ END GROUP
  .debug_line    0x00001cba     0x14e3 ./uwbCore/decadriver/deca_device.o
  .debug_line    0x0000319d      0x3d7 ./uwbCore/decadriver/deca_params_init.o
  .debug_line    0x00003574      0x423 ./uwbCore/decadriver/deca_range_tables.o
- .debug_line    0x00003997      0xbf9 ./uwbCore/application/instance.o
- .debug_line    0x00004590      0x90d ./uwbCore/application/instance_calib.o
- .debug_line    0x00004e9d     0x1181 ./uwbCore/application/instance_common.o
- .debug_line    0x0000601e      0xea0 ./uwbCore/application/uwbMain.o
- .debug_line    0x00006ebe      0x841 ./system/src/stm32f4xx/stm32f4xx_hal.o
- .debug_line    0x000076ff      0x843 ./system/src/stm32f4xx/stm32f4xx_hal_cortex.o
- .debug_line    0x00007f42     0x2afe ./system/src/stm32f4xx/stm32f4xx_hal_dma.o
- .debug_line    0x0000aa40      0x806 ./system/src/stm32f4xx/stm32f4xx_hal_gpio.o
- .debug_line    0x0000b246      0xa34 ./system/src/stm32f4xx/stm32f4xx_hal_rcc.o
- .debug_line    0x0000bc7a      0xeda ./system/src/stm32f4xx/stm32f4xx_hal_spi.o
- .debug_line    0x0000cb54     0x155f ./system/src/stm32f4xx/stm32f4xx_hal_tim.o
- .debug_line    0x0000e0b3      0xc70 ./system/src/stm32f4xx/stm32f4xx_hal_tim_ex.o
- .debug_line    0x0000ed23      0xd45 ./system/src/stm32f4xx/stm32f4xx_hal_uart.o
- .debug_line    0x0000fa68      0x2c1 ./system/src/newlib/_exit.o
- .debug_line    0x0000fd29      0x221 ./system/src/newlib/_sbrk.o
- .debug_line    0x0000ff4a      0x2c2 ./system/src/newlib/_startup.o
- .debug_line    0x0001020c      0x346 ./system/src/newlib/_syscalls.o
- .debug_line    0x00010552      0x320 ./system/src/diag/Trace.o
- .debug_line    0x00010872      0x39d ./system/src/diag/trace_impl.o
- .debug_line    0x00010c0f      0x1c1 ./system/src/cortexm/_initialize_hardware.o
- .debug_line    0x00010dd0      0x1ba ./system/src/cortexm/_reset_hardware.o
- .debug_line    0x00010f8a      0x51d ./system/src/cortexm/exception_handlers.o
- .debug_line    0x000114a7       0x88 ./system/src/cmsis/startup_stm32f411xe.o
- .debug_line    0x0001152f      0x1c0 ./system/src/cmsis/system_stm32f4xx.o
- .debug_line    0x000116ef      0x8eb ./system/src/FreeRTOS/cmsis_os.o
- .debug_line    0x00011fda      0x474 ./system/src/FreeRTOS/heap_2.o
- .debug_line    0x0001244e      0x43d ./system/src/FreeRTOS/list.o
- .debug_line    0x0001288b      0x427 ./system/src/FreeRTOS/port.o
- .debug_line    0x00012cb2      0xa89 ./system/src/FreeRTOS/queue.o
- .debug_line    0x0001373b      0xda5 ./system/src/FreeRTOS/tasks.o
- .debug_line    0x000144e0      0xab1 ./User/src/main.o
- .debug_line    0x00014f91      0x716 ./Peripheral/src/dma.o
- .debug_line    0x000156a7      0x74d ./Peripheral/src/gpio.o
- .debug_line    0x00015df4      0x955 ./Peripheral/src/i2c.o
- .debug_line    0x00016749      0x860 ./Peripheral/src/rgbLed.o
- .debug_line    0x00016fa9      0x723 ./Peripheral/src/sf_port.o
- .debug_line    0x000176cc      0x76e ./Peripheral/src/spi.o
- .debug_line    0x00017e3a      0xac7 ./Peripheral/src/uart.o
- .debug_line    0x00018901      0x70b ./DeviceSupport/src/stm32f4xx_hal_msp.o
- .debug_line    0x0001900c      0xc15 ./DeviceSupport/src/stm32f4xx_it.o
+ .debug_line    0x00003997      0xbf8 ./uwbCore/application/instance.o
+ .debug_line    0x0000458f      0x90d ./uwbCore/application/instance_calib.o
+ .debug_line    0x00004e9c     0x1180 ./uwbCore/application/instance_common.o
+ .debug_line    0x0000601c      0xea0 ./uwbCore/application/uwbMain.o
+ .debug_line    0x00006ebc      0x841 ./system/src/stm32f4xx/stm32f4xx_hal.o
+ .debug_line    0x000076fd      0x843 ./system/src/stm32f4xx/stm32f4xx_hal_cortex.o
+ .debug_line    0x00007f40     0x2afe ./system/src/stm32f4xx/stm32f4xx_hal_dma.o
+ .debug_line    0x0000aa3e      0x806 ./system/src/stm32f4xx/stm32f4xx_hal_gpio.o
+ .debug_line    0x0000b244      0xa34 ./system/src/stm32f4xx/stm32f4xx_hal_rcc.o
+ .debug_line    0x0000bc78      0xeda ./system/src/stm32f4xx/stm32f4xx_hal_spi.o
+ .debug_line    0x0000cb52     0x155f ./system/src/stm32f4xx/stm32f4xx_hal_tim.o
+ .debug_line    0x0000e0b1      0xc70 ./system/src/stm32f4xx/stm32f4xx_hal_tim_ex.o
+ .debug_line    0x0000ed21      0xd45 ./system/src/stm32f4xx/stm32f4xx_hal_uart.o
+ .debug_line    0x0000fa66      0x2c1 ./system/src/newlib/_exit.o
+ .debug_line    0x0000fd27      0x221 ./system/src/newlib/_sbrk.o
+ .debug_line    0x0000ff48      0x2c2 ./system/src/newlib/_startup.o
+ .debug_line    0x0001020a      0x346 ./system/src/newlib/_syscalls.o
+ .debug_line    0x00010550      0x320 ./system/src/diag/Trace.o
+ .debug_line    0x00010870      0x39d ./system/src/diag/trace_impl.o
+ .debug_line    0x00010c0d      0x1c1 ./system/src/cortexm/_initialize_hardware.o
+ .debug_line    0x00010dce      0x1ba ./system/src/cortexm/_reset_hardware.o
+ .debug_line    0x00010f88      0x51d ./system/src/cortexm/exception_handlers.o
+ .debug_line    0x000114a5       0x88 ./system/src/cmsis/startup_stm32f411xe.o
+ .debug_line    0x0001152d      0x1c0 ./system/src/cmsis/system_stm32f4xx.o
+ .debug_line    0x000116ed      0x8eb ./system/src/FreeRTOS/cmsis_os.o
+ .debug_line    0x00011fd8      0x474 ./system/src/FreeRTOS/heap_2.o
+ .debug_line    0x0001244c      0x43d ./system/src/FreeRTOS/list.o
+ .debug_line    0x00012889      0x427 ./system/src/FreeRTOS/port.o
+ .debug_line    0x00012cb0      0xa89 ./system/src/FreeRTOS/queue.o
+ .debug_line    0x00013739      0xda5 ./system/src/FreeRTOS/tasks.o
+ .debug_line    0x000144de      0xab1 ./User/src/main.o
+ .debug_line    0x00014f8f      0x716 ./Peripheral/src/dma.o
+ .debug_line    0x000156a5      0x74d ./Peripheral/src/gpio.o
+ .debug_line    0x00015df2      0x955 ./Peripheral/src/i2c.o
+ .debug_line    0x00016747      0x860 ./Peripheral/src/rgbLed.o
+ .debug_line    0x00016fa7      0x723 ./Peripheral/src/sf_port.o
+ .debug_line    0x000176ca      0x76e ./Peripheral/src/spi.o
+ .debug_line    0x00017e38      0xac7 ./Peripheral/src/uart.o
+ .debug_line    0x000188ff      0x70b ./DeviceSupport/src/stm32f4xx_hal_msp.o
+ .debug_line    0x0001900a      0xc15 ./DeviceSupport/src/stm32f4xx_it.o
 
 .debug_frame    0x00000000     0x5328
  *(.debug_frame)
@@ -19536,7 +19538,7 @@ END GROUP
  .debug_frame   0x000052a0       0x60 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-reallocr.o)
  .debug_frame   0x00005300       0x28 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu\libgcc.a(_aeabi_uldivmod.o)
 
-.debug_str      0x00000000    0x7563d
+.debug_str      0x00000000    0x75659
  *(.debug_str)
  .debug_str     0x00000000    0x60655 ./uwbCore/platform/deca_mutex.o
                               0x609c1 (size before relaxing)
@@ -19550,126 +19552,126 @@ END GROUP
                                0xdd7a (size before relaxing)
  .debug_str     0x0006c0ca      0x16c ./uwbCore/decadriver/deca_range_tables.o
                                0x9168 (size before relaxing)
- .debug_str     0x0006c236     0x1607 ./uwbCore/application/instance.o
-                              0x66a0d (size before relaxing)
- .debug_str     0x0006d83d       0x3d ./uwbCore/application/instance_calib.o
-                              0x61a10 (size before relaxing)
- .debug_str     0x0006d87a      0x546 ./uwbCore/application/instance_common.o
-                              0x62356 (size before relaxing)
- .debug_str     0x0006ddc0      0x58d ./uwbCore/application/uwbMain.o
-                              0x6c912 (size before relaxing)
- .debug_str     0x0006e34d      0x4bc ./system/src/stm32f4xx/stm32f4xx_hal.o
+ .debug_str     0x0006c236     0x1623 ./uwbCore/application/instance.o
+                              0x66a29 (size before relaxing)
+ .debug_str     0x0006d859       0x3d ./uwbCore/application/instance_calib.o
+                              0x61a2c (size before relaxing)
+ .debug_str     0x0006d896      0x546 ./uwbCore/application/instance_common.o
+                              0x62372 (size before relaxing)
+ .debug_str     0x0006dddc      0x58d ./uwbCore/application/uwbMain.o
+                              0x6c92e (size before relaxing)
+ .debug_str     0x0006e369      0x4bc ./system/src/stm32f4xx/stm32f4xx_hal.o
                               0x5dbe8 (size before relaxing)
- .debug_str     0x0006e809      0x232 ./system/src/stm32f4xx/stm32f4xx_hal_cortex.o
+ .debug_str     0x0006e825      0x232 ./system/src/stm32f4xx/stm32f4xx_hal_cortex.o
                               0x5d922 (size before relaxing)
- .debug_str     0x0006ea3b      0x183 ./system/src/stm32f4xx/stm32f4xx_hal_dma.o
+ .debug_str     0x0006ea57      0x183 ./system/src/stm32f4xx/stm32f4xx_hal_dma.o
                               0x5d5c4 (size before relaxing)
- .debug_str     0x0006ebbe      0x1da ./system/src/stm32f4xx/stm32f4xx_hal_gpio.o
+ .debug_str     0x0006ebda      0x1da ./system/src/stm32f4xx/stm32f4xx_hal_gpio.o
                               0x5d59d (size before relaxing)
- .debug_str     0x0006ed98      0x381 ./system/src/stm32f4xx/stm32f4xx_hal_rcc.o
+ .debug_str     0x0006edb4      0x381 ./system/src/stm32f4xx/stm32f4xx_hal_rcc.o
                               0x5d750 (size before relaxing)
- .debug_str     0x0006f119      0x374 ./system/src/stm32f4xx/stm32f4xx_hal_spi.o
+ .debug_str     0x0006f135      0x374 ./system/src/stm32f4xx/stm32f4xx_hal_spi.o
                               0x5da0c (size before relaxing)
- .debug_str     0x0006f48d      0xe6f ./system/src/stm32f4xx/stm32f4xx_hal_tim.o
+ .debug_str     0x0006f4a9      0xe6f ./system/src/stm32f4xx/stm32f4xx_hal_tim.o
                               0x5e386 (size before relaxing)
- .debug_str     0x000702fc      0x4e0 ./system/src/stm32f4xx/stm32f4xx_hal_tim_ex.o
+ .debug_str     0x00070318      0x4e0 ./system/src/stm32f4xx/stm32f4xx_hal_tim_ex.o
                               0x5dc3e (size before relaxing)
- .debug_str     0x000707dc      0x4b2 ./system/src/stm32f4xx/stm32f4xx_hal_uart.o
+ .debug_str     0x000707f8      0x4b2 ./system/src/stm32f4xx/stm32f4xx_hal_uart.o
                               0x5d9ff (size before relaxing)
- .debug_str     0x00070c8e       0x54 ./system/src/newlib/_exit.o
+ .debug_str     0x00070caa       0x54 ./system/src/newlib/_exit.o
                                0x5ebd (size before relaxing)
- .debug_str     0x00070ce2      0x366 ./system/src/newlib/_sbrk.o
+ .debug_str     0x00070cfe      0x366 ./system/src/newlib/_sbrk.o
                                0x461e (size before relaxing)
- .debug_str     0x00071048      0x191 ./system/src/newlib/_startup.o
+ .debug_str     0x00071064      0x191 ./system/src/newlib/_startup.o
                                0x411c (size before relaxing)
- .debug_str     0x000711d9      0x6cb ./system/src/newlib/_syscalls.o
+ .debug_str     0x000711f5      0x6cb ./system/src/newlib/_syscalls.o
                                0x6618 (size before relaxing)
- .debug_str     0x000718a4      0x185 ./system/src/diag/Trace.o
+ .debug_str     0x000718c0      0x185 ./system/src/diag/Trace.o
                                0x67cd (size before relaxing)
- .debug_str     0x00071a29       0x42 ./system/src/diag/trace_impl.o
+ .debug_str     0x00071a45       0x42 ./system/src/diag/trace_impl.o
                               0x28da2 (size before relaxing)
- .debug_str     0x00071a6b       0x4e ./system/src/cortexm/_initialize_hardware.o
+ .debug_str     0x00071a87       0x4e ./system/src/cortexm/_initialize_hardware.o
                               0x2629c (size before relaxing)
- .debug_str     0x00071ab9       0x28 ./system/src/cortexm/_reset_hardware.o
+ .debug_str     0x00071ad5       0x28 ./system/src/cortexm/_reset_hardware.o
                               0x2626c (size before relaxing)
- .debug_str     0x00071ae1      0x19d ./system/src/cortexm/exception_handlers.o
+ .debug_str     0x00071afd      0x19d ./system/src/cortexm/exception_handlers.o
                               0x29baf (size before relaxing)
- .debug_str     0x00071c7e       0x65 ./system/src/cmsis/system_stm32f4xx.o
+ .debug_str     0x00071c9a       0x65 ./system/src/cmsis/system_stm32f4xx.o
                               0x263d7 (size before relaxing)
- .debug_str     0x00071ce3      0x716 ./system/src/FreeRTOS/cmsis_os.o
+ .debug_str     0x00071cff      0x716 ./system/src/FreeRTOS/cmsis_os.o
                                0xb734 (size before relaxing)
- .debug_str     0x000723f9      0x38c ./system/src/FreeRTOS/heap_2.o
+ .debug_str     0x00072415      0x38c ./system/src/FreeRTOS/heap_2.o
                                0x9277 (size before relaxing)
- .debug_str     0x00072785      0x129 ./system/src/FreeRTOS/list.o
+ .debug_str     0x000727a1      0x129 ./system/src/FreeRTOS/list.o
                                0x8891 (size before relaxing)
- .debug_str     0x000728ae      0x7b4 ./system/src/FreeRTOS/port.o
+ .debug_str     0x000728ca      0x7b4 ./system/src/FreeRTOS/port.o
                                0x73cb (size before relaxing)
- .debug_str     0x00073062      0x696 ./system/src/FreeRTOS/queue.o
+ .debug_str     0x0007307e      0x696 ./system/src/FreeRTOS/queue.o
                                0xa2e0 (size before relaxing)
- .debug_str     0x000736f8      0xe8f ./system/src/FreeRTOS/tasks.o
+ .debug_str     0x00073714      0xe8f ./system/src/FreeRTOS/tasks.o
                                0xaa74 (size before relaxing)
- .debug_str     0x00074587      0x328 ./User/src/main.o
+ .debug_str     0x000745a3      0x328 ./User/src/main.o
                               0x65c56 (size before relaxing)
- .debug_str     0x000748af       0x18 ./Peripheral/src/dma.o
+ .debug_str     0x000748cb       0x18 ./Peripheral/src/dma.o
                               0x5d649 (size before relaxing)
- .debug_str     0x000748c7       0x27 ./Peripheral/src/gpio.o
+ .debug_str     0x000748e3       0x27 ./Peripheral/src/gpio.o
                               0x5d7a2 (size before relaxing)
- .debug_str     0x000748ee      0x2e8 ./Peripheral/src/i2c.o
+ .debug_str     0x0007490a      0x2e8 ./Peripheral/src/i2c.o
                               0x62ed1 (size before relaxing)
- .debug_str     0x00074bd6       0x84 ./Peripheral/src/rgbLed.o
+ .debug_str     0x00074bf2       0x84 ./Peripheral/src/rgbLed.o
                               0x5d80a (size before relaxing)
- .debug_str     0x00074c5a      0x313 ./Peripheral/src/sf_port.o
+ .debug_str     0x00074c76      0x313 ./Peripheral/src/sf_port.o
                               0x5db6a (size before relaxing)
- .debug_str     0x00074f6d       0x32 ./Peripheral/src/spi.o
+ .debug_str     0x00074f89       0x32 ./Peripheral/src/spi.o
                               0x5dc74 (size before relaxing)
- .debug_str     0x00074f9f      0x448 ./Peripheral/src/uart.o
+ .debug_str     0x00074fbb      0x448 ./Peripheral/src/uart.o
                               0x657a6 (size before relaxing)
- .debug_str     0x000753e7       0x55 ./DeviceSupport/src/stm32f4xx_hal_msp.o
+ .debug_str     0x00075403       0x55 ./DeviceSupport/src/stm32f4xx_hal_msp.o
                               0x5dd7d (size before relaxing)
- .debug_str     0x0007543c      0x201 ./DeviceSupport/src/stm32f4xx_it.o
+ .debug_str     0x00075458      0x201 ./DeviceSupport/src/stm32f4xx_it.o
                               0x6658c (size before relaxing)
 
-.debug_loc      0x00000000     0xfe1c
+.debug_loc      0x00000000     0xfe3e
  *(.debug_loc)
  .debug_loc     0x00000000       0x51 ./uwbCore/platform/deca_mutex.o
  .debug_loc     0x00000051      0x160 ./uwbCore/platform/deca_port.o
  .debug_loc     0x000001b1      0x203 ./uwbCore/platform/dma_spi.o
  .debug_loc     0x000003b4     0x1e96 ./uwbCore/decadriver/deca_device.o
  .debug_loc     0x0000224a      0x1a1 ./uwbCore/decadriver/deca_range_tables.o
- .debug_loc     0x000023eb      0xab8 ./uwbCore/application/instance.o
- .debug_loc     0x00002ea3       0x2c ./uwbCore/application/instance_calib.o
- .debug_loc     0x00002ecf     0x1519 ./uwbCore/application/instance_common.o
- .debug_loc     0x000043e8      0x5d0 ./uwbCore/application/uwbMain.o
- .debug_loc     0x000049b8       0xb6 ./system/src/stm32f4xx/stm32f4xx_hal.o
- .debug_loc     0x00004a6e      0x4cd ./system/src/stm32f4xx/stm32f4xx_hal_cortex.o
- .debug_loc     0x00004f3b      0x48c ./system/src/stm32f4xx/stm32f4xx_hal_dma.o
- .debug_loc     0x000053c7      0x38f ./system/src/stm32f4xx/stm32f4xx_hal_gpio.o
- .debug_loc     0x00005756      0x8db ./system/src/stm32f4xx/stm32f4xx_hal_rcc.o
- .debug_loc     0x00006031     0x108e ./system/src/stm32f4xx/stm32f4xx_hal_spi.o
- .debug_loc     0x000070bf     0x335e ./system/src/stm32f4xx/stm32f4xx_hal_tim.o
- .debug_loc     0x0000a41d      0xc47 ./system/src/stm32f4xx/stm32f4xx_hal_tim_ex.o
- .debug_loc     0x0000b064      0xfed ./system/src/stm32f4xx/stm32f4xx_hal_uart.o
- .debug_loc     0x0000c051       0x21 ./system/src/newlib/_exit.o
- .debug_loc     0x0000c072       0x82 ./system/src/newlib/_sbrk.o
- .debug_loc     0x0000c0f4      0x265 ./system/src/newlib/_startup.o
- .debug_loc     0x0000c359       0x63 ./system/src/newlib/_syscalls.o
- .debug_loc     0x0000c3bc       0xf7 ./system/src/diag/Trace.o
- .debug_loc     0x0000c4b3       0x21 ./system/src/diag/trace_impl.o
- .debug_loc     0x0000c4d4      0x184 ./system/src/cortexm/exception_handlers.o
- .debug_loc     0x0000c658      0x137 ./system/src/cmsis/system_stm32f4xx.o
- .debug_loc     0x0000c78f      0xbee ./system/src/FreeRTOS/cmsis_os.o
- .debug_loc     0x0000d37d      0x1cc ./system/src/FreeRTOS/heap_2.o
- .debug_loc     0x0000d549       0x65 ./system/src/FreeRTOS/list.o
- .debug_loc     0x0000d5ae       0xa7 ./system/src/FreeRTOS/port.o
- .debug_loc     0x0000d655      0xb69 ./system/src/FreeRTOS/queue.o
- .debug_loc     0x0000e1be     0x1430 ./system/src/FreeRTOS/tasks.o
- .debug_loc     0x0000f5ee       0x76 ./User/src/main.o
- .debug_loc     0x0000f664      0x172 ./Peripheral/src/i2c.o
- .debug_loc     0x0000f7d6      0x1af ./Peripheral/src/rgbLed.o
- .debug_loc     0x0000f985       0x52 ./Peripheral/src/spi.o
- .debug_loc     0x0000f9d7      0x3be ./Peripheral/src/uart.o
- .debug_loc     0x0000fd95       0x4d ./DeviceSupport/src/stm32f4xx_hal_msp.o
- .debug_loc     0x0000fde2       0x3a ./DeviceSupport/src/stm32f4xx_it.o
+ .debug_loc     0x000023eb      0xaaa ./uwbCore/application/instance.o
+ .debug_loc     0x00002e95       0x2c ./uwbCore/application/instance_calib.o
+ .debug_loc     0x00002ec1     0x1549 ./uwbCore/application/instance_common.o
+ .debug_loc     0x0000440a      0x5d0 ./uwbCore/application/uwbMain.o
+ .debug_loc     0x000049da       0xb6 ./system/src/stm32f4xx/stm32f4xx_hal.o
+ .debug_loc     0x00004a90      0x4cd ./system/src/stm32f4xx/stm32f4xx_hal_cortex.o
+ .debug_loc     0x00004f5d      0x48c ./system/src/stm32f4xx/stm32f4xx_hal_dma.o
+ .debug_loc     0x000053e9      0x38f ./system/src/stm32f4xx/stm32f4xx_hal_gpio.o
+ .debug_loc     0x00005778      0x8db ./system/src/stm32f4xx/stm32f4xx_hal_rcc.o
+ .debug_loc     0x00006053     0x108e ./system/src/stm32f4xx/stm32f4xx_hal_spi.o
+ .debug_loc     0x000070e1     0x335e ./system/src/stm32f4xx/stm32f4xx_hal_tim.o
+ .debug_loc     0x0000a43f      0xc47 ./system/src/stm32f4xx/stm32f4xx_hal_tim_ex.o
+ .debug_loc     0x0000b086      0xfed ./system/src/stm32f4xx/stm32f4xx_hal_uart.o
+ .debug_loc     0x0000c073       0x21 ./system/src/newlib/_exit.o
+ .debug_loc     0x0000c094       0x82 ./system/src/newlib/_sbrk.o
+ .debug_loc     0x0000c116      0x265 ./system/src/newlib/_startup.o
+ .debug_loc     0x0000c37b       0x63 ./system/src/newlib/_syscalls.o
+ .debug_loc     0x0000c3de       0xf7 ./system/src/diag/Trace.o
+ .debug_loc     0x0000c4d5       0x21 ./system/src/diag/trace_impl.o
+ .debug_loc     0x0000c4f6      0x184 ./system/src/cortexm/exception_handlers.o
+ .debug_loc     0x0000c67a      0x137 ./system/src/cmsis/system_stm32f4xx.o
+ .debug_loc     0x0000c7b1      0xbee ./system/src/FreeRTOS/cmsis_os.o
+ .debug_loc     0x0000d39f      0x1cc ./system/src/FreeRTOS/heap_2.o
+ .debug_loc     0x0000d56b       0x65 ./system/src/FreeRTOS/list.o
+ .debug_loc     0x0000d5d0       0xa7 ./system/src/FreeRTOS/port.o
+ .debug_loc     0x0000d677      0xb69 ./system/src/FreeRTOS/queue.o
+ .debug_loc     0x0000e1e0     0x1430 ./system/src/FreeRTOS/tasks.o
+ .debug_loc     0x0000f610       0x76 ./User/src/main.o
+ .debug_loc     0x0000f686      0x172 ./Peripheral/src/i2c.o
+ .debug_loc     0x0000f7f8      0x1af ./Peripheral/src/rgbLed.o
+ .debug_loc     0x0000f9a7       0x52 ./Peripheral/src/spi.o
+ .debug_loc     0x0000f9f9      0x3be ./Peripheral/src/uart.o
+ .debug_loc     0x0000fdb7       0x4d ./DeviceSupport/src/stm32f4xx_hal_msp.o
+ .debug_loc     0x0000fe04       0x3a ./DeviceSupport/src/stm32f4xx_it.o
 
 .debug_macinfo
  *(.debug_macinfo)
