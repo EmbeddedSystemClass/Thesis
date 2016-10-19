@@ -31,13 +31,13 @@ extern "C" {
 
 	//--------------------------------------------------- DEVICE PARAMETERS ---------------------------------------------------------//
 
-	#define NUM_DISP 						(10) // 	Number of Tag to Use
-	#define DEVICE_ID 						(5) // Device ID in Decimal From 0 to (NUM_DISP - 1)
+	#define NUM_DISP 						(40) // 	Number of Tag to Use
+	#define DEVICE_ID 						(1) // Device ID in Decimal From 0 to (NUM_DISP - 1)
 	#define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
 	#define DEVICE_TYPE						FALSE  // FALSE = TAG , TRUE = ANCHOR
 	#define DATA_RATE						FALSE  // FALSE = 110kbps , TRUE = 6,81Mbps
 	#define OPERATION_CHANNEL				TRUE   // FALSE = Channel 2 (3.993 GHz) , TRUE = Channel 5(6.489 GHz)
-	#define NUM_ANCHOR						(7)   // Number of expected responses
+	#define NUM_ANCHOR						(9)   // Number of expected responses
 
 	#define MAX_TAG_LIST_SIZE				(NUM_DISP) //
     #define TOTAL_NUMBER_OF_SLOTS			(MAX_TAG_LIST_SIZE+2)
@@ -54,16 +54,18 @@ extern "C" {
 	#define TIME_RESP_OTHERS 		(3100)
 	#define MARGIN_FINAL_DELAY 		(80)
 #if (NUM_ANCHOR>4)
-	//#define TIME_FINAL 				((int)(5500+(((((NUM_ANCHOR-4)*5)*8*8205.13)+172308)/1000)))
-	#define TIME_FINAL 				((int)(5500+((NUM_ANCHOR-4)*500)))
+	//#define TIME_FINAL 			((int)(5500+(((((NUM_ANCHOR-4)*5)*8*8205.13)+172308)/1000)))
+	#define TIME_FINAL 				((int)(5500+((NUM_ANCHOR-4)*600)))
+	//#define TIME_FINAL 			((int)(300+(((((NUM_ANCHOR-4)*5)*8*128.21)+21539)/1000)))
+	#define TIME_FINAL_HDR 			((int)(300 +((NUM_ANCHOR-4)*50)))
 #else
 	#define TIME_FINAL 				(5500)
+	#define TIME_FINAL_HDR 			(300)
 #endif
 
 	// HIGHER DATA RATE
 	#define TIME_RESP_1_HDR 		(320)
 	#define TIME_RESP_OTHERS_HDR 	(340)
-	#define TIME_FINAL_HDR 			(300)
 	#define MARGIN_FINAL_DELAY_HDR 	(65)
 
 
