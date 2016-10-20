@@ -72,6 +72,9 @@ extern int NUM_DATA_ARRAY;
 extern int Naddress;
 extern int MaskAddr;
 extern int time_final = TIME_FINAL;
+extern int slot_size=SLOT_SIZE;
+extern int super_frame_size=SUPERFRAME_SIZE;
+extern int num_disp=NUM_DISP;
 
 
 
@@ -108,6 +111,9 @@ int instance_mode = ANCHOR;
 #define LCD_BUFF_LEN (80)
 uint8 dataseq[LCD_BUFF_LEN];
 uint8 dataseq1[LCD_BUFF_LEN];
+uint8 dataseqMATEO[LCD_BUFF_LEN];
+uint8 dataseqMATEO2[LCD_BUFF_LEN];
+uint8 dataseqMATEO3[LCD_BUFF_LEN];
 uint32_t pauseTWRReports  = 0;
 uint32_t printTWRReports  = 0;
 
@@ -447,8 +453,17 @@ void uwbPrintRole(uint16 s1switch)
 {
 	int role = instancegetrole();
 
-	sprintf((char*)&dataseq[0], "DecaRangeRTLS %s%d Time Final:%d", (s1switch & SWS1_SHF_MODE) ? "S" : "L", chan, time_final);
+	sprintf((char*)&dataseq[0], "DecaRangeRTLS %s%d Time Final=%d", (s1switch & SWS1_SHF_MODE) ? "S" : "L", chan, time_final);
 	uartWriteLineNoOS((char *) dataseq); //send some data
+
+	sprintf((char*)&dataseqMATEO[0], "Slot Size = %dms " , slot_size);
+	uartWriteLineNoOS((char *) dataseqMATEO); //send some data
+
+	sprintf((char*)&dataseqMATEO2[0], "Super Frame Size = %dms ", super_frame_size);
+	uartWriteLineNoOS((char *) dataseqMATEO2); //send some data
+
+	sprintf((char*)&dataseqMATEO3[0], " Number of possible tags = %d", num_disp);
+	uartWriteLineNoOS((char *) dataseqMATEO3); //send some data
 
 	tagaddr = instance_anchaddr;
 	ancaddr = instance_anchaddr;

@@ -28,16 +28,19 @@ extern "C" {
 	int Naddress;
 	int MaskAddr;
 	int time_final;
+	int slot_size;
+	int super_frame_size;
+	int num_disp;
 
 	//--------------------------------------------------- DEVICE PARAMETERS ---------------------------------------------------------//
 
 	#define NUM_DISP 						(40) // 	Number of Tag to Use
-	#define DEVICE_ID 						(1) // Device ID in Decimal From 0 to (NUM_DISP - 1)
+	#define DEVICE_ID 						(20) // Device ID in Decimal From 0 to (NUM_DISP - 1)
 	#define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
 	#define DEVICE_TYPE						FALSE  // FALSE = TAG , TRUE = ANCHOR
 	#define DATA_RATE						FALSE  // FALSE = 110kbps , TRUE = 6,81Mbps
 	#define OPERATION_CHANNEL				TRUE   // FALSE = Channel 2 (3.993 GHz) , TRUE = Channel 5(6.489 GHz)
-	#define NUM_ANCHOR						(9)   // Number of expected responses
+	#define NUM_ANCHOR						(11)   // Number of expected responses
 
 	#define MAX_TAG_LIST_SIZE				(NUM_DISP) //
     #define TOTAL_NUMBER_OF_SLOTS			(MAX_TAG_LIST_SIZE+2)
@@ -52,21 +55,22 @@ extern "C" {
 	//LOWER DATA RATE
 	#define TIME_RESP_1 			(2620)
 	#define TIME_RESP_OTHERS 		(3100)
-	#define MARGIN_FINAL_DELAY 		(80)
 #if (NUM_ANCHOR>4)
-	//#define TIME_FINAL 			((int)(5500+(((((NUM_ANCHOR-4)*5)*8*8205.13)+172308)/1000)))
-	#define TIME_FINAL 				((int)(5500+((NUM_ANCHOR-4)*600)))
-	//#define TIME_FINAL 			((int)(300+(((((NUM_ANCHOR-4)*5)*8*128.21)+21539)/1000)))
+	#define TIME_FINAL 				((int)(5500+((NUM_ANCHOR-4)*500)))
 	#define TIME_FINAL_HDR 			((int)(300 +((NUM_ANCHOR-4)*50)))
+	#define MARGIN_FINAL_DELAY 		((int)(80+((NUM_ANCHOR-4)*100)))
+	#define MARGIN_FINAL_DELAY_HDR 	((int)(65+((NUM_ANCHOR-4)*30)))
 #else
 	#define TIME_FINAL 				(5500)
 	#define TIME_FINAL_HDR 			(300)
+	#define MARGIN_FINAL_DELAY 		(80)
+	#define MARGIN_FINAL_DELAY_HDR 	(65)
 #endif
 
 	// HIGHER DATA RATE
 	#define TIME_RESP_1_HDR 		(320)
 	#define TIME_RESP_OTHERS_HDR 	(340)
-	#define MARGIN_FINAL_DELAY_HDR 	(65)
+
 
 
 	#ifdef LOCALIZATION_2D
@@ -90,13 +94,13 @@ extern "C" {
 			//LOWER DATA RATE
 			#define SLOT_SIZE 						((TIME_RESP_1+(TIME_RESP_OTHERS*2)+(TIME_FINAL*2)+MARGIN_FINAL_DELAY)/1000) // slot period in ms
 			#define SUPERFRAME_SIZE					(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS) // Super frame period in ms
-			#define SCHEDULED_FINAL_DELAY			(TIME_RESP_1+(TIME_RESP_OTHERS*2)+TIME_FINAL+MARGIN_FINAL_DELAY)  // scheduled final delay in us
+			#define SCHEDULED_FINAL_DELAY			(SLOT_SIZE-TIME_FINAL)  // scheduled final delay in us
 																													//No need to wait for the response of the anchor 4
 
 			// HIGHER DATA RATE
 			#define SLOT_SIZE_HDR 					((TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*2)+(TIME_FINAL_HDR*2)+MARGIN_FINAL_DELAY_HDR)/1000) // slot period in ms
 			#define SUPERFRAME_SIZE_HDR				(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS) // Super frame period in ms
-			#define SCHEDULED_FINAL_DELAY_HDR		(TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*2)+TIME_FINAL_HDR+MARGIN_FINAL_DELAY_HDR)  // scheduled final delay in us
+			#define SCHEDULED_FINAL_DELAY_HDR		(SLOT_SIZE_HDR-TIME_FINAL_HDR)  // scheduled final delay in us
 
 
 		#else
@@ -109,12 +113,12 @@ extern "C" {
 		//LOWER DATA RATE
 			#define SLOT_SIZE 						((TIME_RESP_1+(TIME_RESP_OTHERS*3)+(TIME_FINAL*2)+MARGIN_FINAL_DELAY)/1000) // slot period in ms
 			#define SUPERFRAME_SIZE					(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS) // Super frame period in ms
-			#define SCHEDULED_FINAL_DELAY			(TIME_RESP_1+(TIME_RESP_OTHERS*3)+TIME_FINAL+MARGIN_FINAL_DELAY)  //  scheduled final delay in us
+			#define SCHEDULED_FINAL_DELAY			(SLOT_SIZE-TIME_FINAL)  //  scheduled final delay in us
 
 			// HIGHER DATA RATE
 			#define SLOT_SIZE_HDR 					((TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*3)+(TIME_FINAL_HDR*2)+MARGIN_FINAL_DELAY_HDR)/1000) // slot period in ms
 			#define SUPERFRAME_SIZE_HDR				(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS) // Super frame period in ms
-			#define SCHEDULED_FINAL_DELAY_HDR		(TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*3)+TIME_FINAL_HDR+MARGIN_FINAL_DELAY_HDR)  // scheduled final delay in us
+			#define SCHEDULED_FINAL_DELAY_HDR		(SLOT_SIZE_HDR-TIME_FINAL_HDR)  // scheduled final delay in us
 
 		#endif
 
@@ -136,12 +140,12 @@ extern "C" {
 		//LOWER DATA RATE
 		#define SLOT_SIZE 						((TIME_RESP_1+(TIME_RESP_OTHERS*(NUM_ANCHOR-1))+(TIME_FINAL*2)+MARGIN_FINAL_DELAY)/1000) // slot period in ms
 		#define SUPERFRAME_SIZE					(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS) // Super frame period in ms
-		#define SCHEDULED_FINAL_DELAY			(TIME_RESP_1+(TIME_RESP_OTHERS*(NUM_ANCHOR-1))+TIME_FINAL+MARGIN_FINAL_DELAY)  // scheduled final delay in us
+		#define SCHEDULED_FINAL_DELAY			(SLOT_SIZE-TIME_FINAL)  // scheduled final delay in us
 
 		// HIGHER DATA RATE
 		#define SLOT_SIZE_HDR 					((TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*(NUM_ANCHOR-1))+(TIME_FINAL_HDR*2)+MARGIN_FINAL_DELAY_HDR)/1000) // slot period in ms
 		#define SUPERFRAME_SIZE_HDR				(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS) // Super frame period in ms
-		#define SCHEDULED_FINAL_DELAY_HDR		(TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*(NUM_ANCHOR-1))+TIME_FINAL_HDR+MARGIN_FINAL_DELAY_HDR)  // scheduled final delay in us
+		#define SCHEDULED_FINAL_DELAY_HDR		(SLOT_SIZE_HDR-TIME_FINAL_HDR)  // scheduled final delay in us
 
 
 	#endif
@@ -169,7 +173,8 @@ extern "C" {
 
 //#define RX_RESPONSE1_TURNAROUND_6M81 (NUM_EXPECTED_RESPONSES*100) //takes about 100 us for response to come back
 //#define RX_RESPONSE1_TURNAROUND_110K (NUM_EXPECTED_RESPONSES*100) //takes about 100 us for response to come back
-
+//#define TIME_FINAL 			((int)(300+(((((NUM_ANCHOR-4)*5)*8*128.21)+21539)/1000)))
+//#define TIME_FINAL 			((int)(5500+(((((NUM_ANCHOR-4)*5)*8*8205.13)+172308)/1000)))
 
 
 #ifdef __cplusplus
