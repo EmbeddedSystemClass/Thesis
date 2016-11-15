@@ -73,6 +73,7 @@ extern int time_final = TIME_FINAL;
 extern int slot_size=SLOT_SIZE;
 extern int super_frame_size=SUPERFRAME_SIZE;
 extern int num_disp=NUM_DISP;
+extern int num_anchor = NUM_ANCHOR;
 
 
 
@@ -112,6 +113,7 @@ uint8 dataseq1[LCD_BUFF_LEN];
 uint8 dataseqMATEO[LCD_BUFF_LEN];
 uint8 dataseqMATEO2[LCD_BUFF_LEN];
 uint8 dataseqMATEO3[LCD_BUFF_LEN];
+uint8 dataseqMATEO4[LCD_BUFF_LEN];
 uint32_t pauseTWRReports  = 0;
 uint32_t printTWRReports  = 0;
 
@@ -462,6 +464,9 @@ void uwbPrintRole(uint16 s1switch)
 
 	sprintf((char*)&dataseqMATEO3[0], " Number of possible tags = %d", num_disp);
 	uartWriteLineNoOS((char *) dataseqMATEO3); //send some data
+
+	sprintf((char*)&dataseqMATEO4[0], " Number of Anchors used = %d", num_anchor);
+	uartWriteLineNoOS((char *) dataseqMATEO4); //send some data
 
 	tagaddr = instance_anchaddr;
 	ancaddr = instance_anchaddr;

@@ -20,7 +20,7 @@ extern "C" {
 
 #ifdef MATEO_IMPL
 
-	//#define LOCALIZATION_2D   // UnComment to work with 2D localization
+	#define LOCALIZATION_2D   // UnComment to work with 2D localization
 	//#define SHORT_FRAME_2D  // UnComment to use shorter frames in 2D localization
 
 	bool *TA_SW3;
@@ -31,16 +31,17 @@ extern "C" {
 	int slot_size;
 	int super_frame_size;
 	int num_disp;
+	int num_anchor;
 
 	//--------------------------------------------------- DEVICE PARAMETERS ---------------------------------------------------------//
 
 	#define NUM_DISP 						(40) // 	Number of Tag to Use
-	#define DEVICE_ID 						(38) // Device ID in Decimal From 0 to (NUM_DISP - 1)
+	#define DEVICE_ID 						(10) // Device ID in Decimal From 0 to (NUM_DISP - 1)
 	#define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
 	#define DEVICE_TYPE						FALSE  // FALSE = TAG , TRUE = ANCHOR
 	#define DATA_RATE						FALSE  // FALSE = 110kbps , TRUE = 6,81Mbps
 	#define OPERATION_CHANNEL				TRUE   // FALSE = Channel 2 (3.993 GHz) , TRUE = Channel 5(6.489 GHz)
-	#define NUM_ANCHOR						(11)   // Number of expected responses
+	#define NUM_ANCHOR						(4)   // Number of expected responses
 
 	#define MAX_TAG_LIST_SIZE				(NUM_DISP) //
     #define TOTAL_NUMBER_OF_SLOTS			(MAX_TAG_LIST_SIZE+2)
@@ -48,6 +49,14 @@ extern "C" {
 	#if (DEVICE_ID > NUM_DISP)
 		#error "Device ID wrong! (greater than NUM_DISP)"
 	#endif
+
+#if (FREQUENCY < 1)
+	#error "Frequency of localization wrong! (Must be at least one localization per superframe)"
+#endif
+
+#if (NUM_ANCHOR <= 3)
+	#error "Number of anchor wrong! (This value must remain between 4 and 11). For 3D localization a minumum of 4 anchors is needed, for 3 anchors use 2D localization option"
+#endif
 
 	//--------------------------------------------------- OPTIMIZED TIMES ---------------------------------------------------------//
 

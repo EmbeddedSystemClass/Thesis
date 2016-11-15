@@ -693,7 +693,7 @@ uint8 tagrxreenable(uint16 sourceAddress)
 		//if we got Response from anchor 0, 1, or 2 - go back to wait for next anchor's response
 		case 0:
 		case 1:
-		case 2:
+//		case 2:
 		default:
 			if(instance_data[instance].responseTO > 0) //can get here as result of error frame so need to check
 			{
