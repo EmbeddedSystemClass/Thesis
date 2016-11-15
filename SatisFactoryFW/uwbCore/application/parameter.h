@@ -21,7 +21,7 @@ extern "C" {
 #ifdef MATEO_IMPL
 
 	#define LOCALIZATION_2D   // UnComment to work with 2D localization
-	//#define SHORT_FRAME_2D  // UnComment to use shorter frames in 2D localization
+	#define SHORT_FRAME_2D  // UnComment to use shorter frames in 2D localization
 
 	bool *TA_SW3;
 	int NUM_DATA_ARRAY;
