@@ -15,10 +15,8 @@
 //#include "port.h"
 
 #include "instance.h"
-#include "parameter.h"
-
+#include "parameter.h" // NEW HEADER FILE
 #include "deca_types.h"
-
 #include <uwbMain.h>
 #include "../platform/deca_port.h"
 #include "../../User/inc/compiler.h"

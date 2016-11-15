@@ -35,7 +35,7 @@ extern "C" {
 	//--------------------------------------------------- DEVICE PARAMETERS ---------------------------------------------------------//
 
 	#define NUM_DISP 						(40) // 	Number of Tag to Use
-	#define DEVICE_ID 						(20) // Device ID in Decimal From 0 to (NUM_DISP - 1)
+	#define DEVICE_ID 						(38) // Device ID in Decimal From 0 to (NUM_DISP - 1)
 	#define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
 	#define DEVICE_TYPE						FALSE  // FALSE = TAG , TRUE = ANCHOR
 	#define DATA_RATE						FALSE  // FALSE = 110kbps , TRUE = 6,81Mbps
