@@ -74,6 +74,7 @@ extern int slot_size=SLOT_SIZE;
 extern int super_frame_size=SUPERFRAME_SIZE;
 extern int num_disp=NUM_DISP;
 extern int num_anchor = NUM_ANCHOR;
+extern int sch_final_delay=SCHEDULED_FINAL_DELAY;
 
 
 
@@ -456,7 +457,7 @@ void uwbPrintRole(uint16 s1switch)
 	sprintf((char*)&dataseq[0], "DecaRangeRTLS %s%d Time Final=%d", (s1switch & SWS1_SHF_MODE) ? "S" : "L", chan, time_final);
 	uartWriteLineNoOS((char *) dataseq); //send some data
 
-	sprintf((char*)&dataseqMATEO[0], "Slot Size = %dms " , slot_size);
+	sprintf((char*)&dataseqMATEO[0], "Slot Size = %dms  Scheduled Final =%dms" , slot_size,sch_final_delay);
 	uartWriteLineNoOS((char *) dataseqMATEO); //send some data
 
 	sprintf((char*)&dataseqMATEO2[0], "Super Frame Size = %dms ", super_frame_size);
