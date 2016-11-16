@@ -73,7 +73,11 @@ extern int time_final = TIME_FINAL;
 extern int slot_size=SLOT_SIZE;
 extern int super_frame_size=SUPERFRAME_SIZE;
 extern int num_disp=NUM_DISP;
+#ifdef LOCALIZATION_2D
+extern int num_anchor = NUM_ANCHOR-1;
+#else
 extern int num_anchor = NUM_ANCHOR;
+#endif
 extern int sch_final_delay=SCHEDULED_FINAL_DELAY;
 
 
