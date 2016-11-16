@@ -20,8 +20,8 @@ extern "C" {
 
 #ifdef MATEO_IMPL
 
-	//#define LOCALIZATION_2D   // UnComment to work with 2D localization
-	//#define SHORT_FRAME_2D  // UnComment to use shorter frames in 2D localization
+	#define LOCALIZATION_2D   // UnComment to work with 2D localization
+	#define SHORT_FRAME_2D  // UnComment to use shorter frames in 2D localization
 
 	bool *TA_SW3;
 	int NUM_DATA_ARRAY;
@@ -39,10 +39,10 @@ extern "C" {
 	#define NUM_DISP 						(40) // 	Number of Tag to Use
 	#define DEVICE_ID 						(0) // Device ID in Decimal From 0 to (NUM_DISP - 1)
 	#define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
-	#define DEVICE_TYPE						FALSE  // FALSE = TAG , TRUE = ANCHOR
+	#define DEVICE_TYPE						false  // FALSE = TAG , TRUE = ANCHOR
 	#define DATA_RATE						FALSE  // FALSE = 110kbps , TRUE = 6,81Mbps
 	#define OPERATION_CHANNEL				TRUE   // FALSE = Channel 2 (3.993 GHz) , TRUE = Channel 5(6.489 GHz)
-	#define NUM_ANCHOR						(8)   // Number of expected responses
+	#define NUM_ANCHOR						(5)   // Number of expected responses
 
 	#define MAX_TAG_LIST_SIZE				(NUM_DISP) //
     #define TOTAL_NUMBER_OF_SLOTS			(MAX_TAG_LIST_SIZE+2)
@@ -114,7 +114,7 @@ extern "C" {
 			// HIGHER DATA RATE
 			#define SLOT_SIZE_HDR 					((TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*2)+(TIME_FINAL_HDR*2)+MARGIN_FINAL_DELAY_HDR)/1000) // slot period in ms
 			#define SUPERFRAME_SIZE_HDR				(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS) // Super frame period in ms
-			#define SCHEDULED_FINAL_DELAY_HDR		((TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*2)+(TIME_FINAL_HDR*2)+MARGIN_FINAL_DELAY_HDR-TIME_FINAL_HDR)  // scheduled final delay in us
+			#define SCHEDULED_FINAL_DELAY_HDR		((TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*2)+(TIME_FINAL_HDR*2)+MARGIN_FINAL_DELAY_HDR)-TIME_FINAL_HDR)  // scheduled final delay in us
 
 
 		#else
