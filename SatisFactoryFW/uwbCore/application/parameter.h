@@ -16,12 +16,12 @@ extern "C" {
 #include "deca_types.h"
 #include "deca_device_api.h"
 #include "compiler.h"
-#define MATEO_IMPL
+//#define MATEO_IMPL
 
 #ifdef MATEO_IMPL
 
-	#define LOCALIZATION_2D   // UnComment to work with 2D localization
-	#define SHORT_FRAME_2D  // UnComment to use shorter frames in 2D localization
+	//#define LOCALIZATION_2D   // UnComment to work with 2D localization
+	//#define SHORT_FRAME_2D  // UnComment to use shorter frames in 2D localization
 
 	bool *TA_SW3;
 	int NUM_DATA_ARRAY;
@@ -37,12 +37,12 @@ extern "C" {
 	//--------------------------------------------------- DEVICE PARAMETERS ---------------------------------------------------------//
 
 	#define NUM_DISP 						(40) // 	Number of Tag to Use
-	#define DEVICE_ID 						(32) // Device ID in Decimal From 0 to (NUM_DISP - 1)
+	#define DEVICE_ID 						(0) // Device ID in Decimal From 0 to (NUM_DISP - 1)
 	#define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
-	#define DEVICE_TYPE						false  // FALSE = TAG , TRUE = ANCHOR
+	#define DEVICE_TYPE						true  // FALSE = TAG , TRUE = ANCHOR
 	#define DATA_RATE						FALSE  // FALSE = 110kbps , TRUE = 6,81Mbps
 	#define OPERATION_CHANNEL				TRUE   // FALSE = Channel 2 (3.993 GHz) , TRUE = Channel 5(6.489 GHz)
-	#define NUM_ANCHOR						(5)   // Number of expected responses
+	#define NUM_ANCHOR						(7)   // Number of expected responses
 
 	#define MAX_TAG_LIST_SIZE				(NUM_DISP) //
     #define TOTAL_NUMBER_OF_SLOTS			(MAX_TAG_LIST_SIZE+2)
@@ -108,13 +108,13 @@ extern "C" {
 			//LOWER DATA RATE
 			#define SLOT_SIZE 						(((TIME_RESP_1+(TIME_RESP_OTHERS*2)+(TIME_FINAL*2)+MARGIN_FINAL_DELAY+100)/1000)) // slot period in ms
 			#define SUPERFRAME_SIZE					(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS) // Super frame period in ms
-			#define SCHEDULED_FINAL_DELAY			((TIME_RESP_1+(TIME_RESP_OTHERS*2)+(TIME_FINAL*2)+MARGIN_FINAL_DELAY+100)-TIME_FINAL)  // scheduled final delay in us
+			#define SCHEDULED_FINAL_DELAY			((TIME_RESP_1+(TIME_RESP_OTHERS*2)+(TIME_FINAL)+MARGIN_FINAL_DELAY+100))  // scheduled final delay in us
 																													//No need to wait for the response of the anchor 4
 
 			// HIGHER DATA RATE
 			#define SLOT_SIZE_HDR 					(((TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*2)+(TIME_FINAL_HDR*2)+MARGIN_FINAL_DELAY_HDR+100)/1000)) // slot period in ms
 			#define SUPERFRAME_SIZE_HDR				(SLOT_SIZE_HDR*TOTAL_NUMBER_OF_SLOTS) // Super frame period in ms
-			#define SCHEDULED_FINAL_DELAY_HDR		((TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*2)+(TIME_FINAL_HDR*2)+MARGIN_FINAL_DELAY_HDR)-TIME_FINAL_HDR)  // scheduled final delay in us
+			#define SCHEDULED_FINAL_DELAY_HDR		((TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*2)+(TIME_FINAL_HDR)+MARGIN_FINAL_DELAY_HDR))  // scheduled final delay in us
 
 
 		#else
@@ -127,12 +127,12 @@ extern "C" {
 		//LOWER DATA RATE
 			#define SLOT_SIZE 						(((TIME_RESP_1+(TIME_RESP_OTHERS*3)+(TIME_FINAL*2)+MARGIN_FINAL_DELAY)/1000)) // slot period in ms
 			#define SUPERFRAME_SIZE					(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS) // Super frame period in ms
-			#define SCHEDULED_FINAL_DELAY			((TIME_RESP_1+(TIME_RESP_OTHERS*3)+(TIME_FINAL*2)+MARGIN_FINAL_DELAY)-TIME_FINAL)  //  scheduled final delay in us
+			#define SCHEDULED_FINAL_DELAY			((TIME_RESP_1+(TIME_RESP_OTHERS*3)+(TIME_FINAL)+MARGIN_FINAL_DELAY))  //  scheduled final delay in us
 
 			// HIGHER DATA RATE
 			#define SLOT_SIZE_HDR 					(((TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*3)+(TIME_FINAL_HDR*2)+MARGIN_FINAL_DELAY_HDR)/1000)) // slot period in ms
 			#define SUPERFRAME_SIZE_HDR				(SLOT_SIZE_HDR*TOTAL_NUMBER_OF_SLOTS) // Super frame period in ms
-			#define SCHEDULED_FINAL_DELAY_HDR		((TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*3)+(TIME_FINAL_HDR*2)+MARGIN_FINAL_DELAY_HDR)-TIME_FINAL_HDR)  // scheduled final delay in us
+			#define SCHEDULED_FINAL_DELAY_HDR		((TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*3)+(TIME_FINAL_HDR)+MARGIN_FINAL_DELAY_HDR))  // scheduled final delay in us
 
 		#endif
 
@@ -154,12 +154,12 @@ extern "C" {
 		//LOWER DATA RATE
 		#define SLOT_SIZE 						(((TIME_RESP_1+(TIME_RESP_OTHERS*(NUM_ANCHOR-1))+(TIME_FINAL*2)+MARGIN_FINAL_DELAY)/1000)) // slot period in ms
 		#define SUPERFRAME_SIZE					(SLOT_SIZE*TOTAL_NUMBER_OF_SLOTS) // Super frame period in ms
-		#define SCHEDULED_FINAL_DELAY			((TIME_RESP_1+(TIME_RESP_OTHERS*(NUM_ANCHOR-1))+(TIME_FINAL*2)+MARGIN_FINAL_DELAY)-TIME_FINAL)  // scheduled final delay in us
+		#define SCHEDULED_FINAL_DELAY			((TIME_RESP_1+(TIME_RESP_OTHERS*(NUM_ANCHOR-1))+TIME_FINAL+MARGIN_FINAL_DELAY))  // scheduled final delay in us
 
 		// HIGHER DATA RATE
 		#define SLOT_SIZE_HDR 					(((TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*(NUM_ANCHOR-1))+(TIME_FINAL_HDR*2)+MARGIN_FINAL_DELAY_HDR)/1000)) // slot period in ms
 		#define SUPERFRAME_SIZE_HDR				(SLOT_SIZE_HDR*TOTAL_NUMBER_OF_SLOTS) // Super frame period in ms
-		#define SCHEDULED_FINAL_DELAY_HDR		((TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*(NUM_ANCHOR-1))+(TIME_FINAL_HDR*2)+MARGIN_FINAL_DELAY_HDR)-TIME_FINAL_HDR)  // scheduled final delay in us
+		#define SCHEDULED_FINAL_DELAY_HDR		((TIME_RESP_1_HDR+(TIME_RESP_OTHERS_HDR*(NUM_ANCHOR-1))+(TIME_FINAL_HDR)+MARGIN_FINAL_DELAY_HDR))  // scheduled final delay in us
 
 
 	#endif
@@ -174,7 +174,14 @@ extern "C" {
 
 
 #else
-	#define MAX_TAG_LIST_SIZE				(8)
+	#define MAX_TAG_LIST_SIZE					(8)
+	#define TAG_FINAL_MSG_LEN                   (33)        // FunctionCode(1), Range Num (1), Poll_TxTime(5),// Resp0_RxTime(5), Resp1_RxTime(5), Resp2_RxTime(5), Resp3_RxTime(5), Final_TxTime(5), Valid Response Mask (1)
+	#define FTXT                                (27)		// Final TX time
+	#define VRESP                               (32)		// Mask of valid response times (e.g. if bit 1 = A0's response time is valid)
+	#define MAX_ANCHOR_LIST_SIZE			(4) //this is limited to 4 in this application
+	#define NUM_EXPECTED_RESPONSES			(MAX_ANCHOR_LIST_SIZE-1) //e.g. MAX_ANCHOR_LIST_SIZE - 1
+	#define NUM_EXPECTED_RESPONSES_ANC		(1) //anchors A0, A1 and A2 are involved in anchor to anchor ranging
+	#define NUM_EXPECTED_RESPONSES_ANC0		(2) //anchor A0 expects response from A1 and A2
 #endif
 
 

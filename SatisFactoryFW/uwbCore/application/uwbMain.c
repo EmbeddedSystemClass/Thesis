@@ -63,8 +63,6 @@
  * * n->Reserved
  * */
 
-
-
 extern bool *TA_SW3;
 extern int NUM_DATA_ARRAY;
 extern int Naddress;
@@ -87,14 +85,13 @@ extern int sch_final_delay=SCHEDULED_FINAL_DELAY;
 #define SWITCH_ON 			TRUE
 #define SWITCH_OFF 			FALSE
 
-#define BUTTON_0			TRUE
-
-#define TA_SW1_3			FALSE
-#define TA_SW1_4			FALSE		/* FALSE: Tag - TRUE: Anchor */
-#define TA_SW1_5			FALSE
+#define BUTTON_0			FALSE //DARA RATE
+#define TA_SW1_3			TRUE //CHANNEL
+#define TA_SW1_4			FALSE	/* FALSE: Tag - TRUE: Anchor */
+#define TA_SW1_5			FALSE  //MSB
 #define TA_SW1_6			FALSE
-#define TA_SW1_7			TRUE
-#define TA_SW1_8			FALSE
+#define TA_SW1_7			FALSE  //LSB
+#define TA_SW1_8			FALSE  //ALWAYS IN FALSE
 
 #define FASTRANGING 		SWITCH_OFF
 #endif
@@ -115,10 +112,12 @@ int instance_mode = ANCHOR;
 #define LCD_BUFF_LEN (80)
 uint8 dataseq[LCD_BUFF_LEN];
 uint8 dataseq1[LCD_BUFF_LEN];
+#ifdef MATEO_IMPL
 uint8 dataseqMATEO[LCD_BUFF_LEN];
 uint8 dataseqMATEO2[LCD_BUFF_LEN];
 uint8 dataseqMATEO3[LCD_BUFF_LEN];
 uint8 dataseqMATEO4[LCD_BUFF_LEN];
+#endif
 uint32_t pauseTWRReports  = 0;
 uint32_t printTWRReports  = 0;
 
@@ -458,6 +457,7 @@ void uwbPrintRole(uint16 s1switch)
 {
 	int role = instancegetrole();
 
+#ifdef MATEO_IMPL
 	sprintf((char*)&dataseq[0], "DecaRangeRTLS %s%d Time Final=%d", (s1switch & SWS1_SHF_MODE) ? "S" : "L", chan, time_final);
 	uartWriteLineNoOS((char *) dataseq); //send some data
 
@@ -473,6 +473,10 @@ void uwbPrintRole(uint16 s1switch)
 	sprintf((char*)&dataseqMATEO4[0], " Number of Anchors used = %d", num_anchor);
 	uartWriteLineNoOS((char *) dataseqMATEO4); //send some data
 
+#else
+	sprintf((char*)&dataseq[0], "DecaRangeRTLS %s%d ", (s1switch & SWS1_SHF_MODE) ? "S" : "L", chan);
+	uartWriteLineNoOS((char *) dataseq); //send some data
+#endif
 	tagaddr = instance_anchaddr;
 	ancaddr = instance_anchaddr;
 

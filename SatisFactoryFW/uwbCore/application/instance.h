@@ -21,7 +21,7 @@ extern "C" {
 #include "deca_types.h"
 #include "deca_device_api.h"
 #include "parameter.h"
-#define MATEO_IMPL
+
 
 
 
