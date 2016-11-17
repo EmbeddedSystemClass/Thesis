@@ -19501,7 +19501,7 @@ END GROUP
  .debug_frame   0x00004fa8       0x60 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libg.a(lib_a-reallocr.o)
  .debug_frame   0x00005008       0x28 d:/stm32toolchain/gnu-arm/4.9 2015q2/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/fpu\libgcc.a(_aeabi_uldivmod.o)
 
-.debug_str      0x00000000    0x7527c
+.debug_str      0x00000000    0x75279
  *(.debug_str)
  .debug_str     0x00000000    0x60655 ./uwbCore/platform/deca_mutex.o
                               0x609c1 (size before relaxing)
@@ -19521,77 +19521,77 @@ END GROUP
                               0x615d6 (size before relaxing)
  .debug_str     0x0006d446      0x546 ./uwbCore/application/instance_common.o
                               0x61f1c (size before relaxing)
- .debug_str     0x0006d98c      0x5e9 ./uwbCore/application/uwbMain.o
-                              0x6c51d (size before relaxing)
- .debug_str     0x0006df75      0x4bc ./system/src/stm32f4xx/stm32f4xx_hal.o
+ .debug_str     0x0006d98c      0x5e6 ./uwbCore/application/uwbMain.o
+                              0x6c51a (size before relaxing)
+ .debug_str     0x0006df72      0x4bc ./system/src/stm32f4xx/stm32f4xx_hal.o
                               0x5dbe8 (size before relaxing)
- .debug_str     0x0006e431      0x232 ./system/src/stm32f4xx/stm32f4xx_hal_cortex.o
+ .debug_str     0x0006e42e      0x232 ./system/src/stm32f4xx/stm32f4xx_hal_cortex.o
                               0x5d922 (size before relaxing)
- .debug_str     0x0006e663      0x183 ./system/src/stm32f4xx/stm32f4xx_hal_dma.o
+ .debug_str     0x0006e660      0x183 ./system/src/stm32f4xx/stm32f4xx_hal_dma.o
                               0x5d5c4 (size before relaxing)
- .debug_str     0x0006e7e6      0x1da ./system/src/stm32f4xx/stm32f4xx_hal_gpio.o
+ .debug_str     0x0006e7e3      0x1da ./system/src/stm32f4xx/stm32f4xx_hal_gpio.o
                               0x5d59d (size before relaxing)
- .debug_str     0x0006e9c0      0x381 ./system/src/stm32f4xx/stm32f4xx_hal_rcc.o
+ .debug_str     0x0006e9bd      0x381 ./system/src/stm32f4xx/stm32f4xx_hal_rcc.o
                               0x5d750 (size before relaxing)
- .debug_str     0x0006ed41      0x374 ./system/src/stm32f4xx/stm32f4xx_hal_spi.o
+ .debug_str     0x0006ed3e      0x374 ./system/src/stm32f4xx/stm32f4xx_hal_spi.o
                               0x5da0c (size before relaxing)
- .debug_str     0x0006f0b5      0xe6f ./system/src/stm32f4xx/stm32f4xx_hal_tim.o
+ .debug_str     0x0006f0b2      0xe6f ./system/src/stm32f4xx/stm32f4xx_hal_tim.o
                               0x5e386 (size before relaxing)
- .debug_str     0x0006ff24      0x4e0 ./system/src/stm32f4xx/stm32f4xx_hal_tim_ex.o
+ .debug_str     0x0006ff21      0x4e0 ./system/src/stm32f4xx/stm32f4xx_hal_tim_ex.o
                               0x5dc3e (size before relaxing)
- .debug_str     0x00070404      0x4b2 ./system/src/stm32f4xx/stm32f4xx_hal_uart.o
+ .debug_str     0x00070401      0x4b2 ./system/src/stm32f4xx/stm32f4xx_hal_uart.o
                               0x5d9ff (size before relaxing)
- .debug_str     0x000708b6       0x54 ./system/src/newlib/_exit.o
+ .debug_str     0x000708b3       0x54 ./system/src/newlib/_exit.o
                                0x5ebd (size before relaxing)
- .debug_str     0x0007090a      0x366 ./system/src/newlib/_sbrk.o
+ .debug_str     0x00070907      0x366 ./system/src/newlib/_sbrk.o
                                0x461e (size before relaxing)
- .debug_str     0x00070c70      0x191 ./system/src/newlib/_startup.o
+ .debug_str     0x00070c6d      0x191 ./system/src/newlib/_startup.o
                                0x411c (size before relaxing)
- .debug_str     0x00070e01      0x6cb ./system/src/newlib/_syscalls.o
+ .debug_str     0x00070dfe      0x6cb ./system/src/newlib/_syscalls.o
                                0x6618 (size before relaxing)
- .debug_str     0x000714cc      0x185 ./system/src/diag/Trace.o
+ .debug_str     0x000714c9      0x185 ./system/src/diag/Trace.o
                                0x67cd (size before relaxing)
- .debug_str     0x00071651       0x42 ./system/src/diag/trace_impl.o
+ .debug_str     0x0007164e       0x42 ./system/src/diag/trace_impl.o
                               0x28da2 (size before relaxing)
- .debug_str     0x00071693       0x4e ./system/src/cortexm/_initialize_hardware.o
+ .debug_str     0x00071690       0x4e ./system/src/cortexm/_initialize_hardware.o
                               0x2629c (size before relaxing)
- .debug_str     0x000716e1       0x28 ./system/src/cortexm/_reset_hardware.o
+ .debug_str     0x000716de       0x28 ./system/src/cortexm/_reset_hardware.o
                               0x2626c (size before relaxing)
- .debug_str     0x00071709      0x19d ./system/src/cortexm/exception_handlers.o
+ .debug_str     0x00071706      0x19d ./system/src/cortexm/exception_handlers.o
                               0x29baf (size before relaxing)
- .debug_str     0x000718a6       0x65 ./system/src/cmsis/system_stm32f4xx.o
+ .debug_str     0x000718a3       0x65 ./system/src/cmsis/system_stm32f4xx.o
                               0x263d7 (size before relaxing)
- .debug_str     0x0007190b      0x72d ./system/src/FreeRTOS/cmsis_os.o
+ .debug_str     0x00071908      0x72d ./system/src/FreeRTOS/cmsis_os.o
                                0xb734 (size before relaxing)
- .debug_str     0x00072038      0x38c ./system/src/FreeRTOS/heap_2.o
+ .debug_str     0x00072035      0x38c ./system/src/FreeRTOS/heap_2.o
                                0x9277 (size before relaxing)
- .debug_str     0x000723c4      0x129 ./system/src/FreeRTOS/list.o
+ .debug_str     0x000723c1      0x129 ./system/src/FreeRTOS/list.o
                                0x8891 (size before relaxing)
- .debug_str     0x000724ed      0x7b4 ./system/src/FreeRTOS/port.o
+ .debug_str     0x000724ea      0x7b4 ./system/src/FreeRTOS/port.o
                                0x73cb (size before relaxing)
- .debug_str     0x00072ca1      0x696 ./system/src/FreeRTOS/queue.o
+ .debug_str     0x00072c9e      0x696 ./system/src/FreeRTOS/queue.o
                                0xa2e0 (size before relaxing)
- .debug_str     0x00073337      0xe8f ./system/src/FreeRTOS/tasks.o
+ .debug_str     0x00073334      0xe8f ./system/src/FreeRTOS/tasks.o
                                0xaa74 (size before relaxing)
- .debug_str     0x000741c6      0x328 ./User/src/main.o
+ .debug_str     0x000741c3      0x328 ./User/src/main.o
                               0x65c56 (size before relaxing)
- .debug_str     0x000744ee       0x18 ./Peripheral/src/dma.o
+ .debug_str     0x000744eb       0x18 ./Peripheral/src/dma.o
                               0x5d649 (size before relaxing)
- .debug_str     0x00074506       0x27 ./Peripheral/src/gpio.o
+ .debug_str     0x00074503       0x27 ./Peripheral/src/gpio.o
                               0x5d7a2 (size before relaxing)
- .debug_str     0x0007452d      0x2e8 ./Peripheral/src/i2c.o
+ .debug_str     0x0007452a      0x2e8 ./Peripheral/src/i2c.o
                               0x62ed1 (size before relaxing)
- .debug_str     0x00074815       0x84 ./Peripheral/src/rgbLed.o
+ .debug_str     0x00074812       0x84 ./Peripheral/src/rgbLed.o
                               0x5d80a (size before relaxing)
- .debug_str     0x00074899      0x313 ./Peripheral/src/sf_port.o
+ .debug_str     0x00074896      0x313 ./Peripheral/src/sf_port.o
                               0x5db6a (size before relaxing)
- .debug_str     0x00074bac       0x32 ./Peripheral/src/spi.o
+ .debug_str     0x00074ba9       0x32 ./Peripheral/src/spi.o
                               0x5dc74 (size before relaxing)
- .debug_str     0x00074bde      0x448 ./Peripheral/src/uart.o
+ .debug_str     0x00074bdb      0x448 ./Peripheral/src/uart.o
                               0x657a6 (size before relaxing)
- .debug_str     0x00075026       0x55 ./DeviceSupport/src/stm32f4xx_hal_msp.o
+ .debug_str     0x00075023       0x55 ./DeviceSupport/src/stm32f4xx_hal_msp.o
                               0x5dd7d (size before relaxing)
- .debug_str     0x0007507b      0x201 ./DeviceSupport/src/stm32f4xx_it.o
+ .debug_str     0x00075078      0x201 ./DeviceSupport/src/stm32f4xx_it.o
                               0x6658c (size before relaxing)
 
 .debug_loc      0x00000000     0xf9cf
