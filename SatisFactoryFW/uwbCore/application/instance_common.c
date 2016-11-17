@@ -671,7 +671,7 @@ uint8 tagrxreenable(uint16 sourceAddress)
 #ifdef MATEO_IMPL
 	uint8 anc = sourceAddress & MaskAddr;
 #else
-	uint8 anc = sourceAddress & 0x4;
+	uint8 anc = sourceAddress & 0x3;
 #endif
 
 	int instance = 0;
