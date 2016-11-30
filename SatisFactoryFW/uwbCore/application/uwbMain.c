@@ -87,10 +87,10 @@ extern int sch_final_delay=SCHEDULED_FINAL_DELAY;
 
 #define BUTTON_0			FALSE //DARA RATE
 #define TA_SW1_3			TRUE //CHANNEL
-#define TA_SW1_4			FALSE	/* FALSE: Tag - TRUE: Anchor */
-#define TA_SW1_5			TRUE  //MSB
-#define TA_SW1_6			TRUE
-#define TA_SW1_7			TRUE  //LSB
+#define TA_SW1_4			TRUE	/* FALSE: Tag - TRUE: Anchor */
+#define TA_SW1_5			FALSE  //MSB
+#define TA_SW1_6			FALSE
+#define TA_SW1_7			FALSE  //LSB
 #define TA_SW1_8			FALSE  //ALWAYS IN FALSE
 
 #define FASTRANGING 		SWITCH_OFF

@@ -16,7 +16,7 @@ extern "C" {
 #include "deca_types.h"
 #include "deca_device_api.h"
 #include "compiler.h"
-//#define MATEO_IMPL
+#define MATEO_IMPL
 
 #ifdef MATEO_IMPL
 
@@ -36,8 +36,8 @@ extern "C" {
 
 	//--------------------------------------------------- DEVICE PARAMETERS ---------------------------------------------------------//
 
-	#define NUM_DISP 						(8) // 	Number of Tag to Use
-	#define DEVICE_ID 						(0) // Device ID in Decimal From 0 to (NUM_DISP - 1)
+	#define NUM_DISP 						(8) // Number of Tag to Use
+	#define DEVICE_ID 						(3) // Device ID in Decimal From 0 to (NUM_DISP - 1)
 	#define FREQUENCY 						(1)  // Number of localization per TAG (one every superframe, one every 2 superframes etc.)
 	#define DEVICE_TYPE						true  // FALSE = TAG , TRUE = ANCHOR
 	#define DATA_RATE						FALSE  // FALSE = 110kbps , TRUE = 6,81Mbps

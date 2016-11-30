@@ -1017,7 +1017,7 @@ void ancprepareresponse(uint16 sourceAddress, uint8 srcAddr_index, uint8 fcode_i
 
 #ifdef MATEO_IMPL
 		//this is the slot time the poll should be received in (Mask 0x07 for the 8 MAX tags we support in TREK)  //MODIFY HERE TO INCREASE THE EXPECTED SLOT TIME
-		expectedSlotTime = (sourceAddress&0xFF) * (FREQUENCY*(instance_data[instance].slotPeriod)); //
+		expectedSlotTime = ((sourceAddress&0xFF) * (instance_data[instance].slotPeriod)); //
 #else
 		//this is the slot time the poll should be received in (Mask 0x07 for the 8 MAX tags we support in TREK)  //MODIFY HERE TO INCREASE THE EXPECTED SLOT TIME
 		expectedSlotTime = (sourceAddress&0xFF) * instance_data[instance].slotPeriod; //
@@ -1027,15 +1027,37 @@ void ancprepareresponse(uint16 sourceAddress, uint8 srcAddr_index, uint8 fcode_i
 		//error = expectedSlotTime - currentSlotTime
 		error = expectedSlotTime - currentSlotTime;
 
+#ifdef MATEO_IMPL
 		if(error < (-(instance_data[instance].sframePeriod>>1))) //if error is more negative than 0.5 period, add whole period to give up to 1.5 period sleep
 		{
-			instance_data[instance].tagSleepCorrection = (instance_data[instance].sframePeriod + error);
+			if (FREQUENCY==1)
+			instance_data[instance].tagSleepCorrection = (instance_data[instance].sframePeriod*(FREQUENCY))+ error;
+			else
+			instance_data[instance].tagSleepCorrection = (instance_data[instance].sframePeriod*(FREQUENCY+1))+ error;
+		}
+		else //the minimum Sleep time will be 0.5 period
+		{
+			if (FREQUENCY==1)
+			instance_data[instance].tagSleepCorrection = (instance_data[instance].sframePeriod*(FREQUENCY-1))+ error;
+			else
+			instance_data[instance].tagSleepCorrection = (instance_data[instance].sframePeriod*(FREQUENCY-1))+ error;
+		}
+
+#else
+		if(error < (-(instance_data[instance].sframePeriod>>1))) //if error is more negative than 0.5 period, add whole period to give up to 1.5 period sleep
+		{
+			instance_data[instance].tagSleepCorrection = (instance_data[instance].sframePeriod)+ error;
 		}
 		else //the minimum Sleep time will be 0.5 period
 		{
 			instance_data[instance].tagSleepCorrection = error;
 		}
-		instance_data[instance].msg_f.messageData[RES_TAG_SLP0] = instance_data[instance].tagSleepCorrection & 0xFF ;
+#endif
+
+
+
+
+		instance_data[instance].msg_f.messageData[RES_TAG_SLP0] = (instance_data[instance].tagSleepCorrection) & 0xFF ;
 		instance_data[instance].msg_f.messageData[RES_TAG_SLP1] = (instance_data[instance].tagSleepCorrection >> 8) & 0xFF;
 	}
 	else
